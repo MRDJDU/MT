@@ -28,6 +28,7 @@ public class CategoryServiceTest {
     @Test
     public void save(){
         Category category = new Category();
+        int k=1 ;
         for (int i=1;i<=10;i++){
             category.setCategory_id(UUID.randomUUID().toString());
             category.setName("DJDU"+i);
