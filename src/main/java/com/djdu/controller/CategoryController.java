@@ -9,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -24,7 +25,7 @@ public class CategoryController {
     }
 
 	@PostMapping(name="/saveOrUpdateCategory",consumes= MediaType.APPLICATION_JSON_VALUE)
-	public  Category saveOrUpdateCategory(Category category) throws Exception {
+	public  Category saveOrUpdateCategory(@RequestBody Category category) throws Exception {
 		return category;
 	}
 }

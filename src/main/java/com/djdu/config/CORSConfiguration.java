@@ -10,8 +10,14 @@ public class CORSConfiguration extends WebMvcConfigurerAdapter{
 	public void addCorsMappings(CorsRegistry registry) {
 		//所有请求都允许跨域
 		registry.addMapping("/**")
+				//是否允许证书 不再默认开启，这里没设置导致使用接口工具时后台无法接收数据
+				.allowCredentials(true)
+				//设置允许跨域请求的域名
 				.allowedOrigins("*")
+				//设置允许的方法
 				.allowedMethods("*")
-				.allowedHeaders("*");
+				.allowedHeaders("*")
+				//跨域允许时间
+				.maxAge(3600);
 	}
 }

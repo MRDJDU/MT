@@ -46,16 +46,4 @@ public class CategoryService {
         return (List<Category>)categoryRepository.findAll();
     }
 
-    /**
-     * @Author DJDU
-     * @Description 
-     * @Date 2019/2/11 17:50 
-     * @Param 
-     * @return 
-     **/
-    @Transactional(readOnly=true)
-    public Page<Category> findAll(Specification<Category> spec, Pageable pageable) {
-        return categoryRepository.findAll(spec, pageable);
-    }
-
 }
