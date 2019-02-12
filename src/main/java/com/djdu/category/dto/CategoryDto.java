@@ -3,7 +3,7 @@ package com.djdu.category.dto;
 import com.djdu.category.entity.Category;
 import com.djdu.common.Enums.ShowOut;
 import com.djdu.common.Enums.Usable;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.jpa.domain.Specification;
 
 import javax.persistence.criteria.CriteriaBuilder;
@@ -22,16 +22,9 @@ import java.util.List;
  **/
 public class CategoryDto {
 
-    String category_id;//分类的id
+    private String name;//分类名
 
-    String name;//分类名
-
-    ShowOut showOut;//是否展示
-
-
-    public String getCategory_id() {
-        return category_id;
-    }
+    private ShowOut showOut;//是否展示
 
     public String getName() {
         return name;
@@ -39,12 +32,6 @@ public class CategoryDto {
 
     public ShowOut getShowOut() {
         return showOut;
-    }
-
-
-
-    public void setCategory_id(String category_id) {
-        this.category_id = category_id;
     }
 
     public void setName(String name) {
@@ -56,18 +43,6 @@ public class CategoryDto {
     }
 
 
-    /**
-     * @Author DJDU
-     * @Description 重写toString
-     * @Date 2019/1/26 21:26
-     * @Param []
-     * @return java.lang.String
-     **/
-    public String toString(){
-        return "category_id:"+category_id+" "+"name:"+name+" "+"showOut:"+showOut;
-    }
-
-    
     /**
      * @Author DJDU
      * @Description 拼装高级自定义查询条件，动态条件组装
@@ -103,7 +78,16 @@ public class CategoryDto {
                 return query.where(predicate.toArray(pre)).getRestriction();
             }
         };
-
+    }
+    /**
+     * @Author DJDU
+     * @Description 重写toString
+     * @Date 2019/1/26 21:26
+     * @Param []
+     * @return java.lang.String
+     **/
+    public String toString(){
+        return "name:"+name+" "+"showOut:"+showOut;
     }
 
 }
