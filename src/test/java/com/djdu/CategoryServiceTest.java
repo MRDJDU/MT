@@ -1,7 +1,7 @@
 package com.djdu;
 
-import com.djdu.common.ShowOut;
-import com.djdu.common.Usable;
+import com.djdu.common.Enums.ShowOut;
+import com.djdu.common.Enums.Usable;
 import com.djdu.entity.Category;
 import com.djdu.service.CategoryService;
 import org.junit.Test;

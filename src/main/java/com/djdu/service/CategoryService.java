@@ -42,6 +42,7 @@ public class CategoryService {
      * @Param []
      * @return java.util.List<com.djdu.entity.Category>
      **/
+    @Transactional(readOnly=true)
     public List<Category> findAll(){
         return (List<Category>)categoryRepository.findAll();
     }

@@ -13,7 +13,6 @@ import org.springframework.stereotype.Component;
 public class ResponseMessage<T> {
     private int StatuCode;
     private String Message;
-    private T data;
 
     public int getStatuCode() {
         return StatuCode;
@@ -29,13 +28,5 @@ public class ResponseMessage<T> {
 
     public void setMessage(String message) {
         Message = message;
-    }
-
-    public T getData() {
-        return data;
-    }
-
-    public void setData(T data) {
-        this.data = data;
     }
 }

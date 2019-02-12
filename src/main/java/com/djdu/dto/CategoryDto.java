@@ -1,7 +1,7 @@
 package com.djdu.dto;
 
-import com.djdu.common.ShowOut;
-import com.djdu.common.Usable;
+import com.djdu.common.Enums.ShowOut;
+import com.djdu.common.Enums.Usable;
 import com.djdu.entity.Category;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.data.jpa.domain.Specification;

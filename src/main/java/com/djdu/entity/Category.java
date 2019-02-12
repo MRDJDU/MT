@@ -1,15 +1,13 @@
 package com.djdu.entity;
 
-import com.djdu.common.ShowOut;
-import com.djdu.common.Usable;
+import com.djdu.common.Enums.ShowOut;
+import com.djdu.common.Enums.Usable;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import java.io.Serializable;
-import java.util.UUID;
 
 /**
  * @ClassName Category
