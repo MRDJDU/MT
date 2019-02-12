@@ -1,4 +1,4 @@
-package com.djdu.common;
+package com.djdu.common.Enums;
 
 /**
  * @EnumName Usable
