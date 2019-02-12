@@ -4,6 +4,13 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
+/**
+ * @ClassName CategoryDto
+ * @Description CORSConfiguration配置请求跨域问题
+ * @Author DJDU
+ * @Date 2019/1/27 20:42
+ * @Version 1.0
+ **/
 @Configuration
 public class CORSConfiguration extends WebMvcConfigurerAdapter{
 	@Override

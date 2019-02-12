@@ -14,7 +14,7 @@ import java.util.UUID;
 
 /**
  * @ClassName CategoryServiceTest
- * @Description TODO
+ * @Description Category的单元测试类
  * @Author DJDU
  * @Date 2019/1/27 18:31
  * @Version 1.0
