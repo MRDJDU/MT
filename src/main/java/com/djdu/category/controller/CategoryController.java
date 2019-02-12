@@ -1,17 +1,19 @@
 package com.djdu.category.controller;
 
 
+import com.djdu.category.dto.CategoryDto;
 import com.djdu.category.entity.Category;
 import com.djdu.category.service.CategoryService;
+import com.djdu.common.Message.MyPagaRequest;
 import com.djdu.common.Message.ResponseMessage;
+import com.djdu.common.Tool.JsonXMLUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @ClassName CategoryDto
@@ -24,8 +26,7 @@ import java.util.List;
 public class CategoryController {
 	@Autowired
     CategoryService categoryService;
-	@Autowired
-	ResponseMessage responseMessage;
+
 
 	/**
 	 * @Author DJDU
@@ -36,10 +37,12 @@ public class CategoryController {
 	 **/
 	@PostMapping(name="/saveOrUpdateCategory",consumes= MediaType.APPLICATION_JSON_VALUE)
 	public  ResponseMessage saveOrUpdateCategory(@RequestBody Category category){
+		ResponseMessage responseMessage = new ResponseMessage<Category>();
 		try{
 			categoryService.save(category);
 			responseMessage.setStatuCode(0);
 			responseMessage.setMessage("保存成功！");
+			responseMessage.setData(category);
 		}catch (Exception e){
 			responseMessage.setStatuCode(1);
 			responseMessage.setMessage("保存失败！");
@@ -47,17 +50,29 @@ public class CategoryController {
 		return responseMessage;
 	}
 
+
 	/**
 	 * @Author DJDU
-	 * @Description 处理前端获取全部分类的请求
+	 * @Description 处理前端获取全部分类的请求,前端请求有json格式的多个对象参数时封装在map再转对象
 	 * @Date 2019/2/12 11:09
 	 * @Param []
 	 * @return java.util.List<com.djdu.entity.Category>
 	 **/
-	@GetMapping("/findAllCategories")
-    public List<Category> list(){
-    	return categoryService.findAll();
-    }
-
+	@GetMapping(name="/findAllCategories")
+	public ResponseMessage getPage(@RequestBody Map<String, Object> models){
+		ResponseMessage responseMessage = new ResponseMessage<Page<Category>>();
+		try{
+			CategoryDto categoryDto = JsonXMLUtils.map2obj((Map<String, Object>)models.get("categoryDto"),CategoryDto.class);
+			MyPagaRequest myPagaRequest=JsonXMLUtils.map2obj((Map<String, Object>)models.get("myPagaRequest"),MyPagaRequest.class);
+			responseMessage.setStatuCode(0);
+			responseMessage.setMessage("查找成功！");
+			responseMessage.setData(categoryService.findAll(CategoryDto.getWhereClause(categoryDto),myPagaRequest.getPageable()));
+		}
+		catch (Exception e){
+			responseMessage.setStatuCode(1);
+			responseMessage.setMessage("查找失败！");
+		}
+		return responseMessage;
+	}
 }
 
