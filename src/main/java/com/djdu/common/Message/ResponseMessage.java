@@ -4,7 +4,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * @ClassName ResponseMessage
- * @Description 返回对数据库操作的信息
+ * @Description 返回请求处理操作结果的信息
  * @Author DJDU
  * @Date 2019/2/12 10:03
  * @Version 1.0
@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 public class ResponseMessage<T> {
     private int StatuCode;
     private String Message;
+    private T Data;
 
     public int getStatuCode() {
         return StatuCode;
@@ -28,5 +29,13 @@ public class ResponseMessage<T> {
 
     public void setMessage(String message) {
         Message = message;
+    }
+
+    public T getData() {
+        return Data;
+    }
+
+    public void setData(T data) {
+        Data = data;
     }
 }
