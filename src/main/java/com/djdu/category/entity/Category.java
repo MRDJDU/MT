@@ -1,4 +1,4 @@
-package com.djdu.entity;
+package com.djdu.category.entity;
 
 import com.djdu.common.Enums.ShowOut;
 import com.djdu.common.Enums.Usable;

@@ -1,12 +1,10 @@
-package com.djdu.controller;
+package com.djdu.category.controller;
 
 
+import com.djdu.category.entity.Category;
+import com.djdu.category.service.CategoryService;
 import com.djdu.common.Message.ResponseMessage;
-import com.djdu.dto.CategoryDto;
-import com.djdu.entity.Category;
-import com.djdu.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,7 +23,7 @@ import java.util.List;
 @RestController
 public class CategoryController {
 	@Autowired
-	CategoryService categoryService;
+    CategoryService categoryService;
 	@Autowired
 	ResponseMessage responseMessage;
 

@@ -1,4 +1,4 @@
-package com.djdu.controller;
+package com.djdu.category.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

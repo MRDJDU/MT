@@ -1,9 +1,9 @@
 package com.djdu;
 
+import com.djdu.category.entity.Category;
+import com.djdu.category.service.CategoryService;
 import com.djdu.common.Enums.ShowOut;
 import com.djdu.common.Enums.Usable;
-import com.djdu.entity.Category;
-import com.djdu.service.CategoryService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

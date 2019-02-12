@@ -1,6 +1,6 @@
-package com.djdu.repository;
+package com.djdu.category.repository;
 
-import com.djdu.entity.Category;
+import com.djdu.category.entity.Category;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;

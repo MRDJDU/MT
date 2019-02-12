@@ -1,11 +1,8 @@
-package com.djdu.service;
+package com.djdu.category.service;
 
-import com.djdu.entity.Category;
-import com.djdu.repository.CategoryRepository;
+import com.djdu.category.entity.Category;
+import com.djdu.category.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Page;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
