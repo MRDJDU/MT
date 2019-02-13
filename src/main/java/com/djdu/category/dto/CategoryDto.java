@@ -21,10 +21,19 @@ import java.util.List;
  * @Version 1.0
  **/
 public class CategoryDto {
+    private  String category_id;//分类id
 
     private String name;//分类名
 
     private ShowOut showOut;//是否展示
+
+    public String getCategory_id() {
+        return category_id;
+    }
+
+    public void setCategory_id(String category_id) {
+        this.category_id = category_id;
+    }
 
     public String getName() {
         return name;
