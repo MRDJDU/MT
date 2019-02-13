@@ -9,7 +9,10 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @ClassName CategoryService
@@ -47,4 +50,27 @@ public class CategoryService {
         return categoryRepository.findAll(specification,pageable);
     }
 
+    /**
+     * @Author DJDU
+     * @Description 通过id查找对应得分类实体
+     * @Date 2019/2/13 10:32
+     * @Param [category_id]
+     * @return java.util.Optional<com.djdu.category.entity.Category>
+     **/
+    @Transactional(readOnly=true)
+    public Optional<Category> findById(String category_id){
+        return categoryRepository.findById(category_id);
+    }
+
+    /**
+     * @Author DJDU
+     * @Description 通过ids数组查找对应的分类实体列表
+     * @Date 2019/2/13 10:38
+     * @Param [category_ids]
+     * @return java.util.List<com.djdu.category.entity.Category>
+     **/
+    @Transactional(readOnly=true)
+    public List<Category> findAllById(List<String> category_ids){
+        return (List<Category>)categoryRepository.findAllById(category_ids);
+    }
 }
