@@ -4,6 +4,7 @@ package com.djdu.category.controller;
 import com.djdu.category.dto.CategoryDto;
 import com.djdu.category.entity.Category;
 import com.djdu.category.service.CategoryService;
+import com.djdu.common.Enums.ShowOut;
 import com.djdu.common.Enums.Usable;
 import com.djdu.common.Message.MyPagaRequest;
 import com.djdu.common.Message.ResponseMessage;
@@ -26,6 +27,7 @@ import java.util.Map;
  * @Version 1.0
  **/
 @RestController
+@RequestMapping("/mt/category")
 public class CategoryController {
 	@Autowired
     CategoryService categoryService;
@@ -38,7 +40,7 @@ public class CategoryController {
 	 * @Param [category]
 	 * @return com.djdu.common.Message.ResponseMessage
 	 **/
-	@PostMapping(name="/saveCategory",consumes= MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping(value="/saveCategory",consumes= MediaType.APPLICATION_JSON_VALUE)
 	public  ResponseMessage save(@RequestBody Category category){
 		ResponseMessage responseMessage = new ResponseMessage<Category>();
 		try{
@@ -61,7 +63,7 @@ public class CategoryController {
 	 * @Param [models]
 	 * @return com.djdu.common.Message.ResponseMessage
 	 **/
-	@DeleteMapping(name="/deleteCategories",consumes= MediaType.APPLICATION_JSON_VALUE)
+	@DeleteMapping(value="/deleteCategories",consumes= MediaType.APPLICATION_JSON_VALUE)
 	public ResponseMessage delete(@RequestBody Map<String, Object> models){
 		ResponseMessage responseMessage = new ResponseMessage<Category>();
 		try{
@@ -84,12 +86,52 @@ public class CategoryController {
 
 	/**
 	 * @Author DJDU
+	 * @Description 分类是否显示在客户端，批量操作
+	 * @Date 2019/2/13 15:14 
+	 * @Param [models]
+	 * @return com.djdu.common.Message.ResponseMessage
+	 **/
+	@PutMapping(value="/showCategories",consumes= MediaType.APPLICATION_JSON_VALUE)
+	public ResponseMessage show(@RequestBody Map<String, Object> models){
+		ResponseMessage responseMessage = new ResponseMessage<Category>();
+		ShowOut showOut=null;
+		try{
+			ArrayList<String> category_ids = (ArrayList<String>) models.get("category_ids");
+			showOut=ShowOut.valueOf((String) models.get("showOut"));
+			List<Category> categories = categoryService.findAllById(category_ids);
+			for(Category category:categories){
+				category.setShowOut(showOut);
+				categoryService.save(category);
+			}
+			responseMessage.setStatuCode(true);
+			if(showOut==ShowOut.Show){
+				responseMessage.setMessage("显示成功！");
+			}
+			else{
+				responseMessage.setMessage("隐藏成功！");
+			}
+			responseMessage.setData(categories);
+		}catch (Exception e){
+			responseMessage.setStatuCode(false);
+			if(showOut==ShowOut.Show){
+				responseMessage.setMessage("显示失败！");
+			}
+			else{
+				responseMessage.setMessage("隐藏失败！");
+			}
+			responseMessage.setErrorMessage(e.getMessage());
+		}
+		return responseMessage;
+	}
+
+	/**
+	 * @Author DJDU
 	 * @Description 处理前端修改分类操作，使用Dto接收数据再用自定义BeanUtils工具将值赋值到entity，null值数据不处理不赋值,根据id，修改分类名字和是否显示
 	 * @Date 2019/2/13 13:46
 	 * @Param [categoryDto]
 	 * @return com.djdu.common.Message.ResponseMessage
 	 **/
-	@PutMapping(name="/editCategory",consumes= MediaType.APPLICATION_JSON_VALUE)
+	@PutMapping(value ="/editCategory",consumes= MediaType.APPLICATION_JSON_VALUE)
 	public ResponseMessage edit(@RequestBody CategoryDto categoryDto){
 		ResponseMessage responseMessage = new ResponseMessage<Category>();
 		try{
@@ -117,7 +159,7 @@ public class CategoryController {
 	 * @Param []
 	 * @return java.util.List<com.djdu.entity.Category>
 	 **/
-	@GetMapping(name="/findAllCategories")
+	@GetMapping(value="/findAllCategories")
 	public ResponseMessage getPage(@RequestBody Map<String, Object> models){
 		ResponseMessage responseMessage = new ResponseMessage<Page<Category>>();
 		try{
