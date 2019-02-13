@@ -40,12 +40,13 @@ public class CategoryController {
 		ResponseMessage responseMessage = new ResponseMessage<Category>();
 		try{
 			categoryService.save(category);
-			responseMessage.setStatuCode(0);
-			responseMessage.setMessage("保存成功！");
+			responseMessage.setStatuCode(true);
+			responseMessage.setMessage("操作成功！");
 			responseMessage.setData(category);
 		}catch (Exception e){
-			responseMessage.setStatuCode(1);
-			responseMessage.setMessage("保存失败！");
+			responseMessage.setStatuCode(false);
+			responseMessage.setMessage("操作失败！");
+			responseMessage.setErrorMessage(e.getMessage());
 		}
 		return responseMessage;
 	}
@@ -64,13 +65,14 @@ public class CategoryController {
 		try{
 			CategoryDto categoryDto = JsonXMLUtils.map2obj((Map<String, Object>)models.get("categoryDto"),CategoryDto.class);
 			MyPagaRequest myPagaRequest=JsonXMLUtils.map2obj((Map<String, Object>)models.get("myPagaRequest"),MyPagaRequest.class);
-			responseMessage.setStatuCode(0);
+			responseMessage.setStatuCode(true);
 			responseMessage.setMessage("查找成功！");
 			responseMessage.setData(categoryService.findAll(CategoryDto.getWhereClause(categoryDto),myPagaRequest.getPageable()));
 		}
 		catch (Exception e){
-			responseMessage.setStatuCode(1);
+			responseMessage.setStatuCode(false);
 			responseMessage.setMessage("查找失败！");
+			responseMessage.setErrorMessage(e.getMessage());
 		}
 		return responseMessage;
 	}
