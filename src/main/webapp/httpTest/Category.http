@@ -1,0 +1,47 @@
+###条件分页查找分类Category
+GET http://localhost:8080/mt/findAllCategories HTTP/1.1
+Content-Type: application/json;charset=UTF-8
+
+{
+  "categoryDto":{
+    "name": "杜敬威",
+    "showOut": "UnShow"
+  },
+  "myPagaRequest":{
+    "page":1,
+    "limit":10,
+    "sort":"name",
+    "dir":"DESC"
+  }
+}
+
+###新增分类Category
+POST  http://localhost:8080/mt/saveCategory HTTP/1.1
+Content-Type: application/json;charset=UTF-8
+
+{
+  "category_id": "bb5eb671-a7f5-41f9-9bc1-345e08339988",
+  "name": "杜敬威",
+  "usable": "UnDeleted",
+  "showOut": "UnShow"
+}
+
+###删除Category
+DELETE http://localhost:8080/mt/deleteCategories HTTP/1.1
+Content-Type: application/json;charset=UTF-8
+
+{
+  "category_ids": [
+    "bb5eb671-a7f5-41f9-9bc1-345e08339988"
+  ]
+}
+
+###修改分类Category
+PUT http://localhost:8080/mt/editCategory HTTP/1.1
+Content-Type: application/json;charset=UTF-8
+
+{
+  "category_id": "bb5eb671-a7f5-41f9-9bc1-345e08339988",
+  "name": "杜敬威",
+  "showOut": "UnShow"
+}
