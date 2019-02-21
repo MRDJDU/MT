@@ -41,7 +41,7 @@
 - 2019.02.21
   - 大更新，完成了数据库所有表的设计，新建好所有实体和其对应的关系
   - 数据库设计图
-    ![](https://github.com/MRDJDU/ImageCache/MT/master/ExplicateMTImg/数据库设计图.jpg)
+    ![](https://github.com/MRDJDU/MT/raw/master/ExplicateMTImg/数据库设计图.jpg)
   
   
   
