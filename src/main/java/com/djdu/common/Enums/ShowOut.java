@@ -2,7 +2,7 @@ package com.djdu.common.Enums;
 
 /**
  * @EnumName ShowOut
- * @Description 公共类，是否展示给用户
+ * @Description TODO 公共类，是否展示给用户
  * @Author DJDU
  * @Date 2019/1/27 15:38
  * @Version 1.0

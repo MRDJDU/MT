@@ -21,7 +21,7 @@ import java.util.Map;
 
 /**
  * @ClassName CategoryDto
- * @Description Category的Controller层，中间层，接收前端请求数据，给service处理
+ * @Description TODO Category的Controller层，中间层，接收前端请求数据，给service处理
  * @Author DJDU
  * @Date 2019/1/27 20:42
  * @Version 1.0
@@ -35,7 +35,7 @@ public class CategoryController {
 
 	/**
 	 * @Author DJDU
-	 * @Description 处理前端新增分类的请求
+	 * @Description TODO 处理前端新增分类的请求
 	 * @Date 2019/2/12 11:10
 	 * @Param [category]
 	 * @return com.djdu.common.Message.ResponseMessage
@@ -58,7 +58,7 @@ public class CategoryController {
 
 	/**
 	 * @Author DJDU
-	 * @Description 处理前端删除分类操作，逻辑删除更改标记值，可批量删除
+	 * @Description TODO 处理前端删除分类操作，逻辑删除更改标记值，可批量删除
 	 * @Date 2019/2/13 13:49
 	 * @Param [models]
 	 * @return com.djdu.common.Message.ResponseMessage
@@ -86,7 +86,7 @@ public class CategoryController {
 
 	/**
 	 * @Author DJDU
-	 * @Description 分类是否显示在客户端，批量操作
+	 * @Description TODO 分类是否显示在客户端，批量操作
 	 * @Date 2019/2/13 15:14 
 	 * @Param [models]
 	 * @return com.djdu.common.Message.ResponseMessage
@@ -126,7 +126,7 @@ public class CategoryController {
 
 	/**
 	 * @Author DJDU
-	 * @Description 处理前端修改分类操作，使用Dto接收数据再用自定义BeanUtils工具将值赋值到entity，null值数据不处理不赋值,根据id，修改分类名字和是否显示
+	 * @Description TODO 处理前端修改分类操作，使用Dto接收数据再用自定义BeanUtils工具将值赋值到entity，null值数据不处理不赋值,根据id，修改分类名字和是否显示
 	 * @Date 2019/2/13 13:46
 	 * @Param [categoryDto]
 	 * @return com.djdu.common.Message.ResponseMessage
@@ -154,7 +154,7 @@ public class CategoryController {
 
 	/**
 	 * @Author DJDU
-	 * @Description 处理前端获取全部分类的请求,前端请求有json格式的多个对象参数时封装在map再转对象，分页条件对象和查询条件对象（分类名字和是否显示）
+	 * @Description TODO 处理前端获取全部分类的请求,前端请求有json格式的多个对象参数时封装在map再转对象，分页条件对象和查询条件对象（分类名字和是否显示）
 	 * @Date 2019/2/12 11:09
 	 * @Param []
 	 * @return java.util.List<com.djdu.entity.Category>

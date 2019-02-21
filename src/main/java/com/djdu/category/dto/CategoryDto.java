@@ -4,18 +4,20 @@ import com.djdu.category.entity.Category;
 import com.djdu.common.Enums.ShowOut;
 import com.djdu.common.Enums.Usable;
 import org.apache.commons.lang3.StringUtils;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.springframework.data.jpa.domain.Specification;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.criteria.*;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * @ClassName CategoryDto
- * @Description Category的DTO
+ * @Description TODO Category的DTO
  * @Author DJDU
  * @Date 2019/1/27 20:42
  * @Version 1.0
@@ -26,6 +28,11 @@ public class CategoryDto {
     private String name;//分类名
 
     private ShowOut showOut;//是否展示
+
+    private Integer grade = 1;//分类等级
+
+
+    private Integer morder;//同级分类顺序
 
     public String getCategory_id() {
         return category_id;
@@ -51,10 +58,26 @@ public class CategoryDto {
         this.showOut = showOut;
     }
 
+    public Integer getGrade() {
+        return grade;
+    }
+
+    public void setGrade(Integer grade) {
+        this.grade = grade;
+    }
+
+    public Integer getMorder() {
+        return morder;
+    }
+
+    public void setMorder(Integer morder) {
+        this.morder = morder;
+    }
+
 
     /**
      * @Author DJDU
-     * @Description 拼装高级自定义查询条件，动态条件组装
+     * @Description TODO 拼装高级自定义查询条件，动态条件组装
      * @Date 2019/2/11 17:03 
      * @Param [categoryDto]
      * @return org.springframework.data.jpa.domain.Specification<com.djdu.entity.Category>
@@ -78,6 +101,16 @@ public class CategoryDto {
                     ));
                 }
 
+
+                if(StringUtils.isNotBlank(categoryDto.getCategory_id())){
+                    predicate.add(criteriaBuilder.like(root.get("category_id").as(String.class),
+                            "%"+categoryDto.getCategory_id()+"%"
+                    ));
+                }
+                predicate.add(criteriaBuilder.equal(root.get("grade").as(Integer.class),
+                        categoryDto.getGrade()
+                ));
+
                 //默认已删除的不能查询
                 predicate.add(criteriaBuilder.equal(root.get("usable").as(Usable.class),
                         Usable.UnDeleted
@@ -90,7 +123,7 @@ public class CategoryDto {
     }
     /**
      * @Author DJDU
-     * @Description 重写toString
+     * @Description TODO 重写toString
      * @Date 2019/1/26 21:26
      * @Param []
      * @return java.lang.String

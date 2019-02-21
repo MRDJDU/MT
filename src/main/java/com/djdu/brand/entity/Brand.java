@@ -1,0 +1,33 @@
+package com.djdu.brand.entity;
+
+import com.djdu.common.base.BaseEmtity2;
+import com.djdu.goods.entity.Goods;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.Data;
+
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * @ClassName  Brand
+ * @Description TODO 品牌实体类，如华硕，联想
+ * @Author DJDU
+ * @Date 2019/2/19 1:15
+ * @Version 1.0
+ **/
+
+@Data
+@Entity
+@Table(name = "brand")
+@JsonIgnoreProperties({ "handler","hibernateLazyInitializer" })
+public class Brand extends BaseEmtity2 {
+    @Id
+    @Column(name = "brand_id")
+    private String brand_id;//品牌id
+
+    private String name;//品牌名
+
+    @OneToMany(cascade = CascadeType.ALL,mappedBy="brand",fetch=FetchType.LAZY)
+    private List<Goods> goods = new ArrayList<Goods>();//子，商品
+}

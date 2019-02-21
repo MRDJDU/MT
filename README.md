@@ -38,6 +38,10 @@
   - 优化了处理前端请求操作结果信息封装类的数据，新增了错误信息字段，状态码改为boolean类型，更符合逻辑
   - controller调整为RESTFUL 标准，增加-post 删除和批量删除-delete 修改-put 查询-get
   - 实现了分类是否显示的批量操作以及优化了url访问路径
+- 2019.02.21
+  - 大更新，完成了数据库所有表的设计，新建好所有实体和其对应的关系
+  - 数据库设计图
+    ![](https://github.com/MRDJDU/ImageCache/MT/master/ExplicateMTImg/数据库设计图.jpg)
   
   
   

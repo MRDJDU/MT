@@ -2,7 +2,7 @@ package com.djdu.common.Enums;
 
 /**
  * @EnumName Usable
- * @Description 公共类，是否删除枚举
+ * @Description TODO 公共类，是否删除枚举
  * @Author DJDU
  * @Date 2019/1/27 14:13
  * @Version 1.0

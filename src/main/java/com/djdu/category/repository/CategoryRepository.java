@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 
 /**
  * @InterfaceName CategoryRepository
- * @Description 仓库层，进行对数据库的各种操作
+ * @Description TODO 仓库层，进行对数据库的各种操作
  * 继承PagingAndSortingRepository提供额外的分页查询及排序功能,
  * 继承JpaSpecificationExecutor自定义高级（动态条件组装）查询接口
  * @Author DJDU

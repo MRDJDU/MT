@@ -1,0 +1,8 @@
+###新增分类Brand
+POST  http://localhost:8080/mt/brand/addBrand HTTP/1.1
+Content-Type: application/json;charset=UTF-8
+
+{
+  "brand_id": "bb5eb671-a7f5-41f9-9bc1-345e08339988",
+  "name": "华硕"
+}

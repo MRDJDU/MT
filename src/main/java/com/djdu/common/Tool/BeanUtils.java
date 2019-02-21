@@ -14,7 +14,7 @@ import org.springframework.util.Assert;
 
 /**
  * @ClassName BeanUtils
- * @Description 用与更新操作时，dto数值赋值到entity，重写了BeanUtils
+ * @Description TODO 用与更新操作时，dto数值赋值到entity，重写了BeanUtils
  * @Author DJDU
  * @Date 2019/2/13 11:38
  * @Version 1.0
