@@ -22,7 +22,7 @@ import java.util.Date;
 public class GetLogistics {
     @Id
     @Column(name = "getLogistics_id")
-    private String getLogisticsDto_id;//获取物流查询接口返回的信息id
+    private String getLogistics_id;//获取物流查询接口返回的信息id
 
     @JsonFormat(pattern="yyyy/MM/dd HH:mm:ss",timezone="GMT+8")
     private Date time;//时间

@@ -34,11 +34,13 @@ public class Evaluation extends BaseEmtity2 {
 
     private String name;//评论人昵称
 
-    @OneToOne(cascade= CascadeType.ALL,fetch= FetchType.LAZY)
-    private User user;
+    @ManyToOne(cascade= CascadeType.ALL,fetch= FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User user;//父，用户
 
-    @OneToOne(cascade= CascadeType.ALL,fetch= FetchType.LAZY)
-    private Goods goods;//单向，商品
+    @ManyToOne(cascade= CascadeType.ALL,fetch= FetchType.LAZY)
+    @JoinColumn(name = "goods_id")
+    private Goods goods;//父，商品
 
     @OneToOne(cascade= CascadeType.ALL,fetch= FetchType.LAZY)
     private SKU sku;//单向，商品进存基础单位

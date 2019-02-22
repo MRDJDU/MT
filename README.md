@@ -42,7 +42,8 @@
   - 大更新，完成了数据库所有表的设计，新建好所有实体和其对应的关系
   - 数据库设计图
     ![](https://github.com/MRDJDU/MT/raw/master/ExplicateMTImg/数据库设计图.jpg)
-  
-  
-  
+- 2019.02.22
+  - 更新，优化了数据库的设计，编写好ER图
+  - MT_ER图 数据库设计
+    ![](https://github.com/MRDJDU/MT/raw/master/ExplicateMTImg/MT_ER数据库设计.jpg)
   

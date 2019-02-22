@@ -1,5 +1,6 @@
 package com.djdu.goods.entity;
 
+import com.djdu.evaluation.entity.Evaluation;
 import com.djdu.imageResource.entity.ImageResource;
 import com.djdu.brand.entity.Brand;
 import com.djdu.category.entity.CategoryThird;
@@ -48,5 +49,7 @@ public class Goods extends BaseEmtity {
     @OneToMany(cascade = CascadeType.ALL,mappedBy="goods",fetch=FetchType.LAZY)
     private List<SKU> SKUs = new ArrayList<SKU>();//子，库存进出计量单位
 
+    @OneToMany(cascade = CascadeType.ALL,mappedBy="goods",fetch=FetchType.LAZY)
+    private List<Evaluation> evaluations = new ArrayList<Evaluation>();//子，评论表
 
 }

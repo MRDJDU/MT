@@ -2,6 +2,7 @@ package com.djdu.user.entity;
 
 import com.djdu.address.entity.Address;
 import com.djdu.common.base.BaseEmtity2;
+import com.djdu.evaluation.entity.Evaluation;
 import com.djdu.orders.entity.Orders;
 import com.djdu.shoppingCart.entity.ShoppingCart;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -40,5 +41,8 @@ public class User extends BaseEmtity2 {
 
     @OneToMany(cascade = CascadeType.ALL,mappedBy="user",fetch=FetchType.LAZY)
     private List<Orders> orders = new ArrayList<Orders>();//子，订单
+
+    @OneToMany(cascade = CascadeType.ALL,mappedBy="user",fetch=FetchType.LAZY)
+    private List<Evaluation> evaluations = new ArrayList<Evaluation>();//子，评论表
 
 }

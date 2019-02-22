@@ -1,6 +1,6 @@
 package com.djdu.brand.entity;
 
-import com.djdu.common.base.BaseEmtity2;
+import com.djdu.common.base.BaseEmtity;
 import com.djdu.goods.entity.Goods;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
@@ -21,7 +21,7 @@ import java.util.List;
 @Entity
 @Table(name = "brand")
 @JsonIgnoreProperties({ "handler","hibernateLazyInitializer" })
-public class Brand extends BaseEmtity2 {
+public class Brand extends BaseEmtity {
     @Id
     @Column(name = "brand_id")
     private String brand_id;//品牌id
