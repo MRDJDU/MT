@@ -1,0 +1,18 @@
+日志定义格式：
+
+info（用户操作结果记录）
+
+	方法功能+操作结果！ >>>>> [brand_id:%s]
+
+	String.format("品牌批量隐藏失败！ >>>>> [brand_id:%s]",message)
+
+
+
+
+
+
+errer（后台处理错误记录）
+
+	方法功能+操作结果！ >>>>> [error:%s]
+
+	String.format("品牌批量隐藏失败！ >>>>> [error:%s]",message)

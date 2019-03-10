@@ -28,6 +28,8 @@ public class Brand extends BaseEmtity {
 
     private String name;//品牌名
 
+    private String IcoURL;//Ico路径
+
     @OneToMany(cascade = CascadeType.ALL,mappedBy="brand",fetch=FetchType.LAZY)
     private List<Goods> goods = new ArrayList<Goods>();//子，商品
 }

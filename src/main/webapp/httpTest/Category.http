@@ -3,6 +3,7 @@ GET http://localhost:8080/mt/category/findAllCategories HTTP/1.1
 Content-Type: application/json;charset=UTF-8
 
 {
+  
   "categoryDto":{
     "category_id": "",
     "name": "",

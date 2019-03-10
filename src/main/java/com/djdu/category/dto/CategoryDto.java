@@ -3,14 +3,10 @@ package com.djdu.category.dto;
 import com.djdu.category.entity.Category;
 import com.djdu.common.Enums.ShowOut;
 import com.djdu.common.Enums.Usable;
+import lombok.Data;
 import org.apache.commons.lang3.StringUtils;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 import org.springframework.data.jpa.domain.Specification;
 
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.criteria.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +18,7 @@ import java.util.List;
  * @Date 2019/1/27 20:42
  * @Version 1.0
  **/
+@Data
 public class CategoryDto {
     private  String category_id;//分类id
 
@@ -33,46 +30,6 @@ public class CategoryDto {
 
 
     private Integer morder;//同级分类顺序
-
-    public String getCategory_id() {
-        return category_id;
-    }
-
-    public void setCategory_id(String category_id) {
-        this.category_id = category_id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public ShowOut getShowOut() {
-        return showOut;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setShowOut(ShowOut showOut) {
-        this.showOut = showOut;
-    }
-
-    public Integer getGrade() {
-        return grade;
-    }
-
-    public void setGrade(Integer grade) {
-        this.grade = grade;
-    }
-
-    public Integer getMorder() {
-        return morder;
-    }
-
-    public void setMorder(Integer morder) {
-        this.morder = morder;
-    }
 
 
     /**

@@ -46,4 +46,8 @@
   - 更新，优化了数据库的设计，编写好ER图
   - MT_ER图 数据库设计
     ![](https://github.com/MRDJDU/MT/raw/master/ExplicateMTImg/MT_ER数据库设计.jpg)
-  
+- 2019.02.27
+  -添加日志框架logback
+- 2019.03.10
+  -更新了前段页面，使用了vue+element搭建后台页面,目前写了登陆界面，开始前后台结合。
+   前后台交互使用了axios技术，进行异步处理请求。

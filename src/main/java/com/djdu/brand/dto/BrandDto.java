@@ -1,8 +1,8 @@
 package com.djdu.brand.dto;
 
 import com.djdu.brand.entity.Brand;
+import com.djdu.common.Enums.ShowOut;
 import com.djdu.common.Enums.Usable;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.jpa.domain.Specification;
@@ -12,12 +12,11 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
  * @ClassName BrandDto
- * @Description TODO 品牌类Dto，用于接收数据，拼装查询条件
+ * @Description TODO 品牌类Dto，用于接收数据，拼装查询条件,查询使用的字段：品牌名和是否展示在客户端
  * @Author DJDU
  * @Date 2019/2/21 10:37
  * @Version 1.0
@@ -29,6 +28,8 @@ public class BrandDto {
     private String name;//品牌名
 
     private Usable usable;//是否被删除
+
+    private ShowOut showOut;//是否展示在客户端
 
     /**
      * @Author DJDU
@@ -51,6 +52,12 @@ public class BrandDto {
                             ));
                 }
 
+                //查询品牌名不为空的话，拼装查询条件
+                if(brandDto.getShowOut()!=null){
+                    predicate.add(criteriaBuilder.equal(root.get("showOut").as(ShowOut.class),
+                            brandDto.getShowOut()
+                    ));
+                }
                 //默认已删除的不能查询
                 predicate.add(criteriaBuilder.equal(root.get("usable").as(Usable.class),
                         Usable.UnDeleted
