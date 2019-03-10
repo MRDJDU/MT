@@ -1,0 +1,25 @@
+
+2019-02-27 14:09:43.629 [http-nio-8080-exec-1] ERROR
+[message：]新增品牌，前台传输报文有误,name为空！
+
+================================================================================================================
+
+2019-02-27 14:10:06.926 [http-nio-8080-exec-2] ERROR
+[message：]新增品牌失败！ >>>>> [error:ids for this class must be manually assigned before calling save(): com.djdu.brand.entity.Brand; nested exception is org.hibernate.id.IdentifierGenerationException: ids for this class must be manually assigned before calling save(): com.djdu.brand.entity.Brand]
+
+================================================================================================================
+
+2019-02-27 14:14:34.415 [http-nio-8080-exec-1] ERROR
+[message：]新增品牌失败！ >>>>> [error:ids for this class must be manually assigned before calling save(): com.djdu.brand.entity.Brand; nested exception is org.hibernate.id.IdentifierGenerationException: ids for this class must be manually assigned before calling save(): com.djdu.brand.entity.Brand]
+
+================================================================================================================
+
+2019-02-27 14:16:36.215 [http-nio-8080-exec-2] ERROR
+[message：]新增品牌失败！ >>>>> [error:ids for this class must be manually assigned before calling save(): com.djdu.brand.entity.Brand; nested exception is org.hibernate.id.IdentifierGenerationException: ids for this class must be manually assigned before calling save(): com.djdu.brand.entity.Brand]
+
+================================================================================================================
+
+2019-02-27 14:22:27.486 [http-nio-8080-exec-1] ERROR
+[message：]新增品牌失败！ >>>>> [error:ids for this class must be manually assigned before calling save(): com.djdu.brand.entity.Brand; nested exception is org.hibernate.id.IdentifierGenerationException: ids for this class must be manually assigned before calling save(): com.djdu.brand.entity.Brand]
+
+================================================================================================================
