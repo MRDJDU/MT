@@ -41,6 +41,7 @@
                     if (valid) {
                         // localStorage.setItem('ms_username',this.loginForm.username);
                         // this.$router.push('/');
+                        console.log(this.axios);
                         this.$message({
                         message: 'Landing success ',
                         duration:4000,

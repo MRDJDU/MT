@@ -29,5 +29,7 @@ public class Manage extends BaseEmtity2 {
 
     private String password;//管理员密码
 
+    private String img;//管理员头像
+
     private boolean state;//管理员状态，0，可用，1，停用
 }
