@@ -58,5 +58,8 @@
   - 用户是否登陆使用localStorage存储用户id来判断
   - 仪表盘主页面使用bus总线进行组件间通讯
   - 界面展示
-    ![](https://github.com/MRDJDU/MT/raw/master/ExplicateMTImg/仪表盘1.jpg)
-    ![](https://github.com/MRDJDU/MT/raw/master/ExplicateMTImg/仪表盘2.jpg)
+    ![](https://github.com/MRDJDU/MT/raw/master/ExplicateMTImg/仪表盘1.png)
+    ![](https://github.com/MRDJDU/MT/raw/master/ExplicateMTImg/仪表盘2.png)
+  - 完成了用户管理模块的界面设计，能够正常新增用户，具体细节明天完善
+    ![](https://github.com/MRDJDU/MT/raw/master/ExplicateMTImg/用户管理.png)
+    

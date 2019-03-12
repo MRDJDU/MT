@@ -44,42 +44,42 @@
                         title: '系统首页'
                     },
                     {
-                        icon: 'el-icon-lx-home',
+                        icon: 'el-icon-lx-cascades',
                         index: 'category',
                         title: '分类管理'
                     },
                     {
-                        icon: 'el-icon-lx-home',
+                        icon: 'el-icon-lx-favor',
                         index: 'brand',
                         title: '品牌管理'
                     },
                     {
-                        icon: 'el-icon-lx-home',
+                        icon: 'el-icon-lx-goods',
                         index: 'goods',
                         title: '商品管理'
                     },
                     {
-                        icon: 'el-icon-lx-home',
+                        icon: 'el-icon-lx-tag',
                         index: 'orders',
                         title: '订单管理'
                     },
                     {
-                        icon: 'el-icon-lx-home',
+                        icon: 'el-icon-lx-comment',
                         index: 'evaluation',
                         title: '评价管理'
                     },
                     {
-                        icon: 'el-icon-lx-home',
+                        icon: 'el-icon-lx-message',
                         index: 'message',
                         title: '消息管理'
                     },
                     {
-                        icon: 'el-icon-lx-home',
+                        icon: 'el-icon-lx-people',
                         index: 'manager',
                         title: '个人信息'
                     },
                     {
-                        icon: 'el-icon-lx-home',
+                        icon: 'el-icon-lx-friend',
                         index: 'user',
                         title: '用户管理'
                     }

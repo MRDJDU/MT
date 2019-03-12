@@ -57,6 +57,9 @@ public class ManageService {
                 manage.setUsable(Usable.UnDeleted);
                 manage.setState(true);
                 manage.setPassword(Md5.EncoderByMd5(manage.getPassword()));
+                if(manage.getImg()==null || manage.getImg()==""){
+                    manage.setImg("../../assets/ManageImg/DJDU.png");
+                }
                 manageRepository.save(manage);
                 responseMessage.makeSuccess(success,manage.getName(),manage);
                 return responseMessage;
@@ -99,7 +102,8 @@ public class ManageService {
             else {
                 String password=manageRepository.UnDeletedfindAndStatefindByNameToLogin(manage.getName());
                 if(Md5.checkpassword(manage.getPassword(),password)){
-                    responseMessage.makeSuccess(success,manage.getName(),manage);
+                    Manage manage1 = manageRepository.findByName(manage.getName()).get();
+                    responseMessage.makeSuccess(success,manage.getName(),manage1);
                 }
                 else {
                     responseMessage.makeFail(fail,"密码错误");

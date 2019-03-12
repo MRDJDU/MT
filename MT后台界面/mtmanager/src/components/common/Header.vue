@@ -47,13 +47,14 @@
             return {
                 collapse: false,
                 fullscreen: false,
-                name: 'linxin',
+                name: 'DJDU',
                 message: 1
             }
         },
         computed:{
             username(){
-                let username = localStorage.getItem('ms_username');
+                let username = sessionStorage.getItem('manage_name');
+                // let username = localStorage.getItem('manage_name');
                 return username ? username : this.name;
             }
         },

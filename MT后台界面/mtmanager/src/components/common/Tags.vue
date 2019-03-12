@@ -62,7 +62,7 @@
                     return item.path === route.fullPath;
                 })
                 if(!isExist){
-                    if(this.tagsList.length >= 8){
+                    if(this.tagsList.length >= 10){
                         this.tagsList.shift();
                     }
                     this.tagsList.push({
