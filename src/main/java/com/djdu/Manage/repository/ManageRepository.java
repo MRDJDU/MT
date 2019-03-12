@@ -36,6 +36,10 @@ public interface ManageRepository extends PagingAndSortingRepository<Manage,Stri
     @Query(value = "select password from manage a where a.name = ?1 AND a.usable = 0 AND a.state = 1", nativeQuery = true)
     String  UnDeletedfindAndStatefindByNameToLogin(String name);
 
+
+    @Query(value = "select count(*) from manage a where a.name = ?1 AND a.usable = 0", nativeQuery = true)
+    Integer  UnDeletedfindByNameToLoginExists(String name);
+
     /**
      * @Author DJDU
      * @Description TODO 通过名字查找是否存在未删除的状态为可用的用户

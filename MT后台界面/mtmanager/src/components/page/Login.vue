@@ -39,19 +39,40 @@
             submitForm(formName) {
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
-                        // localStorage.setItem('ms_username',this.loginForm.username);
-                        // this.$router.push('/');
-                        console.log(this.axios);
-                        this.$message({
-                        message: 'Landing success ',
-                        duration:4000,
-                        type: 'success'
+                        // 保留this
+                        let _this=this;
+                        // 收集用户输入的账号和密码，发送给后端验证登陆
+                        this.axios.post('http://localhost:8080/mt/manage/login',{
+                            "name": _this.loginForm.username,
+                            "password":_this.loginForm.password
+                        })
+                        .then(response => {
+                            if(response.data.statuCode){
+                                // 把数据存入本地存储
+                                localStorage.setItem('ms_username',response.data.data.name);
+                                // 把当前登录成功的用户存入vuex的store里面
+                                _this.$store.commit('SAVE_USERINFO',response.data.data)
+                                _this.$message({
+                                    message: response.data.message,
+                                    duration:4000,
+                                    type: 'success'
+                                });
+                                _this.$router.push('/index');
+                            }
+                            else{
+                                _this.$message.error({
+                                    message:response.data.message,
+                                    duration:4000
+                                });
+                            }
                         });
-                    } else {
-                         this.$message.error({
-                             message:'Username and password cannot be empty',
-                             duration:4000
-                             });
+                       
+                    } 
+                    else {
+                        this.$message.error({
+                            message:'用户名和密码不能为空！',
+                            duration:4000
+                            });
                         return false;
                     }
                 });
@@ -66,7 +87,7 @@
         position: relative;
         width:100%;
         height:100%;
-        background-image: url(../assets/img/login.jpg) ;
+        background-image: url(../../assets/img/login.jpg) ;
         background-size: cover;
     }
     .ms-title{

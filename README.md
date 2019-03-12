@@ -53,3 +53,10 @@
    前后台交互使用了axios技术，进行异步处理请求。
 - 2019.03.11
   - 新增了管理员的新增和登陆的方法，管理员用户密码使用MD5进行加密
+- 2019.03.12
+  - 搭建起基础的仪表盘界面，用vue-router来控制用户登录权限的原理，应用了vue-router提供的router.beforeEach来注册一个全局钩子，用户只能通过登陆界面进入系统
+  - 用户是否登陆使用localStorage存储用户id来判断
+  - 仪表盘主页面使用bus总线进行组件间通讯
+  - 界面展示
+    ![](https://github.com/MRDJDU/MT/raw/master/ExplicateMTImg/仪表盘1.jpg)
+    ![](https://github.com/MRDJDU/MT/raw/master/ExplicateMTImg/仪表盘2.jpg)

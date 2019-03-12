@@ -35,7 +35,14 @@ public class ManageController {
         return manageService.addManage(manage);
     }
 
-    @GetMapping(value="/login", consumes= MediaType.APPLICATION_JSON_VALUE)
+    /**
+     * @Author DJDU
+     * @Description TODO 登陆
+     * @Date 2019/3/11 15:23
+     * @Param [manage]
+     * @return com.djdu.common.Message.ResponseMessage
+     **/
+    @PostMapping(value="/login", consumes= MediaType.APPLICATION_JSON_VALUE)
     public ResponseMessage login(@RequestBody Manage manage){
         return manageService.login(manage);
     }

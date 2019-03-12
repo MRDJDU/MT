@@ -88,8 +88,12 @@ public class ManageService {
                 responseMessage.makeFail(fail,"用户名不能为空");
                 return responseMessage;
             }
-            else if(manageRepository.UnDeletedfindAndStatefindByNameToLoginExists(manage.getName())==0){
+            else if(manageRepository.UnDeletedfindByNameToLoginExists(manage.getName())==0){
                 responseMessage.makeFail(fail,"用户不存在");
+                return responseMessage;
+            }
+            else if(manageRepository.UnDeletedfindAndStatefindByNameToLoginExists(manage.getName())==0){
+                responseMessage.makeFail(fail,"账号已被冻结");
                 return responseMessage;
             }
             else {
