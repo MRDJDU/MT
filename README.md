@@ -62,4 +62,5 @@
     ![](https://github.com/MRDJDU/MT/raw/master/ExplicateMTImg/仪表盘2.png)
   - 完成了用户管理模块的界面设计，能够正常新增用户，具体细节明天完善
     ![](https://github.com/MRDJDU/MT/raw/master/ExplicateMTImg/用户管理.png)
-    
+- 2019-03-13
+  - 实现了管理员分页查询，并动态加载组件，有一个问题未解决，图片问题没有显示

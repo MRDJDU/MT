@@ -2,10 +2,14 @@ package com.djdu.Manage.service;
 
 import com.djdu.Manage.entity.Manage;
 import com.djdu.Manage.repository.ManageRepository;
+import com.djdu.brand.entity.Brand;
 import com.djdu.common.Enums.Usable;
 import com.djdu.common.Message.ResponseMessage;
 import com.djdu.common.Tool.Md5;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -115,6 +119,28 @@ public class ManageService {
             responseMessage.makeError(fail,e.getMessage());
             return responseMessage;
         }
+    }
+
+    /**
+     * @Author DJDU
+     * @Description TODO 分页查找管理员列表
+     * @Date 2019/3/13 21:57
+     * @Param [specification, pageable]
+     * @return com.djdu.common.Message.ResponseMessage
+     **/
+    public ResponseMessage getBrandPage(Specification specification, Pageable pageable){
+        success = "分页查找管理员列表成功！";
+        fail = "分页查找管理员列表失败！";
+        ResponseMessage responseMessage = new ResponseMessage<Page<Manage>>();
+        try{
+            responseMessage.makeSuccess(success,manageRepository.findAll(specification,pageable));
+            return responseMessage;
+        }
+        catch (Exception e){
+            responseMessage.makeError(fail,e.getMessage());
+            return responseMessage;
+        }
+
     }
 
 }

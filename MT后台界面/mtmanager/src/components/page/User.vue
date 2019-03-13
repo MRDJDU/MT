@@ -7,207 +7,32 @@
     </div>
     <div class="users-card" ref="son">
         <el-row :gutter="12" class="cards">
-            <el-col :span="6" id="ooo">
-                <div class="cardfather">
-                    <el-card shadow="hover" class="card">
-                        <!-- 用户头像 -->
-                        <div class="user-img">
-                            <img src="../../assets/ManageImg/DJDU.png">
-                        </div>
-                        <div class="message">
-                            <h3>{{name}}</h3>
-                            <span>{{createTime}}</span>
-                        </div>
-                        <div class="deleted">
-                            <el-row>
-                                <el-tooltip effect="dark" :content="fullscreen=` 禁用 `" placement="left">
-                                    <el-button type="warning" icon="el-icon-lx-lock" circle size='mini' @click = "lock"></el-button>
-                                </el-tooltip>
-                                <el-tooltip effect="dark" :content="fullscreen=` 删除 `" placement="right">
-                                    <el-button type="danger" icon="el-icon-delete" circle size='mini' @click = "deletes"></el-button>
-                                </el-tooltip>
-                            </el-row>
-                        </div>
-                    </el-card>
-                </div>
-            </el-col>
-
-              <el-col :span="6">
-                <div class="cardfather">
-                    <el-card shadow="hover" class="card">
-                        <!-- 用户头像 -->
-                        <div class="user-img">
-                            <img src="../../assets/ManageImg/DJDU.png">
-                        </div>
-                        <div class="message">
-                            <h3>{{name}}</h3>
-                            <span>{{createTime}}</span>
-                        </div>
-                        <div class="deleted">
-                            <el-row>
-                                <el-tooltip effect="dark" :content="fullscreen=` 禁用 `" placement="left">
-                                    <el-button type="warning" icon="el-icon-lx-lock" circle size='mini' @click = "lock"></el-button>
-                                </el-tooltip>
-                                <el-tooltip effect="dark" :content="fullscreen=` 删除 `" placement="right">
-                                    <el-button type="danger" icon="el-icon-delete" circle size='mini' @click = "deletes"></el-button>
-                                </el-tooltip>
-                            </el-row>
-                        </div>
-                    </el-card>
-                </div>
-            </el-col>
-
-              <el-col :span="6">
-                <div class="cardfather">
-                    <el-card shadow="hover" class="card">
-                        <!-- 用户头像 -->
-                        <div class="user-img">
-                            <img src="../../assets/ManageImg/DJDU.png">
-                        </div>
-                        <div class="message">
-                            <h3>{{name}}</h3>
-                            <span>{{createTime}}</span>
-                        </div>
-                        <div class="deleted">
-                            <el-row>
-                                <el-tooltip effect="dark" :content="fullscreen=` 禁用 `" placement="left">
-                                    <el-button type="warning" icon="el-icon-lx-lock" circle size='mini' @click = "lock"></el-button>
-                                </el-tooltip>
-                                <el-tooltip effect="dark" :content="fullscreen=` 删除 `" placement="right">
-                                    <el-button type="danger" icon="el-icon-delete" circle size='mini' @click = "deletes"></el-button>
-                                </el-tooltip>
-                            </el-row>
-                        </div>
-                    </el-card>
-                </div>
-            </el-col>
-
-              <el-col :span="6">
-                <div class="cardfather">
-                    <el-card shadow="hover" class="card">
-                        <!-- 用户头像 -->
-                        <div class="user-img">
-                            <img src="../../assets/ManageImg/DJDU.png">
-                        </div>
-                        <div class="message">
-                            <h3>{{name}}</h3>
-                            <span>{{createTime}}</span>
-                        </div>
-                        <div class="deleted">
-                            <el-row>
-                                <el-tooltip effect="dark" :content="fullscreen=` 禁用 `" placement="left">
-                                    <el-button type="warning" icon="el-icon-lx-lock" circle size='mini' @click = "lock"></el-button>
-                                </el-tooltip>
-                                <el-tooltip effect="dark" :content="fullscreen=` 删除 `" placement="right">
-                                    <el-button type="danger" icon="el-icon-delete" circle size='mini' @click = "deletes"></el-button>
-                                </el-tooltip>
-                            </el-row>
-                        </div>
-                    </el-card>
-                </div>
-            </el-col>
-
-              <el-col :span="6">
-                <div class="cardfather">
-                    <el-card shadow="hover" class="card">
-                        <!-- 用户头像 -->
-                        <div class="user-img">
-                            <img src="../../assets/ManageImg/DJDU.png">
-                        </div>
-                        <div class="message">
-                            <h3>{{name}}</h3>
-                            <span>{{createTime}}</span>
-                        </div>
-                        <div class="deleted">
-                            <el-row>
-                                <el-tooltip effect="dark" :content="fullscreen=` 禁用 `" placement="left">
-                                    <el-button type="warning" icon="el-icon-lx-lock" circle size='mini' @click = "lock"></el-button>
-                                </el-tooltip>
-                                <el-tooltip effect="dark" :content="fullscreen=` 删除 `" placement="right">
-                                    <el-button type="danger" icon="el-icon-delete" circle size='mini' @click = "deletes"></el-button>
-                                </el-tooltip>
-                            </el-row>
-                        </div>
-                    </el-card>
-                </div>
-            </el-col>
-
-              <el-col :span="6">
-                <div class="cardfather">
-                    <el-card shadow="hover" class="card">
-                        <!-- 用户头像 -->
-                        <div class="user-img">
-                            <img src="../../assets/ManageImg/DJDU.png">
-                        </div>
-                        <div class="message">
-                            <h3>{{name}}</h3>
-                            <span>{{createTime}}</span>
-                        </div>
-                        <div class="deleted">
-                            <el-row>
-                                <el-tooltip effect="dark" :content="fullscreen=` 禁用 `" placement="left">
-                                    <el-button type="warning" icon="el-icon-lx-lock" circle size='mini' @click = "lock"></el-button>
-                                </el-tooltip>
-                                <el-tooltip effect="dark" :content="fullscreen=` 删除 `" placement="right">
-                                    <el-button type="danger" icon="el-icon-delete" circle size='mini' @click = "deletes"></el-button>
-                                </el-tooltip>
-                            </el-row>
-                        </div>
-                    </el-card>
-                </div>
-            </el-col>
-
-              <el-col :span="6">
-                <div class="cardfather">
-                    <el-card shadow="hover" class="card">
-                        <!-- 用户头像 -->
-                        <div class="user-img">
-                            <img src="../../assets/ManageImg/DJDU.png">
-                        </div>
-                        <div class="message">
-                            <h3>{{name}}</h3>
-                            <span>{{createTime}}</span>
-                        </div>
-                        <div class="deleted">
-                            <el-row>
-                                <el-tooltip effect="dark" :content="fullscreen=` 禁用 `" placement="left">
-                                    <el-button type="warning" icon="el-icon-lx-lock" circle size='mini' @click = "lock"></el-button>
-                                </el-tooltip>
-                                <el-tooltip effect="dark" :content="fullscreen=` 删除 `" placement="right">
-                                    <el-button type="danger" icon="el-icon-delete" circle size='mini' @click = "deletes"></el-button>
-                                </el-tooltip>
-                            </el-row>
-                        </div>
-                    </el-card>
-                </div>
-            </el-col>
-
-              <el-col :span="6">
-                <div class="cardfather">
-                    <el-card shadow="hover" class="card">
-                        <!-- 用户头像 -->
-                        <div class="user-img">
-                            <img src="../../assets/ManageImg/DJDU.png">
-                        </div>
-                        <div class="message">
-                            <h3>{{name}}</h3>
-                            <span>{{createTime}}</span>
-                        </div>
-                        <div class="deleted">
-                            <el-row>
-                                <el-tooltip effect="dark" :content="fullscreen=` 禁用 `" placement="left">
-                                    <el-button type="warning" icon="el-icon-lx-lock" circle size='mini' @click = "lock"></el-button>
-                                </el-tooltip>
-                                <el-tooltip effect="dark" :content="fullscreen=` 删除 `" placement="right">
-                                    <el-button type="danger" icon="el-icon-delete" circle size='mini' @click = "deletes"></el-button>
-                                </el-tooltip>
-                            </el-row>
-                        </div>
-                    </el-card>
-                </div>
-            </el-col>
-
-            
+            <template v-for="item in items">
+                <el-col :span="6" :id="item.manage_id">
+                    <div class="cardfather">
+                        <el-card shadow="hover" class="card">
+                            <!-- 用户头像 -->
+                            <div class="user-img">
+                                <img :src="item.face">
+                            </div>
+                            <div class="message">
+                                <h3>{{item.name}}</h3>
+                                <span>{{creatTime}}</span>
+                            </div>
+                            <div class="deleted">
+                                <el-row>
+                                    <el-tooltip effect="dark" :content="fullscreen=` 禁用 `" placement="left">
+                                        <el-button type="warning" icon="el-icon-lx-lock" circle size='mini' @click = "lock"></el-button>
+                                    </el-tooltip>
+                                    <el-tooltip effect="dark" :content="fullscreen=` 删除 `" placement="right">
+                                        <el-button type="danger" icon="el-icon-delete" circle size='mini' @click = "deletes"></el-button>
+                                    </el-tooltip>
+                                </el-row>
+                            </div>
+                        </el-card>
+                    </div>
+                </el-col>
+            </template>            
         </el-row>
     </div>
     <div class="page">
@@ -232,22 +57,16 @@
     export default {
         data:function(){
             return {
-                totalNum : 88,
-                pageSize : 8,
-                cur_page : 1,
-                name:"DJDU",
-                createTime:"2018.03.12",
+                totalNum : 0,// 总记录数
+                pageSize : 8,// 一页显示记录数
+                cur_page : 1,//选择多少页
+                sort:"creatTime",// 排序标记
+                dir:"DESC",// 倒序
+                name:"DJDU", // 查询条件管理员姓名
+                createTime:"2018.03.12",// 查询条件，新增时间
+                items:{},// 查询结果
                 dialogFormVisible: false,
-                addForm: {
-                    name: '',
-                    region: '',
-                    date1: '',
-                    date2: '',
-                    delivery: false,
-                    type: [],
-                    resource: '',
-                    desc: ''
-                }
+                addForm: {}
             }
         },
         mounted(){
@@ -255,9 +74,43 @@
             this.recursion();
         },
         methods :{
+            // 页面加载时获取管理员列表
             getManager(){
-                
+                        // 保留this
+                        let _this=this;
+                        this.axios.post('http://localhost:8080/mt/manage/findAllManage',{
+                            "manageDto":{},
+                            "myPagaRequest":{
+                                "page":1,
+                                "limit":this.pageSize,
+                                "sort":this.sort,
+                                "dir":this.dir
+                            }
+                        })
+                        .then(response => {
+                            // console.log(response)
+                            if(response.data.statuCode){
+                                this.items=response.data.data.content;
+                                // for(var i=0;i<this.items.length;i++){
+                                //     this.items[i].face=require(this.items[i].img);
+                                // }
+                                console.log(this.items);
+                                this.totalNum=response.data.data.totalElements;
+                                this.$notify({
+                                    title: response.data.message,
+                                    type: 'success'
+                                });
+                            }
+                            else{
+                                this.$notify.error({
+                                    title: response.data.message
+                                });
+                                this.dialogFormVisible = false;
+                                _this.addForm.username=null;
+                            }
+                        });
             },
+            // 递归函数，随时监控页面的高度和宽度的变化，对页面中的元素样式进行调整
             recursion(){
                 this.$refs.son.style.width =window.getComputedStyle(this.$refs.father).width;
                 this.$refs.son.style.height =(this.$refs.father.offsetHeight*0.8268156)+'px';
@@ -269,22 +122,23 @@
                     this.recursion()
                 }, 10);
             },
+            // 分页行点击触发时间，val是点击的页数
             handleCurrentChange(val) {
                 this.cur_page = val;
                 this.getData();
             },
             getData(){
-                alert(this.pageSize);
+                // alert(this.pageSize);
             },
-            add(){
-              alert("add");  
-            },
+            // 冻结管理员
             lock(){
                 alert("lock");
             },
+            // 删除管理员
             deletes(){
               alert("delete");
             },
+            // 新增管理员
             submit(formName){
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
