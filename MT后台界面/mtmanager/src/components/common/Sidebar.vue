@@ -77,8 +77,10 @@
                         icon: 'el-icon-lx-people',
                         index: 'manager',
                         title: '个人信息'
-                    },
-                    {
+                    }
+                ],
+                adminItems:[
+                     {
                         icon: 'el-icon-lx-friend',
                         index: 'user',
                         title: '用户管理'
@@ -96,6 +98,15 @@
             bus.$on('collapse', msg => {
                 this.collapse = msg;
             })
+        },
+        // 权限管理，只有超级管理员才能看到人员管理
+        mounted(){
+            const role = sessionStorage.getItem('manage_grade');
+            if(role=="0"||role==0){
+                this.adminItems.forEach(adminItem => {
+                    this.items.push(adminItem);
+                });
+            }
         }
     }
 </script>

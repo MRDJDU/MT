@@ -51,6 +51,7 @@
                                 // 把数据存入本地存储
                                 sessionStorage.setItem('manage_name',response.data.data.name);
                                 sessionStorage.setItem('manage_id',response.data.data.manage_id);
+                                sessionStorage.setItem('manage_grade',response.data.data.grade);
                                 // localStorage.setItem('manage_name',response.data.data.name);
                                 // localStorage.setItem('manage_id',response.data.data.manage_id);
                                 // 把当前登录成功的用户存入vuex的store里面

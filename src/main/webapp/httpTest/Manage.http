@@ -3,10 +3,19 @@ POST  http://localhost:8080/mt/manage/addManage HTTP/1.1
 Content-Type: application/json;charset=UTF-8
 
 {
-  "name": "admin",
+  "name": "",
   "password":"123"
 }
 
+###
+POST  http://localhost:8080/mt/manage/addManageAdmin HTTP/1.1
+Content-Type: application/json;charset=UTF-8
+
+{
+  "name": "DJDU",
+  "password":"123",
+  "key":"DJDU"
+}
 
 ###
 POST  http://localhost:8080/mt/manage/login HTTP/1.1
@@ -25,9 +34,9 @@ Content-Type: application/json;charset=UTF-8
 {
   "manageDto":{},
   "myPagaRequest":{
-    "page":2,
+    "page":1,
     "limit":8,
-    "sort":"name",
+    "sort":"creatTime",
     "dir":"DESC"
   }
 }

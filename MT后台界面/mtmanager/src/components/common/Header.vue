@@ -62,7 +62,9 @@
             // 用户名下拉菜单选择事件
             handleCommand(command) {
                 if(command == 'loginout'){
-                    localStorage.removeItem('ms_username')
+                    sessionStorage.removeItem('manage_name');
+                    sessionStorage.removeItem('manage_id');
+                    sessionStorage.removeItem('manage_grade');
                     this.$router.push('/login');
                 }
             },

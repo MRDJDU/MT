@@ -44,6 +44,18 @@ public class ManageController {
 
     /**
      * @Author DJDU
+     * @Description TODO 新增超级管理员，只能通过脚本添加
+     * @Date 2019/3/16 16:37
+     * @Param [manage]
+     * @return com.djdu.common.Message.ResponseMessage
+     **/
+    @PostMapping(value="/addManageAdmin",consumes= MediaType.APPLICATION_JSON_VALUE)
+    public ResponseMessage addManageAdmin(@RequestBody Manage manage){
+        return manageService.addManageAdmin(manage);
+    }
+
+    /**
+     * @Author DJDU
      * @Description TODO 登陆
      * @Date 2019/3/11 15:23
      * @Param [manage]
@@ -75,4 +87,30 @@ public class ManageController {
             return responseMessage;
         }
     }
+
+    /**
+     * @Author DJDU
+     * @Description TODO 更改用户状态
+     * @Date 2019/3/18 2:29
+     * @Param [manage]
+     * @return com.djdu.common.Message.ResponseMessage
+     **/
+    @PostMapping(value="/state", consumes= MediaType.APPLICATION_JSON_VALUE)
+    public ResponseMessage state(@RequestBody Manage manage){
+        return manageService.changeState(manage);
+    }
+
+    /**
+     * @Author DJDU
+     * @Description TODO 删除用户
+     * @Date 2019/3/18 2:29
+     * @Param [manage]
+     * @return com.djdu.common.Message.ResponseMessage
+     **/
+    @PostMapping(value="/delete", consumes= MediaType.APPLICATION_JSON_VALUE)
+    public ResponseMessage delete(@RequestBody Manage manage){
+        return manageService.delete(manage);
+    }
+
+
 }

@@ -4,10 +4,7 @@ import com.djdu.common.base.BaseEmtity2;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * @ClassName Manage
@@ -31,5 +28,13 @@ public class Manage extends BaseEmtity2 {
 
     private String img;//管理员头像
 
-    private boolean state;//管理员状态，0，可用，1，停用
+    private Integer state;//管理员状态，0，停用，1，可用
+
+    private Integer grade;//管理员等级，0-超级管理员 1-普通管理员，超级管理员只能脚本添加
+
+    @Transient
+    private String token;//用于身份验证
+
+    @Transient
+    private String key;//脚本添加超级管理员时身份密码验证
 }

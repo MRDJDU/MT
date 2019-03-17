@@ -33,7 +33,9 @@ public class ManageDto {
 
     private String img;//管理员头像
 
-    private boolean state;//管理员状态，0，可用，1，停用
+    private Integer state;//管理员状态，0，可用，1，停用
+
+    private Integer grade;//管理员等级，0-超级管理员 1-普通管理员，超级管理员只能脚本添加
 
     @SuppressWarnings({"serial"})
     public static Specification<Manage> getWhereClause(final ManageDto manageDto){
@@ -42,11 +44,23 @@ public class ManageDto {
             public Predicate toPredicate(Root<Manage> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder){
                 List<Predicate> predicate = new ArrayList<>();
 
+                //通过名字模糊查询
                 if(StringUtils.isNotBlank(manageDto.getName())){
                     predicate.add(criteriaBuilder.like(root.get("name").as(String.class),
                             "%"+manageDto.getName()+"%"
                     ));
                 }
+                //通过用户状态查询
+                if(manageDto.getState()!=null){
+                    predicate.add(criteriaBuilder.equal(root.get("state").as(Integer.class),
+                            manageDto.getState()
+                    ));
+                }
+
+                //默认不能查询超级管理员
+                predicate.add(criteriaBuilder.equal(root.get("grade").as(Integer.class),
+                        1
+                ));
 
                 //默认已删除的不能查询
                 predicate.add(criteriaBuilder.equal(root.get("usable").as(Usable.class),

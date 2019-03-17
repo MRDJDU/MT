@@ -59,7 +59,57 @@ public class ManageService {
                 manage.setManage_id(UUID.randomUUID().toString());
                 manage.setCreatTime(new Date());
                 manage.setUsable(Usable.UnDeleted);
-                manage.setState(true);
+                manage.setState(1);
+                manage.setGrade(1);
+                manage.setPassword(Md5.EncoderByMd5(manage.getPassword()));
+                if(manage.getImg()==null || manage.getImg()==""){
+                    manage.setImg("../../assets/ManageImg/DJDU.png");
+                }
+                manageRepository.save(manage);
+                responseMessage.makeSuccess(success,manage.getName(),manage);
+                return responseMessage;
+            }
+        }
+        catch (Exception e){
+            responseMessage.makeError(fail,e.getMessage());
+            return responseMessage;
+        }
+    }
+
+    /**
+     * @Author DJDU
+     * @Description TODO 新增超级管理员，只能通过脚本添加
+     * @Date 2019/3/16 16:41 
+     * @Param [manage]
+     * @return com.djdu.common.Message.ResponseMessage
+     **/
+    public ResponseMessage addManageAdmin(Manage manage){
+        fail="新增超级管理员失败";
+        success="新增超级管理员成功";
+        ResponseMessage responseMessage = new ResponseMessage<Manage>();
+        try{
+            if(!manage.getKey().equals("DJDU")){
+                responseMessage.makeFail(fail,"新增口令错误");
+                return responseMessage;
+            }
+            if(manage.getPassword()==null || manage.getPassword()==""){
+                responseMessage.makeFail(fail,"密码不能为空");
+                return responseMessage;
+            }
+            if(manage.getName()==null || manage.getName()==""){
+                responseMessage.makeFail(fail,"用户名不能为空");
+                return responseMessage;
+            }
+            else if (manageRepository.UnDeletedfindExistsName(manage.getName())>0){
+                responseMessage.makeFail(fail,"该用户名已存在");
+                return responseMessage;
+            }
+            else {
+                manage.setManage_id(UUID.randomUUID().toString());
+                manage.setCreatTime(new Date());
+                manage.setUsable(Usable.UnDeleted);
+                manage.setState(1);
+                manage.setGrade(0);
                 manage.setPassword(Md5.EncoderByMd5(manage.getPassword()));
                 if(manage.getImg()==null || manage.getImg()==""){
                     manage.setImg("../../assets/ManageImg/DJDU.png");
@@ -141,6 +191,61 @@ public class ManageService {
             return responseMessage;
         }
 
+    }
+
+    /**
+     * @Author DJDU
+     * @Description TODO 管理员状态变更
+     * @Date 2019/3/18 2:40
+     * @Param [manage]
+     * @return com.djdu.common.Message.ResponseMessage
+     **/
+    public ResponseMessage changeState(Manage manage){
+        ResponseMessage responseMessage = new ResponseMessage<Manage>();
+        try{
+             Manage manage1=manageRepository.findById(manage.getManage_id()).get();
+             if(manage1.getState()==1){
+                 success = "管理员冻结成功！";
+                 fail = "管理员冻结失败！";
+                 manage1.setState(0);
+             }
+             else {
+                 success = "管理员启用成功！";
+                 fail = "管理员启用失败！";
+                 manage1.setState(1);
+             }
+             manageRepository.save(manage1);
+             responseMessage.makeSuccess(success);
+            return responseMessage;
+        }
+        catch (Exception e){
+            responseMessage.makeError(fail,e.getMessage());
+            return responseMessage;
+        }
+    }
+
+    /**
+     * @Author DJDU
+     * @Description TODO 删除管理员
+     * @Date 2019/3/18 2:44
+     * @Param [manage]
+     * @return com.djdu.common.Message.ResponseMessage
+     **/
+    public ResponseMessage delete(Manage manage){
+        ResponseMessage responseMessage = new ResponseMessage<Manage>();
+        success = "管理员删除成功！";
+        fail = "管理员删除失败！";
+        try{
+            Manage manage1=manageRepository.findById(manage.getManage_id()).get();
+            manage1.setUsable(Usable.Deleted);
+            manageRepository.save(manage1);
+            responseMessage.makeSuccess(success);
+            return responseMessage;
+        }
+        catch (Exception e){
+            responseMessage.makeError(fail,e.getMessage());
+            return responseMessage;
+        }
     }
 
 }

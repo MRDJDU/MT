@@ -19,8 +19,6 @@ Vue.prototype.axios = axios
 
 router.beforeEach((to, from, next) => {
   const role = sessionStorage.getItem('manage_id');
-//   const role = localStorage.getItem('manage_id');
-  console.log(role);
   if (!role && to.path !== '/login') {
       next('/login');
   } else if (to.meta.permission) {
