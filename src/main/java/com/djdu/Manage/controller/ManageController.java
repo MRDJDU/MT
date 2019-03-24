@@ -7,6 +7,7 @@ import com.djdu.brand.dto.BrandDto;
 import com.djdu.brand.entity.Brand;
 import com.djdu.common.Message.MyPagaRequest;
 import com.djdu.common.Message.ResponseMessage;
+import com.djdu.common.Tool.Base64ToImg;
 import com.djdu.common.Tool.JsonXMLUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -113,4 +114,19 @@ public class ManageController {
     }
 
 
+    /**
+     * @Author DJDU
+     * @Description TODO 修改用户信息
+     * @Date 2019/3/24 21:45
+     * @Param
+     * @return
+     **/
+    @PostMapping(value="/edit", consumes= MediaType.APPLICATION_JSON_VALUE)
+    public ResponseMessage edit(@RequestBody String image){
+        String s=image;
+        String str = image.substring(image.indexOf(",")+1);
+        String imagePath = "E:\\workspace\\IdeaProjects\\MT\\MT后台界面\\mtmanager\\src\\assets\\ManageImg/"+"123"+".png";
+        Base64ToImg.GenerateImage(str,imagePath);
+        return null;
+    }
 }

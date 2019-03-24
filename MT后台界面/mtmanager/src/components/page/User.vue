@@ -20,7 +20,7 @@
                             <!-- 用户头像 -->
                             <div class="user-img">
                                 <input hidden :value="item.state" class="manage-state"/>
-                                <img src="../../assets/ManageImg/DJDU.png">
+                                <img :src="item.img">
                             </div>
                             <div class="message">
                                 <h3>{{item.name}}</h3>
@@ -136,6 +136,9 @@
                         .then(response => {
                             if(response.data.statuCode){
                                 this.items=response.data.data.content;
+                                for(var i=0;i<this.items.length;i++){
+                                    this.items[i].img=require('../../../static/ManageImg/'+this.items[i].img+'.png');
+                                }
                                 this.totalNum=response.data.data.totalElements;
                                 this.currentPages=1;
                             }
@@ -192,6 +195,9 @@
                     if(response.data.statuCode){
                         this.items=response.data.data.content;
                         this.totalNum=response.data.data.totalElements;
+                        for(var i=0;i<this.items.length;i++){
+                                    this.items[i].img=require('../../../static/ManageImg/'+this.items[i].img+'.png');
+                        }
                     }
                     else{
                         this.$notify.error({
@@ -237,6 +243,9 @@
                             if(response.data.statuCode){
                                 this.items=response.data.data.content;
                                 this.totalNum=response.data.data.totalElements;
+                                for(var i=0;i<this.items.length;i++){
+                                    this.items[i].img=require('../../../static/ManageImg/'+this.items[i].img+'.png');
+                                }
                             }
                             else{
                                 this.$notify.error({
@@ -293,6 +302,9 @@
                                     if(response.data.statuCode){
                                         this.items=response.data.data.content;
                                         this.totalNum=response.data.data.totalElements;
+                                        for(var i=0;i<this.items.length;i++){
+                                            this.items[i].img=require('../../../static/ManageImg/'+this.items[i].img+'.png');
+                                        }
                                     }
                                     else{
                                         this.$notify.error({
@@ -420,6 +432,9 @@
                     if(response.data.statuCode){
                         this.items=response.data.data.content;
                         this.totalNum=response.data.data.totalElements;
+                        for(var i=0;i<this.items.length;i++){
+                            this.items[i].img=require('../../../static/ManageImg/'+this.items[i].img+'.png');
+                        }
                         this.currentPages=1;
                     }
                     else{
@@ -471,6 +486,9 @@
                     if(response.data.statuCode){
                         this.items=response.data.data.content;
                         this.totalNum=response.data.data.totalElements;
+                        for(var i=0;i<this.items.length;i++){
+                            this.items[i].img=require('../../../static/ManageImg/'+this.items[i].img+'.png');
+                        }
                         this.currentPages=1;
                     }
                     else{
@@ -518,6 +536,8 @@
     .user-img{
         width:100px;
         height:100px;
+        padding-top: 3px;
+        padding-bottom: 5px;
         border-bottom: 1px solid rgba(0, 0, 0, 0.33);
     }
     .user-img img{

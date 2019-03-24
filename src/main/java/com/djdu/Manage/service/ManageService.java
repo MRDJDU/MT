@@ -63,7 +63,7 @@ public class ManageService {
                 manage.setGrade(1);
                 manage.setPassword(Md5.EncoderByMd5(manage.getPassword()));
                 if(manage.getImg()==null || manage.getImg()==""){
-                    manage.setImg("../../assets/ManageImg/DJDU.png");
+                    manage.setImg("DJDU");
                 }
                 manageRepository.save(manage);
                 responseMessage.makeSuccess(success,manage.getName(),manage);
