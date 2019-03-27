@@ -5,7 +5,10 @@ import com.djdu.Manage.repository.ManageRepository;
 import com.djdu.brand.entity.Brand;
 import com.djdu.common.Enums.Usable;
 import com.djdu.common.Message.ResponseMessage;
+import com.djdu.common.Tool.Base64ToImg;
+import com.djdu.common.Tool.BeanUtils;
 import com.djdu.common.Tool.Md5;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -60,7 +63,6 @@ public class ManageService {
                 manage.setCreatTime(new Date());
                 manage.setUsable(Usable.UnDeleted);
                 manage.setState(1);
-                manage.setGrade(1);
                 manage.setPassword(Md5.EncoderByMd5(manage.getPassword()));
                 if(manage.getImg()==null || manage.getImg()==""){
                     manage.setImg("DJDU");
@@ -247,5 +249,38 @@ public class ManageService {
             return responseMessage;
         }
     }
+
+    public ResponseMessage editMessage(Manage manage){
+        ResponseMessage responseMessage = new ResponseMessage<Manage>();
+        success = "信息修改成功！";
+        fail = "信息修改失败！";
+        try{
+            if(StringUtils.isNotBlank(manage.getName())){
+                if (manageRepository.UnDeletedfindExistsName(manage.getName())>0){
+                    responseMessage.makeFail(fail,"该用户名已存在");
+                    return responseMessage;
+                }
+            }
+            if(StringUtils.isNotBlank(manage.getImg())){
+                String str = manage.getImg().substring(manage.getImg().indexOf(",")+1);
+                String imagePath = "E:\\workspace\\IdeaProjects\\MT\\MT后台界面\\mtmanager\\static\\ManageImg/"+manage.getManage_id()+".png";
+                Base64ToImg.GenerateImage(str,imagePath);
+                manage.setImg(manage.getManage_id());
+            }
+            if(StringUtils.isNotBlank(manage.getPassword())){
+                manage.setPassword(Md5.EncoderByMd5(manage.getPassword()));
+            }
+            Manage manage1 = manageRepository.findById(manage.getManage_id()).get();
+            BeanUtils.copyProperties(manage,manage1);
+            manage1.setUpdateTime(new Date());
+            responseMessage.makeSuccess(success,manage1);
+            return responseMessage;
+        }
+        catch (Exception e){
+            responseMessage.makeError(fail,e.getMessage());
+            return responseMessage;
+        }
+    }
+
 
 }

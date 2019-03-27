@@ -13,6 +13,13 @@ import java.io.OutputStream;
  * @Version 1.0
  **/
 public class Base64ToImg {
+    /**
+     * @Author DJDU
+     * @Description TODO 传入分割好的base64数据和指定的目录就可以将其转换为图片存储在指定路径
+     * @Date 2019/3/25 0:17
+     * @Param [imgStr, imageName]
+     * @return boolean
+     **/
     public static boolean GenerateImage(String imgStr,String imageName){
         //对字节数组字符串进行Base64解码并生成图片
         if (imgStr == null) //图像数据为空

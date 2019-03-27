@@ -56,10 +56,15 @@ public class ManageDto {
                             manageDto.getState()
                     ));
                 }
-
+                //
+                if(manageDto.getGrade()!=null){
+                    predicate.add(criteriaBuilder.equal(root.get("grade").as(Integer.class),
+                            manageDto.getGrade()
+                    ));
+                }
                 //默认不能查询超级管理员
-                predicate.add(criteriaBuilder.equal(root.get("grade").as(Integer.class),
-                        1
+                predicate.add(criteriaBuilder.notEqual(root.get("grade").as(Integer.class),
+                        0
                 ));
 
                 //默认已删除的不能查询

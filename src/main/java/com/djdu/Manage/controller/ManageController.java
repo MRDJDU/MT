@@ -121,12 +121,12 @@ public class ManageController {
      * @Param
      * @return
      **/
-    @PostMapping(value="/edit", consumes= MediaType.APPLICATION_JSON_VALUE)
-    public ResponseMessage edit(@RequestBody String image){
-        String s=image;
-        String str = image.substring(image.indexOf(",")+1);
-        String imagePath = "E:\\workspace\\IdeaProjects\\MT\\MT后台界面\\mtmanager\\src\\assets\\ManageImg/"+"123"+".png";
-        Base64ToImg.GenerateImage(str,imagePath);
-        return null;
+    @PostMapping(value="/editMessage", consumes= MediaType.APPLICATION_JSON_VALUE)
+    public ResponseMessage edit(@RequestBody Manage manage){
+        return manageService.editMessage(manage);
+        //String str = image.substring(image.indexOf(",")+1);
+        //String imagePath = "E:\\workspace\\IdeaProjects\\MT\\MT后台界面\\mtmanager\\static\\ManageImg/"+"123"+".png";
+        //Base64ToImg.GenerateImage(str,imagePath);
+        //return null;
     }
 }

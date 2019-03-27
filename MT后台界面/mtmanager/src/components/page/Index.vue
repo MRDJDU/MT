@@ -5,10 +5,10 @@
                 <el-card shadow="hover" class="mgb20">
                     <div style="height:120px">
                         <div class="user-info">
-                            <img src="../../assets/ManageImg/DJDU.png" class="user-avator">
+                            <img :src="userImg" class="user-avator">
                             <div class="user-info-cont">
                                 <div class="user-info-name">{{name}}</div>
-                                <div>2019/03/20 12:06:54</div>
+                                <div>{{creatTime}}</div>
                                 <div>{{role}}</div>
                             </div>
                         </div>
@@ -99,11 +99,13 @@
     export default {
         data() {
             return {
+                userImg:require('../../../static/ManageImg/'+sessionStorage.getItem('manage_img')+'.png'),
+                creatTime:sessionStorage.getItem('manage_creatTime'),
                 totalNum : 20,// 总记录数
                 pageSize : 8,// 一页显示记录数
                 page:1,//记录当前页数
                 currentPages:0,//设置当前页数
-                name: 'DJDU',
+                name: sessionStorage.getItem('manage_name'),
                 todoList: [{
                         title: '今天要修复100个bug',
                         status: false,
@@ -128,7 +130,15 @@
         },
         computed: {
             role() {
-                return this.name === 'admin' ? '超级管理员' : '普通用户';
+                if(sessionStorage.getItem('manage_grade') == 0){
+                    return '超级管理员';
+                }
+                else if(sessionStorage.getItem('manage_grade') == 1){
+                     return '购物管理员'
+                }
+                else{
+                    return '维修管理员'
+                }
             }
         },
          mounted(){

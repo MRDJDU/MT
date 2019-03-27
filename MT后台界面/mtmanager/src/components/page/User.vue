@@ -24,6 +24,7 @@
                             </div>
                             <div class="message">
                                 <h3>{{item.name}}</h3>
+                                <span>{{item.role}}</span>&nbsp&nbsp&nbsp&nbsp&nbsp
                                 <span>{{item.creatTime}}</span>
                             </div>
                             <div class="deleted">
@@ -51,6 +52,13 @@
             <el-form-item prop="username">
                 <el-input v-model="addForm.username" autocomplete="off" placeholder="username      默认密码：888888"></el-input>
             </el-form-item>
+            <div style="text-align: center;">
+                <el-switch
+                    v-model="UserValue1"
+                    active-text="维修管理员"
+                    inactive-text="购物管理员">
+                </el-switch>
+            </div>
         </el-form>
         <div slot="footer" class="dialog-footer">
             <el-button @click="addManageCancel">取 消</el-button>
@@ -77,6 +85,13 @@
                     inactive-text="禁用">
                 </el-switch>
             </div>
+            <div id="manageGradeSeach" style="text-align: center;" hidden>
+                <el-switch
+                    v-model="SearchUserValue"
+                    active-text="维修管理员"
+                    inactive-text="购物管理员">
+                </el-switch>
+            </div>
         </el-form>
         <div slot="footer" class="dialog-footer">
             <el-button @click="searchManageCancel">取 消</el-button>
@@ -89,7 +104,7 @@
 </div>
 </template>
 <script>
-    const searchOptions = ['管理员姓名', '管理员状态'];
+    const searchOptions = ['管理员姓名', '管理员状态',"管理员类别"];
     export default {
         data:function(){
             return {
@@ -111,7 +126,10 @@
                 value1:true,// 搜索条件Switch 开关的值，管理员状态
                 seachSubmit:true,//搜索对话框中提交按钮是否可用
                 seachname:null,//搜索条件管理员姓名
-                seachstate:null//搜索条件管理员状态
+                seachstate:null,//搜索条件管理员状态
+                seachgrade:null,//搜索条件管理员类别
+                UserValue1:true,
+                SearchUserValue:true
             }
         },
         //页面加载函数
@@ -138,6 +156,15 @@
                                 this.items=response.data.data.content;
                                 for(var i=0;i<this.items.length;i++){
                                     this.items[i].img=require('../../../static/ManageImg/'+this.items[i].img+'.png');
+                                    if(this.items[i].grade == 0){
+                                        this.items[i].role = '超级管理员'
+                                    }
+                                    else if(this.items[i].grade == 1){
+                                        this.items[i].role = '购物管理员'
+                                    }
+                                    else{
+                                        this.items[i].role = '维修管理员'
+                                    }
                                 }
                                 this.totalNum=response.data.data.totalElements;
                                 this.currentPages=1;
@@ -181,7 +208,8 @@
                 this.axios.post('http://localhost:8080/mt/manage/findAllManage',{
                     "manageDto":{
                         'name':_this.seachname,
-                        'state':_this.seachstate
+                        'state':_this.seachstate,
+                        'grade':_this.seachgrade
                     },
                     "myPagaRequest":{
                         "page":val,
@@ -191,12 +219,20 @@
                     }
                 })
                 .then(response => {
-                    // console.log(response)
                     if(response.data.statuCode){
                         this.items=response.data.data.content;
                         this.totalNum=response.data.data.totalElements;
                         for(var i=0;i<this.items.length;i++){
-                                    this.items[i].img=require('../../../static/ManageImg/'+this.items[i].img+'.png');
+                            this.items[i].img=require('../../../static/ManageImg/'+this.items[i].img+'.png');
+                            if(this.items[i].grade == 0){
+                                this.items[i].role = '超级管理员'
+                            }
+                            else if(this.items[i].grade == 1){
+                                this.items[i].role = '购物管理员'
+                            }
+                            else{
+                                this.items[i].role = '维修管理员'
+                            }
                         }
                     }
                     else{
@@ -226,11 +262,11 @@
                             offset: 100,
                             showClose: false
                         });
-                        console.log(_this.seachstate);
                         this.axios.post('http://localhost:8080/mt/manage/findAllManage',{
                             "manageDto":{
                                 'name':_this.seachname,
-                                'state':_this.seachstate
+                                'state':_this.seachstate,
+                                 'grade':_this.seachgrade
                             },
                             "myPagaRequest":{
                                 "page":_this.page,
@@ -245,6 +281,15 @@
                                 this.totalNum=response.data.data.totalElements;
                                 for(var i=0;i<this.items.length;i++){
                                     this.items[i].img=require('../../../static/ManageImg/'+this.items[i].img+'.png');
+                                    if(this.items[i].grade == 0){
+                                        this.items[i].role = '超级管理员'
+                                    }
+                                    else if(this.items[i].grade == 1){
+                                        this.items[i].role = '购物管理员'
+                                    }
+                                    else{
+                                        this.items[i].role = '维修管理员'
+                                    }
                                 }
                             }
                             else{
@@ -289,7 +334,8 @@
                                 this.axios.post('http://localhost:8080/mt/manage/findAllManage',{
                                     "manageDto":{
                                         'name':_this.seachname,
-                                        'state':_this.seachstate
+                                        'state':_this.seachstate,
+                                        'grade':_this.seachgrade
                                     },
                                     "myPagaRequest":{
                                         "page":_this.page,
@@ -304,6 +350,15 @@
                                         this.totalNum=response.data.data.totalElements;
                                         for(var i=0;i<this.items.length;i++){
                                             this.items[i].img=require('../../../static/ManageImg/'+this.items[i].img+'.png');
+                                            if(this.items[i].grade == 0){
+                                                this.items[i].role = '超级管理员'
+                                            }
+                                            else if(this.items[i].grade == 1){
+                                                this.items[i].role = '购物管理员'
+                                            }
+                                            else{
+                                                this.items[i].role = '维修管理员'
+                                            }
                                         }
                                     }
                                     else{
@@ -331,10 +386,18 @@
                     if (valid) {
                         // 保留this
                         let _this=this;
+                        var grade=null;
+                        if(_this.UserValue1==true){
+                            grade = 2;
+                        }
+                        else{
+                            grade = 1;
+                        }
                         // 收集用户输入的账号和密码，发送给后端验证登陆
                         this.axios.post('http://localhost:8080/mt/manage/addManage',{
                             "name": _this.addForm.username,
-                            "password":"888888"
+                            "password":"888888",
+                            "grade":grade
                         })
                         .then(response => {
                             if(response.data.statuCode){
@@ -376,22 +439,49 @@
                     case 1:
                         if(this.seachCheckboxGroup[0]=='管理员姓名'){
                             document.getElementById('manageStateSeach').setAttribute('hidden','true');
+                            document.getElementById('manageGradeSeach').setAttribute('hidden','true');
                             document.getElementById('manageNameSeach').removeAttribute('hidden');
                         }
+                        else if(this.seachCheckboxGroup[0]=='管理员类别'){
+                            document.getElementById('manageStateSeach').setAttribute('hidden','true');
+                            document.getElementById('manageNameSeach').setAttribute('hidden','true');
+                            document.getElementById('manageGradeSeach').removeAttribute('hidden');
+                        }
                         else{
+                            document.getElementById('manageGradeSeach').setAttribute('hidden','true');
                             document.getElementById('manageNameSeach').setAttribute('hidden','true');
                             document.getElementById('manageStateSeach').removeAttribute('hidden');
                         }
                         this.seachSubmit=false;
                         break;
                     case 2:
+                        if((this.seachCheckboxGroup[0]=='管理员姓名' && this.seachCheckboxGroup[1]=='管理员状态')||(this.seachCheckboxGroup[1]=='管理员姓名' && this.seachCheckboxGroup[0]=='管理员状态')){
+                            document.getElementById('manageNameSeach').removeAttribute('hidden');
+                            document.getElementById('manageStateSeach').removeAttribute('hidden');
+                            document.getElementById('manageGradeSeach').setAttribute('hidden','true');
+                        }
+                        if((this.seachCheckboxGroup[0]=='管理员姓名' && this.seachCheckboxGroup[1]=='管理员类别')||(this.seachCheckboxGroup[1]=='管理员姓名' && this.seachCheckboxGroup[0]=='管理员类别')){
+                            document.getElementById('manageNameSeach').removeAttribute('hidden');
+                            document.getElementById('manageGradeSeach').removeAttribute('hidden');
+                            document.getElementById('manageStateSeach').setAttribute('hidden','true');
+                        }
+                        if((this.seachCheckboxGroup[0]=='管理员状态' && this.seachCheckboxGroup[1]=='管理员类别')||(this.seachCheckboxGroup[1]=='管理员状态' && this.seachCheckboxGroup[0]=='管理员类别')){
+                            document.getElementById('manageGradeSeach').removeAttribute('hidden');
+                            document.getElementById('manageStateSeach').removeAttribute('hidden');
+                            document.getElementById('manageNameSeach').setAttribute('hidden','true');
+                        }
+                        this.seachSubmit=false;
+                        break;
+                    case 3:
                         document.getElementById('manageNameSeach').removeAttribute('hidden');
                         document.getElementById('manageStateSeach').removeAttribute('hidden');
+                        document.getElementById('manageGradeSeach').removeAttribute('hidden');
                         this.seachSubmit=false;
                         break;
                     case 0:
                         document.getElementById('manageNameSeach').setAttribute('hidden','true');
                         document.getElementById('manageStateSeach').setAttribute('hidden','true');
+                        document.getElementById('manageGradeSeach').setAttribute('hidden','true');
                         this.seachSubmit=true;
                         break;
                 }
@@ -405,21 +495,67 @@
                         if(this.seachCheckboxGroup[0]=='管理员姓名'){
                             _this.seachname=_this.searchForm.name;
                             _this.seachstate=null;
+                            _this.seachgrade=null;
+                        }
+                        else if(this.seachCheckboxGroup[0]=='管理员类别'){
+                            _this.seachname=null;
+                            _this.seachstate=null;
+                            if(_this.SearchUserValue==true){
+                                _this.seachgrade= 2;
+                            }
+                            else{
+                                _this.seachgrade= 1;
+                            }
                         }
                         else{
                             _this.seachstate=_this.value1;
                             _this.seachname=null;
+                            _this.seachgrade=null;
                         }
                         break;
                     case 2:
-                        _this.seachname=_this.searchForm.name;
+                        if((this.seachCheckboxGroup[0]=='管理员姓名' && this.seachCheckboxGroup[1]=='管理员状态')||(this.seachCheckboxGroup[1]=='管理员姓名' && this.seachCheckboxGroup[0]=='管理员状态')){
+                         _this.seachname=_this.searchForm.name;
                         _this.seachstate=_this.value1;
+                        _this.seachgrade=null;
+                        }
+                        if((this.seachCheckboxGroup[0]=='管理员姓名' && this.seachCheckboxGroup[1]=='管理员类别')||(this.seachCheckboxGroup[1]=='管理员姓名' && this.seachCheckboxGroup[0]=='管理员类别')){
+                         _this.seachname=_this.searchForm.name;
+                        _this.seachstate=null;
+                        if(_this.SearchUserValue==true){
+                                _this.seachgrade= 2;
+                            }
+                            else{
+                                _this.seachgrade= 1;
+                            }
+                        }
+                        if((this.seachCheckboxGroup[0]=='管理员状态' && this.seachCheckboxGroup[1]=='管理员类别')||(this.seachCheckboxGroup[1]=='管理员状态' && this.seachCheckboxGroup[0]=='管理员类别')){
+                        _this.seachname=null;
+                        _this.seachstate=_this.value1;
+                         if(_this.SearchUserValue==true){
+                                _this.seachgrade= 2;
+                            }
+                            else{
+                                _this.seachgrade= 1;
+                            }
+                        }
+                        break;
+                    case 3:
+                         _this.seachname=_this.searchForm.name;
+                        _this.seachstate=_this.value1;
+                         if(_this.SearchUserValue==true){
+                                _this.seachgrade= 2;
+                            }
+                            else{
+                                _this.seachgrade= 1;
+                        }
                         break;
                 }
                 this.axios.post('http://localhost:8080/mt/manage/findAllManage',{
                     "manageDto":{
                         'name':_this.seachname,
-                        'state':_this.seachstate
+                        'state':_this.seachstate,
+                        'grade':_this.seachgrade
                     },
                     "myPagaRequest":{
                         "page":1,
@@ -434,6 +570,15 @@
                         this.totalNum=response.data.data.totalElements;
                         for(var i=0;i<this.items.length;i++){
                             this.items[i].img=require('../../../static/ManageImg/'+this.items[i].img+'.png');
+                            if(this.items[i].grade == 0){
+                                this.items[i].role = '超级管理员'
+                            }
+                            else if(this.items[i].grade == 1){
+                                this.items[i].role = '购物管理员'
+                            }
+                            else{
+                                this.items[i].role = '维修管理员'
+                            }
                         }
                         this.currentPages=1;
                     }
@@ -452,6 +597,7 @@
                 this.seachCheckboxGroup=[];
                 document.getElementById('manageNameSeach').setAttribute('hidden','true');
                 document.getElementById('manageStateSeach').setAttribute('hidden','true');
+                document.getElementById('manageGradeSeach').setAttribute('hidden','true');
                 this.searchManage=false;
             }
             ,
@@ -459,9 +605,11 @@
             searchManageCancel(){
                 document.getElementById('manageNameSeach').setAttribute('hidden','true');
                 document.getElementById('manageStateSeach').setAttribute('hidden','true');
+                document.getElementById('manageGradeSeach').setAttribute('hidden','true');
                 this.seachCheckboxGroup=[];
                 this.searchForm.name=null;
                 this.value1=true;
+                this.SearchUserValue==true
                 this.seachSubmit=true;
                 this.searchManage=false;
             },
@@ -470,10 +618,12 @@
                 let _this=this;
                 _this.seachname=null;
                 _this.seachstate=null;
+                _this.seachgrade=null;
                  this.axios.post('http://localhost:8080/mt/manage/findAllManage',{
                     "manageDto":{
                         'name':_this.seachname,
-                        'state':_this.seachstate
+                        'state':_this.seachstate,
+                        'grade':_this.seachgrade
                     },
                     "myPagaRequest":{
                         "page":1,
@@ -488,6 +638,15 @@
                         this.totalNum=response.data.data.totalElements;
                         for(var i=0;i<this.items.length;i++){
                             this.items[i].img=require('../../../static/ManageImg/'+this.items[i].img+'.png');
+                            if(this.items[i].grade == 0){
+                                this.items[i].role = '超级管理员'
+                            }
+                            else if(this.items[i].grade == 1){
+                                this.items[i].role = '购物管理员'
+                            }
+                            else{
+                                this.items[i].role = '维修管理员'
+                            }
                         }
                         this.currentPages=1;
                     }
@@ -506,6 +665,9 @@
     }
 </script>
 <style>
+    #manageGradeSeach{
+        padding-top: 10px;
+    }
     .add{
         text-align: center;
         padding: 0px 0px 10px 0px;
@@ -534,16 +696,16 @@
         filter:grayscale(100%); 
     }
     .user-img{
-        width:100px;
-        height:100px;
+        width:90px;
+        height:90px;
         padding-top: 3px;
         padding-bottom: 5px;
         border-bottom: 1px solid rgba(0, 0, 0, 0.33);
     }
     .user-img img{
         display: block;
-        width:100px;
-        height:100px;
+        width:90px;
+        height:90px;
         border-radius: 50%;
     }
     .message{
@@ -554,7 +716,7 @@
         font-family:"Axure Handwriting";
     }
     .message span{
-        font-size: 10px;
+        font-size: 13px;
     }
     .el-row{
         text-align: center;

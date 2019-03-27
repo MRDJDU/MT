@@ -52,6 +52,8 @@
                                 sessionStorage.setItem('manage_name',response.data.data.name);
                                 sessionStorage.setItem('manage_id',response.data.data.manage_id);
                                 sessionStorage.setItem('manage_grade',response.data.data.grade);
+                                sessionStorage.setItem('manage_img',response.data.data.img);
+                                sessionStorage.setItem('manage_creatTime',response.data.data.creatTime);
                                 _this.$message({
                                     message: response.data.message,
                                     duration:4000,

@@ -69,5 +69,4 @@ public interface ManageRepository extends PagingAndSortingRepository<Manage,Stri
     @Query(value = "select * from manage a where a.name = ?1 AND a.usable = 0 AND a.state = 1", nativeQuery = true)
     Optional<Manage> findByName(String  name);
 
-
 }
