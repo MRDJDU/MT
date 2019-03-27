@@ -40,19 +40,19 @@ export default new Router({
             meta: { title: '订单管理' }
           },
           {
+            path: '/maintain',
+            component: resolve => require(['../components/page/Maintain.vue'], resolve),
+            meta: { title: '维修管理' }
+          },
+          {
             path: '/evaluation',
             component: resolve => require(['../components/page/Evaluation.vue'], resolve),
             meta: { title: '评价管理' }
           },
           {
-            path: '/message',
-            component: resolve => require(['../components/page/Message.vue'], resolve),
-            meta: { title: '消息管理' }
-          },
-          {
-            path: '/manager',
-            component: resolve => require(['../components/page/Manager.vue'], resolve),
-            meta: { title: '个人信息' }
+            path: '/article',
+            component: resolve => require(['../components/page/Article.vue'], resolve),
+            meta: { title: '文章管理' }
           },
           {
             path: '/user',

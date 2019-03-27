@@ -64,19 +64,19 @@
                         title: '订单管理'
                     },
                     {
+                        icon: 'el-icon-lx-tag',
+                        index: 'maintain',
+                        title: '维修管理'
+                    },
+                    {
                         icon: 'el-icon-lx-comment',
                         index: 'evaluation',
                         title: '评价管理'
                     },
-                    {
-                        icon: 'el-icon-lx-message',
-                        index: 'message',
-                        title: '消息管理'
-                    },
-                    {
-                        icon: 'el-icon-lx-people',
-                        index: 'manager',
-                        title: '个人信息'
+                     {
+                        icon: 'el-icon-lx-comment',
+                        index: 'article',
+                        title: '文章管理'
                     }
                 ],
                 adminItems:[
