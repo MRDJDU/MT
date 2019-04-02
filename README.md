@@ -73,8 +73,8 @@
   - 完善好大部分用户管理功能，管理员分超级、维修、购物管理员，完善好用户信息修改功能
   - 首页功能完善与修改信息弹窗整合完成，调整部分模块
 - 2019.04.02
-  -- 完成了用户管理模块以及首页模块，首页个人信息模块，添加权限，分四类权限，开发者3、超级管理员0、购物管理员1、维修管理员2
-  -- 界面展示
+  - 完成了用户管理模块以及首页模块，首页个人信息模块，添加权限，分四类权限，开发者3、超级管理员0、购物管理员1、维修管理员2
+  - 界面展示
         ![](https://github.com/MRDJDU/MT/raw/master/ExplicateMTImg/首页.png)
         ![](https://github.com/MRDJDU/MT/raw/master/ExplicateMTImg/个人信息模块.png)
         ![](https://github.com/MRDJDU/MT/raw/master/ExplicateMTImg/截图.png)
