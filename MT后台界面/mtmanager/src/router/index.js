@@ -58,6 +58,16 @@ export default new Router({
             path: '/user',
             component: resolve => require(['../components/page/User.vue'], resolve),
             meta: { title: '用户管理' }
+          },
+          {
+            path: '/assess',
+            component: resolve => require(['../components/page/Assess.vue'], resolve),
+            meta: { title: '维修评价' }
+          },
+          {
+            path: '/subscribe',
+            component: resolve => require(['../components/page/Subscribe.vue'], resolve),
+            meta: { title: '预约管理' }
           }
       ]
     },

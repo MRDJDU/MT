@@ -1,5 +1,5 @@
 <template>
-    <h1>个人信息</h1>
+    <h1>预约管理</h1>
 </template>
 <script>
     export default {}

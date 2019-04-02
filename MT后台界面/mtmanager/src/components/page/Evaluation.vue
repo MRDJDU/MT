@@ -1,5 +1,5 @@
 <template>
-    <h1>评论管理</h1>
+    <h1>商品评价</h1>
 </template>
 <script>
     export default {}

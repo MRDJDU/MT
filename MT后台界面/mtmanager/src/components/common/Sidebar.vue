@@ -37,6 +37,7 @@
         data() {
             return {
                 collapse: false,
+                // 任何权限都可进入
                 items: [
                     {
                         icon: 'el-icon-lx-home',
@@ -54,6 +55,22 @@
                         title: '品牌管理'
                     },
                     {
+                        icon: 'el-icon-lx-read',
+                        index: 'article',
+                        title: '文章管理'
+                    }
+                ],
+                // 超级管理员权限进入
+                adminItems:[
+                    {
+                        icon: 'el-icon-lx-friend',
+                        index: 'user',
+                        title: '用户管理'
+                    }
+                ],
+                // 购物管理员权限进入
+                tradeItems:[
+                    {
                         icon: 'el-icon-lx-goods',
                         index: 'goods',
                         title: '商品管理'
@@ -63,27 +80,28 @@
                         index: 'orders',
                         title: '订单管理'
                     },
-                    {
-                        icon: 'el-icon-lx-tag',
-                        index: 'maintain',
-                        title: '维修管理'
-                    },
-                    {
+                     {
                         icon: 'el-icon-lx-comment',
                         index: 'evaluation',
-                        title: '评价管理'
-                    },
-                     {
-                        icon: 'el-icon-lx-comment',
-                        index: 'article',
-                        title: '文章管理'
+                        title: '商品评价'
                     }
                 ],
-                adminItems:[
-                     {
-                        icon: 'el-icon-lx-friend',
-                        index: 'user',
-                        title: '用户管理'
+                // 维修管理员权限进入
+                mtItems:[
+                    {
+                        icon: 'el-icon-lx-service',
+                        index: 'maintain',
+                        title: '服务管理'
+                    },
+                    {
+                        icon: 'el-icon-lx-global',
+                        index: 'subscribe',
+                        title: '预约管理'
+                    },
+                    {
+                        icon: 'el-icon-lx-message',
+                        index: 'assess',
+                        title: '维修评价'
                     }
                 ]
             }
@@ -99,10 +117,35 @@
                 this.collapse = msg;
             })
         },
-        // 权限管理，只有超级管理员才能看到人员管理
+        // 权限管理
         mounted(){
             const role = sessionStorage.getItem('manage_grade');
+            // 超级管理员
             if(role=="0"||role==0){
+                this.adminItems.forEach(adminItem => {
+                    this.items.push(adminItem);
+                });
+            }
+            // 购物管理员
+            if(role=="1"||role==1){
+                this.tradeItems.forEach(tradeItem => {
+                    this.items.push(tradeItem);
+                });
+            }
+            // 维修管理员
+            if(role=="2"||role==2){
+                this.mtItems.forEach(mtItem => {
+                    this.items.push(mtItem);
+                });
+            }
+            // 开发者
+            if(role=="3"||role==3){
+                 this.tradeItems.forEach(tradeItem => {
+                    this.items.push(tradeItem);
+                });
+                this.mtItems.forEach(mtItem => {
+                    this.items.push(mtItem);
+                });
                 this.adminItems.forEach(adminItem => {
                     this.items.push(adminItem);
                 });

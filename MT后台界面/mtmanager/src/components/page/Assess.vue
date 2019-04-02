@@ -1,5 +1,5 @@
 <template>
-    <h1>消息管理</h1>
+    <h1>维修评价</h1>
 </template>
 <script>
     export default {}

@@ -65,7 +65,7 @@
              <el-col :span="16">
                 <el-card shadow="hover">
                    <div slot="header" class="clearfix">
-                        <span>维修知识</span>
+                        <span>分享知识</span>
                         <el-button style="float: right; padding: 3px 0" type="text">添加</el-button>
                     </div>
                      <el-table :data="todoList" :show-header="false" style="width: 100%;font-size:14px; margin-bottom: 20px;">
@@ -332,6 +332,9 @@
                 else if(sessionStorage.getItem('manage_grade') == 1){
                      return '购物管理员'
                 }
+                else if(sessionStorage.getItem('manage_grade') == 3){
+                     return '开发者'
+                }
                 else{
                     return '维修管理员'
                 }
@@ -533,6 +536,7 @@
                 .then(response => {
                     if(response.data.statuCode){
                         sessionStorage.setItem('manage_name',response.data.data.name);
+                        sessionStorage.setItem('manage_img',response.data.data.img);
                         this.$notify({
                             title: response.data.message,
                             type: 'success',

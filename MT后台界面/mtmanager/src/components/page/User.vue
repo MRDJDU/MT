@@ -135,7 +135,7 @@
         //页面加载函数
         mounted(){
             this.getManager();
-            this.recursion();
+            this.recursion();// 递归函数，调整页面
         },
         methods :{
             // 页面加载时获取管理员列表

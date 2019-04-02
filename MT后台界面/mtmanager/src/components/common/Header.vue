@@ -56,6 +56,8 @@
                     sessionStorage.removeItem('manage_name');
                     sessionStorage.removeItem('manage_id');
                     sessionStorage.removeItem('manage_grade');
+                    sessionStorage.removeItem('manage_creatTime');
+                    sessionStorage.removeItem('manage_img');
                     this.$router.push('/login');
                 }
             },

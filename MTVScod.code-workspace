@@ -1,10 +1,16 @@
 {
 	"folders": [
 		{
-			"path": "E:\\workspace\\IdeaProjects\\MT\\read"
+			"path": "MT后台界面\\mtmanager"
 		},
 		{
-			"path": "E:\\workspace\\IdeaProjects\\MT\\src\\main\\webapp\\httpTest"
+			"path": "E:\\workspace\\IdeaProjects\\vue-manage-system-master"
+		},
+		{
+			"path": "src\\main\\webapp\\httpTest"
 		}
-	]
+	],
+	"settings": {
+		"vetur.validation.template": false
+	}
 }

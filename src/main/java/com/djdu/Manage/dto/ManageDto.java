@@ -1,8 +1,6 @@
 package com.djdu.Manage.dto;
 
 import com.djdu.Manage.entity.Manage;
-import com.djdu.category.dto.CategoryDto;
-import com.djdu.common.Enums.ShowOut;
 import com.djdu.common.Enums.Usable;
 import lombok.Data;
 import org.apache.commons.lang3.StringUtils;
@@ -65,6 +63,9 @@ public class ManageDto {
                 //默认不能查询超级管理员
                 predicate.add(criteriaBuilder.notEqual(root.get("grade").as(Integer.class),
                         0
+                ));
+                predicate.add(criteriaBuilder.notEqual(root.get("grade").as(Integer.class),
+                        3
                 ));
 
                 //默认已删除的不能查询
