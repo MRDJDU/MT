@@ -46,8 +46,6 @@ public class Goods extends BaseEmtity {
     @OneToMany(cascade = CascadeType.ALL,mappedBy="goods",fetch=FetchType.LAZY)
     private List<Norms> norms = new ArrayList<Norms>();//子，规格
 
-    @OneToMany(cascade = CascadeType.ALL,mappedBy="goods",fetch=FetchType.LAZY)
-    private List<SKU> SKUs = new ArrayList<SKU>();//子，库存进出计量单位
 
     @OneToMany(cascade = CascadeType.ALL,mappedBy="goods",fetch=FetchType.LAZY)
     private List<Evaluation> evaluations = new ArrayList<Evaluation>();//子，评论表

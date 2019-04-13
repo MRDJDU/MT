@@ -27,8 +27,8 @@ public interface BrandRepository extends PagingAndSortingRepository<Brand,String
      * @Param [name]
      * @return java.lang.Integer
      **/
-    @Query(value = "select count(*) from brand a where a.name = ?1 AND a.usable = 0", nativeQuery = true)
-    Integer UnDeletedfindExistsName(String name);
+    @Query(value = "select count(*) from brand a where a.name = ?1 AND a.usable = 0 And a.Category_id =?2", nativeQuery = true)
+    Integer UnDeletedfindExistsName(String name,String Category_id);
 
     /**
      * @Author DJDU

@@ -27,15 +27,10 @@ public class SKU extends BaseEmtity {
     @Column(name = "SKU_id")
     private String SKU_id;//库存进出计量单位id
 
-    private Long stock;//库存
+    private String name;//库存进出计量单位id
 
-    private BigDecimal price;//价格
+    private String goods_id;//父，商品
 
-    @OneToMany(cascade = CascadeType.ALL,fetch= FetchType.LAZY)
-    private List<NormsValue> normsValue = new ArrayList<NormsValue>();//子，商品规格值
-
-    @ManyToOne(cascade= CascadeType.ALL,fetch=FetchType.LAZY)
-    @JoinColumn(name = "goods_id")
-    private Goods goods;//父，商品
+    private String value;//值
 
 }

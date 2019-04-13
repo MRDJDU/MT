@@ -79,3 +79,5 @@
         ![](https://github.com/MRDJDU/MT/raw/master/ExplicateMTImg/个人信息模块.png)
         ![](https://github.com/MRDJDU/MT/raw/master/ExplicateMTImg/截图.png)
         ![](https://github.com/MRDJDU/MT/raw/master/ExplicateMTImg/用户管理模块.png)
+- 2019.04.14
+  - 大更新，分类管理，品牌管理，商品管理

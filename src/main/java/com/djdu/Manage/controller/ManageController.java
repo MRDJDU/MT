@@ -18,7 +18,7 @@ import java.util.Map;
 
 /**
  * @ClassName ManageController
- * @Description TODO
+ * @Description TODO 管理员控制层，接收前台请求，发送给service逻辑层处理
  * @Author DJDU
  * @Date 2019/3/11 10:10
  * @Version 1.0

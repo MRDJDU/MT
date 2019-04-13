@@ -200,7 +200,7 @@
                     this.recursion()
                 },10);
             },
-            // 分页行点击触发时间，val是点击的页数
+            // 分页行点击触发事件，val是点击的页数
             handleCurrentChange(val) {
                 // 保留this
                 let _this=this;

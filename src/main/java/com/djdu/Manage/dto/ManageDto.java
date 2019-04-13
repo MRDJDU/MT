@@ -54,7 +54,7 @@ public class ManageDto {
                             manageDto.getState()
                     ));
                 }
-                //
+                //查询维修管理员或购物管理员
                 if(manageDto.getGrade()!=null){
                     predicate.add(criteriaBuilder.equal(root.get("grade").as(Integer.class),
                             manageDto.getGrade()

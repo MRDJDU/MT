@@ -29,10 +29,7 @@ public class CategoryThird extends BaseEmtity {
 
     private Integer morder;//同级分类顺序
 
-    @ManyToOne(cascade= CascadeType.ALL,fetch=FetchType.LAZY)
-    @JoinColumn(name = "categorySecond_id")
-    private CategorySecond categorySecond;//父，二级分类
+    private String img;//分类照片
 
-    @OneToMany(cascade = CascadeType.ALL,mappedBy="categoryThird",fetch=FetchType.LAZY)
-    private List<Goods> goods = new ArrayList<Goods>();//子，商品
+    private String categorySecond_id;//父，二级分类
 }

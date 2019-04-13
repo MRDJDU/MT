@@ -14,6 +14,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -51,7 +52,7 @@ public class BrandController {
      * @Param [brandDto]
      * @return com.djdu.common.Message.ResponseMessage
      **/
-    @PutMapping(value="/editBrand",consumes= MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value="/editBrand",consumes= MediaType.APPLICATION_JSON_VALUE)
     public ResponseMessage editBrand(@RequestBody BrandDto brandDto){
         return brandService.editBrand(brandDto);
     }
@@ -70,6 +71,8 @@ public class BrandController {
         return brandService.showOutAll(brand_ids,showOut);
     }
 
+
+
     /**
      * @Author DJDU
      * @Description TODO 处理前端获取品牌的请求,前端请求有json格式的多个对象参数时封装在map再转对象，分页条件对象和查询条件对象（分类名字和是否显示）
@@ -77,7 +80,7 @@ public class BrandController {
      * @Param [models]
      * @return com.djdu.common.Message.ResponseMessage
      **/
-    @GetMapping(value="/getBrandPage",consumes= MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value="/getBrandPage",consumes= MediaType.APPLICATION_JSON_VALUE)
     public ResponseMessage getBrandPage(@RequestBody Map<String, Object> models){
         fail = "分页查找失败！";
         ResponseMessage responseMessage = new ResponseMessage<Page<Brand>>();
@@ -93,4 +96,14 @@ public class BrandController {
     }
 
 
+    @PostMapping(value="/deteleBrand",consumes= MediaType.APPLICATION_JSON_VALUE)
+    public ResponseMessage deleteBrands(@RequestBody  Map<String, Object> models){
+        ArrayList<String> ids  = (ArrayList<String>) models.get("ids");
+        return brandService.deleteBrands(ids);
+    }
+
+    @PostMapping(value="/showOut",consumes= MediaType.APPLICATION_JSON_VALUE)
+    public ResponseMessage showOut(@RequestBody  Brand brand){
+        return brandService.showOut(brand);
+    }
 }

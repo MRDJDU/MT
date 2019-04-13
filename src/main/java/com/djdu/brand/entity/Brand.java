@@ -30,6 +30,10 @@ public class Brand extends BaseEmtity {
 
     private String IcoURL;//Ico路径
 
-    @OneToMany(cascade = CascadeType.ALL,mappedBy="brand",fetch=FetchType.LAZY)
-    private List<Goods> goods = new ArrayList<Goods>();//子，商品
+    public String Category_id; // 所属分类id
+
+    public String Category_name; // 所属分类id
+
+    @Transient
+    public List<String> Category_ids;
 }

@@ -27,8 +27,6 @@ public class NormsValue extends BaseEmtity {
 
     private String value;//商品规格值
 
-    @ManyToOne(cascade= CascadeType.ALL,fetch= FetchType.LAZY)
-    @JoinColumn(name = "norms_id")
-    private Norms norms;//父，规格
+    private String norms_id;//规格id
 
 }

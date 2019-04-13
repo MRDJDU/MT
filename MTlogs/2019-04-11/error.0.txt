@@ -1,0 +1,25 @@
+
+2019-04-11 02:29:32.705 [http-nio-8080-exec-10] ERROR
+[message：]二级分类新增失败 >>>>> [已存在同名的二级分类]
+
+================================================================================================================
+
+2019-04-11 23:13:33.849 [http-nio-8080-exec-7] ERROR
+[message：]分页查找一级分类失败！ >>>>> [null]
+
+================================================================================================================
+
+2019-04-11 23:13:33.876 [http-nio-8080-exec-7] ERROR
+[message：]分页查找一级分类失败！ >>>>> [Transaction was marked for rollback only; cannot commit; nested exception is org.hibernate.TransactionException: Transaction was marked for rollback only; cannot commit]
+
+================================================================================================================
+
+2019-04-11 23:15:16.099 [http-nio-8080-exec-1] ERROR
+[message：]分页查找一级分类失败！ >>>>> [null]
+
+================================================================================================================
+
+2019-04-11 23:15:16.101 [http-nio-8080-exec-1] ERROR
+[message：]分页查找一级分类失败！ >>>>> [Transaction was marked for rollback only; cannot commit; nested exception is org.hibernate.TransactionException: Transaction was marked for rollback only; cannot commit]
+
+================================================================================================================

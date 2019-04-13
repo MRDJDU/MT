@@ -27,6 +27,14 @@ public class BrandDto {
 
     private String name;//品牌名
 
+    private String IcoURL;//Ico路径
+
+    public String Category_id; // 所属分类id
+
+    public String Category_name; // 所属分类id
+
+    public List<String> Category_ids;
+
     private Usable usable;//是否被删除
 
     private ShowOut showOut;//是否展示在客户端
@@ -52,7 +60,23 @@ public class BrandDto {
                             ));
                 }
 
-                //查询品牌名不为空的话，拼装查询条件
+                if(brandDto.getCategory_ids().size()>0){
+                    if(brandDto.getCategory_ids().size()==1){
+                        brandDto.setCategory_id(brandDto.getCategory_ids().get(0));
+                        predicate.add(criteriaBuilder.like(root.get("Category_id").as(String.class),
+                                "%"+brandDto.getCategory_id()+"%"
+                        ));
+                    }
+                    else{
+                        brandDto.setCategory_id(brandDto.getCategory_ids().get(0) + "/" + brandDto.getCategory_ids().get(1));
+                        predicate.add(criteriaBuilder.like(root.get("Category_id").as(String.class),
+                                "%"+brandDto.getCategory_id()+"%"
+                        ));
+                    }
+                }
+
+
+                //拼装查询条件
                 if(brandDto.getShowOut()!=null){
                     predicate.add(criteriaBuilder.equal(root.get("showOut").as(ShowOut.class),
                             brandDto.getShowOut()

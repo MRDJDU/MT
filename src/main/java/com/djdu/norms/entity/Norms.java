@@ -32,9 +32,4 @@ public class Norms extends BaseEmtity {
     @ManyToOne(cascade= CascadeType.ALL,fetch=FetchType.LAZY)
     @JoinColumn(name = "goods_id")
     private Goods goods;//父，商品
-
-    @OneToMany(cascade = CascadeType.ALL,mappedBy="norms",fetch=FetchType.LAZY)
-    private List<NormsValue> normsValue = new ArrayList<NormsValue>();//子，规格值
-
-
 }

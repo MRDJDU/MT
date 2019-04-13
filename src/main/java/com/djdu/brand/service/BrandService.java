@@ -3,6 +3,10 @@ package com.djdu.brand.service;
 import com.djdu.brand.dto.BrandDto;
 import com.djdu.brand.entity.Brand;
 import com.djdu.brand.repository.BrandRepository;
+import com.djdu.category.entity.CategoryFirst;
+import com.djdu.category.entity.CategorySecond;
+import com.djdu.category.repository.CategoryFirstRepository;
+import com.djdu.category.repository.CategorySecondRepository;
 import com.djdu.common.Enums.ShowOut;
 import com.djdu.common.Enums.Usable;
 import com.djdu.common.Message.ResponseMessage;
@@ -31,6 +35,10 @@ import java.util.UUID;
 public class BrandService {
     @Autowired
     BrandRepository brandRepository;//注入品牌仓库层
+    @Autowired
+    CategoryFirstRepository categoryFirstRepository;
+    @Autowired
+    CategorySecondRepository categorySecondRepository;
     private String success = "";
     private String fail = "";
 
@@ -49,8 +57,24 @@ public class BrandService {
             responseMessage.makeFail(fail,"品牌名不能为空");
             return responseMessage;
         }
-        else if(brandRepository.UnDeletedfindExistsName(brand.getName())>0){
-            responseMessage.makeFail(fail,"品牌名已存在！");
+        List<String> a = brand.getCategory_ids();
+        String b ="";
+        String c ="";
+        if(a.size()>1){
+            b = a.get(1);
+            c = a.get(0);
+            CategoryFirst categoryFirst = categoryFirstRepository.findById(c).get();
+            CategorySecond categorySecond = categorySecondRepository.findById(b).get();
+            brand.setCategory_name(categoryFirst.getName() + " / " + categorySecond.getName());
+            brand.setCategory_id(categoryFirst.getCategoryFirst_id() + "/" + categorySecond.getCategorySecond_id());
+        }else{
+            b=a.get(0);
+            CategoryFirst categoryFirst = categoryFirstRepository.findById(b).get();
+            brand.setCategory_name(categoryFirst.getName());
+            brand.setCategory_id(categoryFirst.getCategoryFirst_id());
+        }
+        if(brandRepository.UnDeletedfindExistsName(brand.getName(),b)>0){
+            responseMessage.makeFail(fail,"所属分类品牌名已存在！");
             return responseMessage;
         }
         else {
@@ -92,8 +116,8 @@ public class BrandService {
         else
         {
             if(brandDto.getName()!=null){
-                if(brandRepository.UnDeletedfindExistsName(brandDto.getName())>0 && !brandDto.getBrand_id().equals(brandRepository.UnDeletedfindNameGetId(brandDto.getName()))){
-                    responseMessage.makeFail(fail,"品牌名已存在！");
+                if(brandRepository.UnDeletedfindExistsName(brandDto.getName(),brand.getCategory_id())>0 && !brandDto.getBrand_id().equals(brandRepository.UnDeletedfindNameGetId(brandDto.getName()))){
+                    responseMessage.makeFail(fail,"所属分类品牌名已存在！");
                     return responseMessage;
                 }
             }
@@ -153,6 +177,33 @@ public class BrandService {
         }
     }
 
+    public ResponseMessage showOut(Brand brand){
+        ResponseMessage responseMessage = new ResponseMessage<List<Brand>>();
+        try{
+            Brand brand1 = brandRepository.findById(brand.getBrand_id()).get();
+            if(brand1.getShowOut() == ShowOut.Show){
+                brand1.setShowOut(ShowOut.UnShow);
+                brand1.setUpdateTime(new Date());
+                brandRepository.save(brand1);
+                success = "冻结品牌成功！";
+                responseMessage.makeSuccess(success);
+            }
+            else{
+                brand1.setShowOut(ShowOut.Show);
+                brand1.setUpdateTime(new Date());
+                brandRepository.save(brand1);
+                success = "显示品牌成功！";
+                responseMessage.makeSuccess(success);
+            }
+            return responseMessage;
+        }
+        catch (Exception e){
+            fail = "操作品牌失败";
+            responseMessage.makeError(fail,e.getMessage());
+            return responseMessage;
+        }
+    }
+
 
 
     public ResponseMessage getBrandPage(Specification specification, Pageable pageable){
@@ -168,5 +219,32 @@ public class BrandService {
             return responseMessage;
         }
 
+    }
+
+    /**
+     * @Author DJDU
+     * @Description TODO 批量删除
+     * @Date 2019/4/12 0:56
+     * @Param [ids]
+     * @return com.djdu.common.Message.ResponseMessage
+     **/
+    public ResponseMessage deleteBrands(List<String> ids){
+        success = "品牌批量删除成功！";
+        fail = "修改批量删除失败！";
+        ResponseMessage responseMessage = new ResponseMessage<String[]>();
+        try{
+            List<Brand> brands = (List<Brand>)brandRepository.findAllById(ids);
+            for (Brand brand : brands) {
+                brand.setUsable(Usable.Deleted);
+                brand.setUpdateTime(new Date());
+                brandRepository.save(brand);
+            }
+            responseMessage.makeSuccess(success);
+            return responseMessage;
+        }
+        catch (Exception e){
+            responseMessage.makeError(fail,e.getMessage());
+            return responseMessage;
+        }
     }
 }
