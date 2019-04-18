@@ -32,22 +32,7 @@ public class Goods extends BaseEmtity {
 
     private String name;//商品名
 
-    @ManyToOne(cascade= CascadeType.ALL,fetch=FetchType.LAZY)
-    @JoinColumn(name = "categoryThird_id")
-    private CategoryThird categoryThird;//父，三级分类b
+    private String category_id;//父，三级分类b
 
-    @ManyToOne(cascade= CascadeType.ALL,fetch=FetchType.LAZY)
-    @JoinColumn(name = "brand_id")
-    private Brand brand;//父，品牌
-
-    @OneToMany(cascade = CascadeType.ALL,mappedBy="goods",fetch=FetchType.LAZY)
-    private List<ImageResource> imageResource = new ArrayList<ImageResource>();//子，图片资源
-
-    @OneToMany(cascade = CascadeType.ALL,mappedBy="goods",fetch=FetchType.LAZY)
-    private List<Norms> norms = new ArrayList<Norms>();//子，规格
-
-
-    @OneToMany(cascade = CascadeType.ALL,mappedBy="goods",fetch=FetchType.LAZY)
-    private List<Evaluation> evaluations = new ArrayList<Evaluation>();//子，评论表
-
+    private String brand_id;//父，品牌
 }

@@ -81,3 +81,5 @@
         ![](https://github.com/MRDJDU/MT/raw/master/ExplicateMTImg/用户管理模块.png)
 - 2019.04.14
   - 大更新，分类管理，品牌管理，商品管理
+- 2019.04.18
+  - 商品管理完善

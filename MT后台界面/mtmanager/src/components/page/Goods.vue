@@ -6,47 +6,60 @@
                 <el-cascader expand-trigger="hover" :clearable = 'true' :options="options" class="handle-select mr10" v-model="selectedOptions"  placeholder="所属分类">
                 </el-cascader>
                 <el-input v-model="names" :clearable = 'true' placeholder="商品名" class="handle-input mr10" ></el-input>
-                <el-button type="primary" icon="search" @click="search">搜索</el-button>
+                <el-button type="primary" icon="search" @click="searchGoods">搜索</el-button>
                 <el-button type="success" icon="search" @click="add">新增</el-button>
             </div>
-            <el-table :data="tableData" border class="table" ref="multipleTable" @selection-change="handleSelectionChange">
+
+             <el-table :data="tableData" style="width: 100%" @selection-change="handleSelectionChange">
                 <el-table-column type="selection" width="55" align="center"></el-table-column>
-                <el-table-column prop="creatTime" label="创建日期" sortable width="250">
+                <el-table-column type="expand">
+                    <template slot-scope="props">
+                        <el-form label-position="left" inline class="demo-table-expand">
+                            <template v-for="norm in props.row.norms">
+                                <el-form-item :label="norm.name"><span>{{ norm.value }}</span></el-form-item>
+                            </template>
+                            <div>
+                            <el-form-item label="商品展示图">
+                                <img :src="props.row.masterImage" style="width: 50px;height:50px">
+                            </el-form-item>
+                            <el-form-item label="商品详情图">
+                                <template v-for="img in props.row.detailsImage">
+                                    <img :src="img.img" style="width: 50px;height:50px;margin-right: 5px;">
+                                </template>
+                            </el-form-item>
+                            </div>
+                        </el-form>
+                    </template>
                 </el-table-column>
-                <el-table-column prop="category_name" label="所属分类" width="250">
-                </el-table-column>
-                <el-table-column prop="name" label="品牌名">
-                </el-table-column>
-                <el-table-column label="操作" width="300" align="center">
+                
+                <el-table-column label="创建时间" prop="creatTime" width="200" sortable></el-table-column>
+                <el-table-column label="商品名称" prop="goodsName" width="180"></el-table-column>
+                <el-table-column label="商品分类" prop="category" ></el-table-column>
+                <el-table-column label="品牌" prop="brand" width="180" sortable></el-table-column>
+                <el-table-column label="操作" width="325" align="center">
                     <template slot-scope="scope">
-                        <el-button type="success" @click="handleEdit(scope.row)">编辑</el-button>
-                        <el-button type="warning" @click="handleShow(scope.row)">{{scope.row.button}}</el-button>
+                        <el-button type="success" @click="">编辑</el-button>
+                        <el-button type="success" @click="">上架</el-button>
+                        <el-button type="success" @click="showSKUs">库存计量单位</el-button>
                     </template>
                 </el-table-column>
             </el-table>
+
+
+
+
+
+
+
+
+
+
+
             <div class="pagination">
-                <el-pagination background @current-change="handleCurrentChange" layout="prev, pager, next" :total="total" :page-size="limit" center>
+                <el-pagination background @current-change="" layout="prev, pager, next" :total="total" :page-size="limit" center>
                 </el-pagination>
             </div>
         </div>
-
-        <!-- 编辑弹出框 -->
-        <el-dialog title="编辑品牌" :visible.sync="editVisible" width="30%">
-            <el-form ref="form" :model="form" label-width="70px">
-                <el-form-item label="所属分类">
-                    <el-cascader expand-trigger="hover" :clearable = 'true' :options="options" class="handle-select mr10" v-model="form.category_id" placeholder="所属分类">
-                </el-cascader>
-                </el-form-item>
-                <el-form-item label="品牌名">
-                    <el-input v-model="form.name"></el-input>
-                </el-form-item>
-
-            </el-form>
-            <span slot="footer" class="dialog-footer">
-                <el-button @click="editVisible = false">取 消</el-button>
-                <el-button type="primary" @click="saveEdit">确 定</el-button>
-            </span>
-        </el-dialog>
 
          <!-- 新增弹出框 -->
         <el-dialog title="新增商品" :visible.sync="addVisible" width="70%" @closed="cancalAdd">
@@ -58,7 +71,7 @@
                 <el-step title="商品展示图"></el-step>
                 <el-step title="商品详情图"></el-step>
                 <el-step title="设置基础属性"></el-step>
-                <el-step title="库存计量属性"></el-step>
+                <!-- <el-step title="库存计量属性"></el-step> -->
             </el-steps>
             </div>
             <el-form ref="addform" :model="addform" label-width="70px">
@@ -124,16 +137,6 @@
                 </div>    
 
 
-                <div style="margin-top: 30px;" id="s6" hidden>
-                    <el-table :data="SKU" class="tb-edit" style="width:100%" highlight-current-row>
-                        <el-table-column prop="name" label="属性名"></el-table-column>
-                        <el-table-column  label="属性值">
-                            <template slot-scope="scope">
-                                <el-input size="small" v-model="scope.row.value" placeholder="请输入内容"></el-input> <span>{{scope.row.value}}</span>
-                            </template>
-                        </el-table-column>
-                    </el-table>
-                </div>
 
                 <div style="color: green;font-size: 30px;margin-left: 39%;margin-top: 25px;" id="ok" hidden>
                     <span>信息填写完毕</span>
@@ -166,6 +169,22 @@
             </span>
         </el-dialog>
 
+        <!-- 查看库存计量单位 -->
+        <el-dialog title="单位库存" :visible.sync="skusdialogTableVisible">
+            <el-table :data="tableData">
+
+                <template>
+                    <!-- <el-table-column :property="dataItem" :label="dataName" width="150"></el-table-column> -->
+                </template>
+
+                <el-table-column label="操作" width="325" align="center">
+                    <template slot-scope="scope">
+                        <el-button type="success" @click="">编辑</el-button>
+                        <el-button type="success" @click="">编辑</el-button>
+                    </template>
+                </el-table-column>
+            </el-table>
+        </el-dialog>
 
     </div>
 </template>
@@ -181,9 +200,9 @@
                 total:1,
                 names:'',
                 tableData: [],
+                skusdialogTableVisible: false,
                 multipleSelection: [],
                 del_list: [],
-                editVisible: false,
                 delVisible: false,
                 addVisible:false,
                 form: {
@@ -210,25 +229,91 @@
                 othercropImgs:[],
                 otherImgSrc:'',
                 otherdialogVisible:false,
-                norms: [
-                ],
-                SKU:[
-                ]
+                norms: [],
+                deleteId:[]
             }
         },
         mounted(){
             this.getCategory();
-            this.getTable();
+            this.getgoods();
         },
         components: {
          VueCropper
         },
         methods: {
+            searchGoods(){
+                this.getgoods();
+            },
+            getgoods(){
+                // 保留this
+                let _this=this;
+                this.axios.post('http://localhost:8080/mt/goods/findAllGoods',{
+                    "addgoodsDto":{
+                        "goodsname":this.names,
+                        "selectedaddOptions":this.selectedOptions
+                    },
+                    "myPagaRequest":{
+                        "page":1,
+                        "limit":8,
+                        "sort":"creatTime",
+                        "dir":"DESC"
+                    }
+                })
+                .then(response => {
+                    if(response.data.statuCode){
+                        this.tableData=response.data.data.content;
+                        for(var i=0;i<this.tableData.length;i++){
+                            this.tableData[i].masterImage= require('../../../static/ImageResource/'+this.tableData[i].masterImage+'.png');
+                            for(var j = 0;j < this.tableData[i].detailsImage.length;j++){
+                                    this.tableData[i].detailsImage[j].img = require('../../../static/ImageResource/'+this.tableData[i].detailsImage[j].img+'.png');
+                            }
+                        }
+                    }
+                    else{
+                        this.$notify.error({
+                            title: response.data.message,
+                            offset: 100,
+                            showClose: false
+                        });
+                    }
+                });
+            },
+            handleSelectionChange(val){
+                for(var i = 0 ; i < val.length ; i++){
+                    this.deleteId[i] = val[i].goods_id;
+                }
+            },
+            delAll(){
+                // 保留this
+                let _this=this;
+                this.axios.post('http://localhost:8080/mt/goods/deteleGoods',{
+                    "ids":this.deleteId
+                })
+                .then(response => {
+                    this.getgoods();
+                    if(response.data.statuCode){
+                        this.$notify({
+                            title: response.data.message,
+                            type: 'success',
+                            offset: 100,
+                            showClose: false
+                        });
+                    }
+                    else{
+                        this.$notify.error({
+                            title: response.data.message,
+                            offset: 100,
+                            showClose: false
+                        });
+                    }
+                });
+                this.deleteId=[];
+            },
             next() {
                 this.active++;
                 if(this.active == 0){
                     document.getElementById('s0').removeAttribute('hidden');
-                    document.getElementById('s6').setAttribute('hidden','true');
+                    document.getElementById('s5').setAttribute('hidden','true');
                 }
                 if(this.active == 1){
                     document.getElementById('s1').removeAttribute('hidden');
@@ -301,40 +386,30 @@
                     }
                 }
                 if(this.active == 6){
-                    document.getElementById('s6').removeAttribute('hidden');
-                    document.getElementById('s5').setAttribute('hidden','true');
+                    var k = true;
                     for(var i=0;i<this.norms.length;i++){
                         if(this.norms[i].value=='' || this.norms[i].value==null){
-                            this.$notify.error({
-                            title: '请填写完整基础属性值',
-                            offset: 100,
-                            showClose: false
-                        });
-                        this.active--;
-                        document.getElementById('s5').removeAttribute('hidden');
-                        document.getElementById('s6').setAttribute('hidden','true');
+                            k = false;
                         }
                    }
-                }
-                if(this.active == 7){
-                    for(var i=0;i<this.SKU.length;i++){
-                        if(this.SKU[i].value=='' ||this.SKU[i].value==null){
-                            this.$notify.error({
-                            title: '请填写完整库存计量属属性值',
-                            offset: 100,
-                            showClose: false
-                        });
+                   if(k){
+                        document.getElementById('s5').setAttribute('hidden','true');
+                        document.getElementById('goodsAdd').removeAttribute('hidden');
+                        document.getElementById('ok').removeAttribute('hidden');
+                        document.getElementById('next').setAttribute('hidden','true');
+                   }
+                   else{
                         this.active--;
-                        }
-                        else{
-                            document.getElementById('goodsAdd').removeAttribute('hidden');
-                            document.getElementById('ok').removeAttribute('hidden');
-                            document.getElementById('next').setAttribute('hidden','true');
-                            document.getElementById('s6').setAttribute('hidden','true');
-                        }
+                        this.$notify.error({
+                                title: '请填写完整基础属性值',
+                                offset: 100,
+                                showClose: false
+                            });
                    }
                 }
-                
+            },
+            showSKUs(){
+                this.skusdialogTableVisible = true;
             },
             cancalAdd(){
                 this.active=0;
@@ -344,7 +419,6 @@
                 this.showcropImgs=[];
                 this.othercropImgs=[];
                 this.norms=[];
-                this.SKU=[];
                 this.otherImgSrc = '';
                 this.showImgSrc = '';
                 document.getElementById('s0').removeAttribute('hidden');
@@ -354,7 +428,6 @@
                 document.getElementById('s3').setAttribute('hidden','true');
                 document.getElementById('s4').setAttribute('hidden','true');
                 document.getElementById('s5').setAttribute('hidden','true');
-                document.getElementById('s6').setAttribute('hidden','true');
                 document.getElementById('ok').setAttribute('hidden','true');
                 document.getElementById('goodsAdd').setAttribute('hidden','true');
                 this.addVisible = false
@@ -391,40 +464,6 @@
                     });
                 }
             });
-
-
-
-
-                //获取库存计量属性列表
-                this.axios.post('http://localhost:8080/mt/BaseSKU/getBaseSKUPage',{
-                    "baseSKUDto":{
-                        "categoryThird_id":this.selectedaddOptions[2]
-                    },
-                    "myPagaRequest":{
-                        "page":1,
-                        "limit":200,
-                        "sort":this.sort,
-                        "dir":this.dir
-                    }
-                })
-                .then(response => {
-                    if(response.data.statuCode){
-                        this.SKU=response.data.data.content;
-                        for(var i=0;i<this.SKU.length;i++){
-                            this.SKU.value=''
-                        }
-                    }
-                    else{
-                            this.$notify.error({
-                            title: response.data.message,
-                            offset: 100,
-                            showClose: false
-                        });
-                    }
-                });
-
-
-
 
                 //获取品牌列表
                   // 保留this
@@ -542,146 +581,8 @@
 
 
 
-
-
-            getTable(){
-                 // 保留this
-                let _this=this;
-                this.axios.post('http://localhost:8080/mt/brand/getBrandPage',{
-                    "brandDto":{
-                        "Category_ids":this.selectedOptions,
-                        "name":this.names
-                    },
-                    "myPagaRequest":{
-                        "page":this.page,
-                        "limit":this.limit,
-                        "sort":this.sort,
-                        "dir":this.dir
-                    }
-                })
-                .then(response => {
-                    if(response.data.statuCode){
-                        this.tableData=response.data.data.content;
-                        for(var i=0;i<this.tableData.length;i++){
-                            if(this.tableData[i].showOut == 'UnShow'){
-                                this.tableData[i].button = '显示';
-                            }
-                            else{
-                                this.tableData[i].button = '冻结'
-                            }
-                        }
-                        this.total=response.data.data.totalElements;
-                    }
-                    else{
-                        this.$notify.error({
-                            title: response.data.message,
-                            offset: 100,
-                            showClose: false
-                        });
-                    }
-                });
-            },
-            handleCurrentChange(val){
-                this.page = val;
-                this.getTable();
-            },
-            search(){
-                this.getTable();
-            },
             getCategory(){
               this. getOne();
-            },
-            delAll(){
-                for(var i = 0;i < this.multipleSelection.length;i++){
-                    this.ids[i] = this.multipleSelection[i].brand_id;
-                }
-                 // 保留this
-                let _this=this;
-                this.axios.post('http://localhost:8080/mt/brand/deteleBrand',{
-                    "ids":this.ids
-                })
-                .then(response => {
-                    this.getTable();
-                    if(response.data.statuCode){
-                        this.$notify({
-                            title: response.data.message,
-                            type: 'success',
-                            offset: 100,
-                            showClose: false
-                        });
-                    }
-                    else{
-                        this.$notify.error({
-                            title: response.data.message,
-                            offset: 100,
-                            showClose: false
-                        });
-                    }
-                });
-                this.multipleSelection = [];
-            },
-            handleSelectionChange(val){
-                this.multipleSelection = val;
-            },
-            handleEdit(row){
-                var arr=row.Category_id.split("/");
-                this.form.name = row.name;
-                this.form.category_id=arr;
-                this.form.id = row.brand_id;
-                this.editVisible = true;
-            },
-            saveEdit(){
-                 // 保留this
-                let _this=this;
-                this.axios.post('http://localhost:8080/mt/brand/editBrand',{
-                    "brand_id":this.form.id,
-                    "Category_ids":this.form.category_id,
-                    "name":this.form.name
-                })
-                .then(response => {
-                    this.getTable();
-                    if(response.data.statuCode){
-                        this.$notify({
-                            title: response.data.message,
-                            type: 'success',
-                            offset: 100,
-                            showClose: false
-                        });
-                    }
-                    else{
-                        this.$notify.error({
-                            title: response.data.message,
-                            offset: 100,
-                            showClose: false
-                        });
-                    }
-                });
-                this.editVisible = false;
-            },
-            handleShow(row){
-                // 保留this
-                let _this=this;
-                this.axios.post('http://localhost:8080/mt/brand/showOut',{
-                    "brand_id":row.brand_id
-                })
-                .then(response => {
-                    this.getTable();
-                    if(response.data.statuCode){
-                        this.$notify({
-                            title: response.data.message,
-                            type: 'success',
-                            offset: 100,
-                            showClose: false
-                        });
-                    }
-                    else{
-                        this.$notify.error({
-                            title: response.data.message,
-                            offset: 100,
-                            showClose: false
-                        });
-                    }
-                });
             },
             // 获取一级分类
             getOne(){
@@ -797,14 +698,25 @@
         },
 // -----------------------------------------------------------------------------------------------------------------------------------添加商品
         saveAdd(){
-            this.axios.post('http://localhost:8080/mt/categoryThird/addCategoryThird',{
+            var normsDto=[];
+            for(var i=0;i<this.norms.length;i++){
+                var s={
+                name:'',
+                value:''
+                }
+                s.name = this.norms[i].name;
+                s.value = this.norms[i].value;
+                normsDto.push(s);
+            }
+
+
+            this.axios.post('http://localhost:8080/mt/goods/addGoods',{
                     goodsname:this.goodsname,
                     selectedaddOptions:this.selectedaddOptions,
                     selectedaddBrandOptions:this.selectedaddBrandOptions,
                     showcropImgs:this.showcropImgs,
                     othercropImgs:this.othercropImgs,
-                    norms:this.norms,
-                    SKU:this.SKU,
+                    normsDtos:normsDto
             })
             .then(response => {
                 if(response.data.statuCode){
@@ -839,7 +751,6 @@
             this.showcropImgs=[];//商品展示图片
             this.othercropImgs=[];//商品详情图片
             this.norms=[];//基础属性
-            this.SKU=[];//库存计量属性
             this.otherImgSrc = '';
             this.showImgSrc = '';
             document.getElementById('s0').removeAttribute('hidden');
@@ -849,7 +760,6 @@
             document.getElementById('s3').setAttribute('hidden','true');
             document.getElementById('s4').setAttribute('hidden','true');
             document.getElementById('s5').setAttribute('hidden','true');
-            document.getElementById('s6').setAttribute('hidden','true');
             document.getElementById('ok').setAttribute('hidden','true');
             document.getElementById('goodsAdd').setAttribute('hidden','true');
             this.addVisible = false
@@ -871,6 +781,19 @@
         justify-content: center;
         display: flex;
         line-height: 34px;
+    }
+
+    .demo-table-expand {
+    font-size: 0;
+    }
+    .demo-table-expand label {
+        width: 90px;
+        color: #99a9bf;
+    }
+    .demo-table-expand .el-form-item {
+        margin-right: 0;
+        margin-bottom: 0;
+        width: 50%;
     }
 
     .pre-img{   

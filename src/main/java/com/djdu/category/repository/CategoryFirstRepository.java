@@ -1,10 +1,13 @@
 package com.djdu.category.repository;
 
+import com.djdu.Manage.entity.Manage;
 import com.djdu.category.entity.CategoryFirst;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
+
+import java.util.Optional;
 
 /**
  * @InterfaceName CategoryFirstRepository
@@ -26,6 +29,7 @@ public interface CategoryFirstRepository extends PagingAndSortingRepository<Cate
     @Query(value = "select count(*) from categoryfirst a where a.name = ?1 AND a.usable = 0", nativeQuery = true)
     Integer UnDeletedfindExistsName(String name);
 
-
+    @Query(value = "select * from categoryfirst a where a.categoryFirst_id = ?1 AND a.usable = 0", nativeQuery = true)
+    Optional<CategoryFirst> findByID(String  ID);
 }
 

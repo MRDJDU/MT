@@ -1,15 +1,10 @@
 package com.djdu.sku.entity;
 
 import com.djdu.common.base.BaseEmtity;
-import com.djdu.goods.entity.Goods;
-import com.djdu.normsValue.entity.NormsValue;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @ClassName SKU
@@ -30,7 +25,4 @@ public class SKU extends BaseEmtity {
     private String name;//库存进出计量单位id
 
     private String goods_id;//父，商品
-
-    private String value;//值
-
 }

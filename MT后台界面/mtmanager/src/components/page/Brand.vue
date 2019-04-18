@@ -3,8 +3,7 @@
         <div class="container">
             <div class="handle-box">
                 <el-button type="danger" icon="delete" class="handle-del mr10" @click="delAll">批量删除</el-button>
-                <el-cascader expand-trigger="hover" :clearable = 'true' :options="options" class="handle-select mr10" v-model="selectedOptions"  placeholder="所属分类">
-                </el-cascader>
+                <el-cascader expand-trigger="hover" :clearable = 'true' :options="options" class="handle-select mr10" v-model="selectedOptions"  placeholder="所属分类"></el-cascader>
                 <el-input v-model="names" :clearable = 'true' placeholder="品牌名" class="handle-input mr10" ></el-input>
                 <el-button type="primary" icon="search" @click="search">搜索</el-button>
                 <el-button type="success" icon="search" @click="add">新增</el-button>

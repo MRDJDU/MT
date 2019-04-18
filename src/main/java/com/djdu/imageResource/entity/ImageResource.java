@@ -24,16 +24,11 @@ public class ImageResource extends BaseEmtity {
     @Column(name = "imageResource_id")
     private String imageResource_id;//图片id
 
-    private String name;//图片名
-
     private String ImageURL;//图片路径
 
     private ImageCategory imageCategory;//图片分类，主图和详情图
 
     private Integer morder;//同图片分类展示时顺序
 
-    @ManyToOne(cascade= CascadeType.ALL,fetch=FetchType.LAZY)
-    @JoinColumn(name = "goods_id")
-    private Goods goods;//父，商品
-
+    private String goods_id;//父，商品
 }

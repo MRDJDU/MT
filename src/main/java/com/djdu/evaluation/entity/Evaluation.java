@@ -38,9 +38,7 @@ public class Evaluation extends BaseEmtity2 {
     @JoinColumn(name = "user_id")
     private User user;//父，用户
 
-    @ManyToOne(cascade= CascadeType.ALL,fetch= FetchType.LAZY)
-    @JoinColumn(name = "goods_id")
-    private Goods goods;//父，商品
+
 
     @OneToOne(cascade= CascadeType.ALL,fetch= FetchType.LAZY)
     private SKU sku;//单向，商品进存基础单位
