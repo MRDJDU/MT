@@ -1,0 +1,30 @@
+
+2019-04-19 09:16:51.999 [http-nio-8080-exec-4] ERROR
+[message：]品牌批量删除失败！ >>>>> [The given Iterable of Id's must not be null!; nested exception is java.lang.IllegalArgumentException: The given Iterable of Id's must not be null!]
+
+================================================================================================================
+
+2019-04-19 09:16:53.039 [http-nio-8080-exec-8] ERROR
+[message：]品牌批量删除失败！ >>>>> [The given Iterable of Id's must not be null!; nested exception is java.lang.IllegalArgumentException: The given Iterable of Id's must not be null!]
+
+================================================================================================================
+
+2019-04-19 09:16:53.238 [http-nio-8080-exec-6] ERROR
+[message：]品牌批量删除失败！ >>>>> [The given Iterable of Id's must not be null!; nested exception is java.lang.IllegalArgumentException: The given Iterable of Id's must not be null!]
+
+================================================================================================================
+
+2019-04-19 09:16:53.414 [http-nio-8080-exec-5] ERROR
+[message：]品牌批量删除失败！ >>>>> [The given Iterable of Id's must not be null!; nested exception is java.lang.IllegalArgumentException: The given Iterable of Id's must not be null!]
+
+================================================================================================================
+
+2019-04-19 09:16:53.589 [http-nio-8080-exec-9] ERROR
+[message：]品牌批量删除失败！ >>>>> [The given Iterable of Id's must not be null!; nested exception is java.lang.IllegalArgumentException: The given Iterable of Id's must not be null!]
+
+================================================================================================================
+
+2019-04-19 09:16:53.772 [http-nio-8080-exec-1] ERROR
+[message：]品牌批量删除失败！ >>>>> [The given Iterable of Id's must not be null!; nested exception is java.lang.IllegalArgumentException: The given Iterable of Id's must not be null!]
+
+================================================================================================================

@@ -88,5 +88,10 @@ public class GoodsController {
         return goodsService.deteleGoods(ids);
     }
 
+    @PostMapping(value="/ShowGoods",consumes= MediaType.APPLICATION_JSON_VALUE)
+    public ResponseMessage ShowGoods(@RequestBody Goods goods){
+        return goodsService.ShowGoods(goods);
+    }
+
 
 }

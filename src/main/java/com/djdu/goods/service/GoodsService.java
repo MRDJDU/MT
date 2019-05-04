@@ -268,6 +268,30 @@ public class GoodsService {
         }
     }
 
+    public ResponseMessage ShowGoods(Goods goods){
+        ResponseMessage responseMessage = new ResponseMessage<Goods>();
+        try{
+            Goods goods1=goodsRepository.findById(goods.getGoods_id()).get();
+            if(goods1.getShowOut()==ShowOut.Show){
+                success = "商品下架成功！";
+                fail = "商品下架失败！";
+                goods1.setShowOut(ShowOut.UnShow);
+            }
+            else {
+                success = "商品上架成功！";
+                fail = "商品上架失败！";
+                goods1.setShowOut(ShowOut.Show);
+            }
+            goodsRepository.save(goods1);
+            responseMessage.makeSuccess(success);
+            return responseMessage;
+        }
+        catch (Exception e){
+            responseMessage.makeError(fail,e.getMessage());
+            return responseMessage;
+        }
+    }
+
 
 
 }

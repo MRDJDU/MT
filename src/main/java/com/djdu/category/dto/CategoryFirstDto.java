@@ -32,7 +32,9 @@ public class CategoryFirstDto {
 
     private String img;//分类照片
 
-    @SuppressWarnings({"serial"})
+    private Integer type;
+
+   @SuppressWarnings({"serial"})
     public static Specification<CategoryFirst> getWhereClause(final CategoryFirstDto categoryFirstDto){
         return new Specification<CategoryFirst>(){
             @Override
@@ -43,6 +45,12 @@ public class CategoryFirstDto {
                 if(StringUtils.isNotBlank(categoryFirstDto.getName())){
                     predicate.add(criteriaBuilder.like(root.get("name").as(String.class),
                             "%"+categoryFirstDto.getName()+"%"
+                    ));
+                }
+
+                if(categoryFirstDto.getType()!=null){
+                    predicate.add(criteriaBuilder.notEqual(root.get("type").as(Integer.class),
+                            categoryFirstDto.getType()
                     ));
                 }
                 //默认已删除的不能查询

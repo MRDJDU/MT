@@ -29,4 +29,6 @@ public class CategoryFirst extends BaseEmtity {
     private Integer morder;//同级分类顺序
 
     private String img;//分类照片
+
+    private Integer type;//0代表购物的类型的分类，1代表维修的类型分类
 }
