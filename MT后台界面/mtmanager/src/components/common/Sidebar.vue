@@ -71,6 +71,11 @@
                         title: '商品管理'
                     },
                     {
+                        icon: 'el-icon-lx-service',
+                        index: 'maintain',
+                        title: '服务管理'
+                    },
+                    {
                         icon: 'el-icon-lx-tag',
                         index: 'orders',
                         title: '订单管理'
@@ -78,26 +83,26 @@
                      {
                         icon: 'el-icon-lx-comment',
                         index: 'evaluation',
-                        title: '商品评价'
+                        title: '评价'
                     }
                 ],
                 // 维修管理员权限进入
                 mtItems:[
-                    {
-                        icon: 'el-icon-lx-service',
-                        index: 'maintain',
-                        title: '服务管理'
-                    },
-                    {
-                        icon: 'el-icon-lx-global',
-                        index: 'subscribe',
-                        title: '预约管理'
-                    },
-                    {
-                        icon: 'el-icon-lx-message',
-                        index: 'assess',
-                        title: '维修评价'
-                    }
+                    // {
+                    //     icon: 'el-icon-lx-service',
+                    //     index: 'maintain',
+                    //     title: '服务管理'
+                    // },
+                    // {
+                    //     icon: 'el-icon-lx-global',
+                    //     index: 'subscribe',
+                    //     title: '预约管理'
+                    // },
+                    // {
+                    //     icon: 'el-icon-lx-message',
+                    //     index: 'assess',
+                    //     title: '维修评价'
+                    // }
                 ]
             }
         },

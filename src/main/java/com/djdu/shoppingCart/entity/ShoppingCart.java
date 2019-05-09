@@ -27,21 +27,20 @@ public class ShoppingCart extends BaseEmtity2 {
     @Column(name = "shoppingCart_id")
     private String shoppingCart_id;//购物车内商品id
 
+    private String goods_id;
+
+    private  String sku_id;
+
+    private  String user_id;
+
     private String goodsName;//商品名称
 
     private int goodsCount;//商品数量
 
     private BigDecimal price;//价格
 
-    private boolean state;//状态，是否已付款
+    private String sku; // SKU
 
-    @OneToOne(cascade= CascadeType.ALL,fetch= FetchType.LAZY)
-    private Goods goods;//商品
+    private boolean state;//状态，是否已付款 1未付款 2已付款
 
-    @OneToOne(cascade= CascadeType.ALL,fetch= FetchType.LAZY)
-    private SKU sku;//商品库存进出计量单位
-
-    @ManyToOne(cascade= CascadeType.ALL,fetch=FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    private User user;//父，用户
 }

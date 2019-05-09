@@ -1,0 +1,50 @@
+
+2019-05-08 02:26:10.595 [http-nio-8080-exec-6] ERROR
+[message：]SKU修改失败！ >>>>> [The given id must not be null!; nested exception is java.lang.IllegalArgumentException: The given id must not be null!]
+
+================================================================================================================
+
+2019-05-08 02:26:13.412 [http-nio-8080-exec-2] ERROR
+[message：]SKU修改失败！ >>>>> [The given id must not be null!; nested exception is java.lang.IllegalArgumentException: The given id must not be null!]
+
+================================================================================================================
+
+2019-05-08 02:26:14.050 [http-nio-8080-exec-7] ERROR
+[message：]SKU修改失败！ >>>>> [The given id must not be null!; nested exception is java.lang.IllegalArgumentException: The given id must not be null!]
+
+================================================================================================================
+
+2019-05-08 02:26:14.300 [http-nio-8080-exec-10] ERROR
+[message：]SKU修改失败！ >>>>> [The given id must not be null!; nested exception is java.lang.IllegalArgumentException: The given id must not be null!]
+
+================================================================================================================
+
+2019-05-08 02:26:14.492 [http-nio-8080-exec-9] ERROR
+[message：]SKU修改失败！ >>>>> [The given id must not be null!; nested exception is java.lang.IllegalArgumentException: The given id must not be null!]
+
+================================================================================================================
+
+2019-05-08 02:26:14.683 [http-nio-8080-exec-8] ERROR
+[message：]SKU修改失败！ >>>>> [The given id must not be null!; nested exception is java.lang.IllegalArgumentException: The given id must not be null!]
+
+================================================================================================================
+
+2019-05-08 02:26:14.862 [http-nio-8080-exec-1] ERROR
+[message：]SKU修改失败！ >>>>> [The given id must not be null!; nested exception is java.lang.IllegalArgumentException: The given id must not be null!]
+
+================================================================================================================
+
+2019-05-08 02:26:15.045 [http-nio-8080-exec-3] ERROR
+[message：]SKU修改失败！ >>>>> [The given id must not be null!; nested exception is java.lang.IllegalArgumentException: The given id must not be null!]
+
+================================================================================================================
+
+2019-05-08 02:26:15.229 [http-nio-8080-exec-5] ERROR
+[message：]SKU修改失败！ >>>>> [The given id must not be null!; nested exception is java.lang.IllegalArgumentException: The given id must not be null!]
+
+================================================================================================================
+
+2019-05-08 02:26:36.109 [http-nio-8080-exec-4] ERROR
+[message：]SKU修改失败！ >>>>> [The given id must not be null!; nested exception is java.lang.IllegalArgumentException: The given id must not be null!]
+
+================================================================================================================

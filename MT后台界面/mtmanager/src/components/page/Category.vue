@@ -220,7 +220,7 @@
                 <el-button @click="AddbaseSKU($event)" type="text">新增</el-button>
             </div>
             <template v-for="item in itemskus">
-                <el-button type="primary" size="mini" style="margin-bottom: 10px;margin-left:10px"  :value="item.baseSKU_id" @click="DeletebaseSKU($event)">{{item.name}}</el-button>
+                <el-button type="primary" size="mini" style="margin-bottom: 10px;margin-left:10px"  :value="item.baseSKU_id" @click="DeletebaseSKU(item)">{{item.name}}</el-button>
             </template>
         </el-dialog>
 
@@ -443,6 +443,8 @@
         AddbaseSKU(){
             this.addbaseSKU = true;
         },
+
+        //新增Sku基础名============================================================================
         addbaseSKUSubmit(formName){
                // 提交新增品牌
                 this.axios.post('mt/BaseSKU/addBaseSKU',{
@@ -471,7 +473,23 @@
                 });
         },
         DeletebaseSKU(e){
-            let id = e.currentTarget.value;
+            let id = e.baseSKU_id;
+            // if(e.name == '价格'){
+            //      this.$notify.error({
+            //                 title: '该sku为必填项',
+            //                 offset: 100,
+            //                 showClose: false
+            //             });
+            //     return false;
+            // }
+            // if(e.name == '库存'){
+            //      this.$notify.error({
+            //                 title: '该sku为必填项',
+            //                 offset: 100,
+            //                 showClose: false
+            //             });
+            //     return false;
+            // }
             this.$confirm('此操作将永久删除该库存计量属性, 是否继续?', '提示', {
                 confirmButtonText: '确定',
                 cancelButtonText: '取消',
@@ -1118,7 +1136,7 @@
             this.addThreeForm.threename = null;
             this.addThree = false;
         },
-        // 添加二级分类
+        // 添加三级分类
         addThreeSubmit(){
             let _this=this;
             var imgNew = null;
@@ -1141,9 +1159,10 @@
                 });
                 return false;
             }
-             // 提交新增二级分类
+            let aa = this.uuid();
+             // 提交新增三级分类===================================
             this.axios.post('mt/categoryThird/addCategoryThird',{
-                    "categoryThird_id":this.uuid(),
+                    "categoryThird_id":aa,
                     "img":imgNew,
                     "name":this.addThreeForm.threename,
                     "categorySecond_id":sessionStorage.getItem('threeId')

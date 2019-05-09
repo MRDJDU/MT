@@ -1,0 +1,48 @@
+/* pages/authorize/authorize.wxss */
+/*@import "../../iconfont/iconfont.wxss";*/
+
+.authorize{
+  display: flex;
+  flex-direction: column;
+}
+
+.authorize-top{
+  display: flex;
+  flex-direction: column;
+  background-color: #008842;
+  padding-top: 150rpx;
+  align-items: center;
+}
+
+.authorize-img{
+  height: 160rpx;
+  width: 160rpx;
+}
+
+.authorize-text{
+  padding-top: 10rpx;
+  padding-bottom: 60rpx;
+  padding-left: 90rpx;
+  padding-right: 90rpx;
+  font-size: 30rpx;
+  color: white;
+  text-align:center;
+}
+
+
+
+.authorize-center{
+  display: flex;
+  flex-direction: row;
+  padding-top: 15rpx;
+  padding-left: 20rpx;
+  font-size: 27rpx;
+  color: #888888;
+}
+
+
+.authorize-btm{
+  padding-top: 100rpx;
+  padding-left: 25rpx;
+  padding-right: 25rpx;
+}

@@ -22,6 +22,7 @@ import com.djdu.imageResource.repository.ImageResourceRepository;
 import com.djdu.norms.dto.NormsDto;
 import com.djdu.norms.entity.Norms;
 import com.djdu.norms.repository.NormsRepository;
+import com.djdu.sku.dto.SKUDto;
 import com.djdu.sku.entity.SKU;
 import com.djdu.sku.entity.SKUValue;
 import com.djdu.sku.repository.GroupRepository;
@@ -97,6 +98,7 @@ public class GoodsService {
             goods.setCreatTime(new Date());
             goods.setShowOut(ShowOut.UnShow);
             goods.setUsable(Usable.UnDeleted);
+            goods.setType(addgoodsDto.getType());
 
 
             //填写norms实体
@@ -119,7 +121,9 @@ public class GoodsService {
             imageResource.setGoods_id(goods.getGoods_id());
                 String str = addgoodsDto.getShowcropImgs().get(0).substring(addgoodsDto.getShowcropImgs().get(0).indexOf(",")+1);
                 String imagePath = "E:\\workspace\\IdeaProjects\\MT\\MT后台界面\\mtmanager\\static\\ImageResource/"+imageResource.getImageResource_id()+".png";
+                //String imagePathssS = "E:\\workspace\\IdeaProjects\\MT\\mt\\images\\ImageResource/"+imageResource.getImageResource_id()+".png";
                 Base64ToImg.GenerateImage(str,imagePath);
+                //Base64ToImg.GenerateImage(str,imagePathssS);
             imageResource.setImageURL(imageResource.getImageResource_id());
 
 
@@ -133,29 +137,26 @@ public class GoodsService {
                 imageResource1.setGoods_id(goods.getGoods_id());
                     String strs = addgoodsDto.getOthercropImgs().get(i).substring(addgoodsDto.getOthercropImgs().get(i).indexOf(",")+1);
                     String imagePaths = "E:\\workspace\\IdeaProjects\\MT\\MT后台界面\\mtmanager\\static\\ImageResource/"+imageResource1.getImageResource_id()+".png";
+                    //String imagePathss = "E:\\workspace\\IdeaProjects\\MT\\mt\\images\\ImageResource/"+imageResource1.getImageResource_id()+".png";
+                    //Base64ToImg.GenerateImage(strs,imagePathss);
                     Base64ToImg.GenerateImage(strs,imagePaths);
                 imageResource1.setImageURL(imageResource1.getImageResource_id());
                 imageResources.set(i,imageResource1);
             }
 
 
-            ////填写SKU
-            //List<SKU> skus =  Arrays.asList(new SKU[addgoodsDto.getSkuDtos().size()]);
-            //List<SKUValue> skuValues =  Arrays.asList(new SKUValue[addgoodsDto.getSkuDtos().size()]);
-            //String group_id = UUID.randomUUID().toString();
-            //for(int i = 0; i < addgoodsDto.getSkuDtos().size(); i++){
-            //    SKU sku = new SKU();
-            //    SKUValue skuValue = new SKUValue();
-            //    sku.setSKU_id(UUID.randomUUID().toString());
-            //    sku.setName(addgoodsDto.getSkuDtos().get(i).getName());
-            //    sku.setGoods_id(goods.getGoods_id());
-            //    skuValue.setSKU_id(sku.getSKU_id());
-            //    skuValue.setSKUValue_id(UUID.randomUUID().toString());
-            //    skuValue.setValue(addgoodsDto.getSkuDtos().get(i).getValue());
-            //    skuValue.setGroup_id(group_id);
-            //    skus.set(i,sku);
-            //    skuValues.set(i,skuValue);
-            //}
+            //填写SKU
+            List<SKU> skus =  Arrays.asList(new SKU[addgoodsDto.getSkuDtos().size()]);
+            for(int i = 0; i < addgoodsDto.getSkuDtos().size(); i++){
+                SKU sku = new SKU();
+                sku.setSKU_id(UUID.randomUUID().toString());
+                sku.setSku(addgoodsDto.getSkuDtos().get(i).getValue());
+                sku.setPrice(addgoodsDto.getSkuDtos().get(i).getPrice());
+                sku.setStock(addgoodsDto.getSkuDtos().get(i).getStock());
+                sku.setGoods_id(goods.getGoods_id());
+                sku.setCreatTime(new Date());
+                skus.set(i,sku);
+            }
 
             goodsRepository.save(goods);
 
@@ -169,10 +170,9 @@ public class GoodsService {
                 imageResourceRepository.save(imageResources.get(i));
             }
 
-            //for(int i = 0 ; i < skus.size() ; i++){
-            //    skuRepository.save(skus.get(i));
-            //    skuValueRepository.save(skuValues.get(i));
-            //}
+            for(int i = 0 ; i < skus.size() ; i++){
+                skuRepository.save(skus.get(i));
+            }
             responseMessage.makeSuccess(success);
             return responseMessage;
         }
@@ -206,9 +206,15 @@ public class GoodsService {
                     String category = categoryFirstRepository.findByID(strs[0]).get().getName()+"/"+categorySecondRepository.findByID(strs[1]).get().getName()+"/"+categoryThirdRepository.findByID(strs[2]).get().getName();
                     showGoods1.setCategory(category);
                     showGoods1.setBrand(brandRepository.findById(goods.getBrand_id()).get().getName());
+
                     NormsDto normsDto = new NormsDto();
                     normsDto.setGoods_id(goods.getGoods_id());
                     showGoods1.setNorms(normsRepository.findAll(NormsDto.getWhereClause(normsDto)));
+
+                    SKUDto skuDto = new SKUDto();
+                    skuDto.setGoods_id(goods.getGoods_id());
+                    showGoods1.setSkus(skuRepository.findAll(SKUDto.getWhereClause(skuDto)));
+
                     ImageResourceDto imageResourceDto = new ImageResourceDto();
                     imageResourceDto.setGoods_id(goods.getGoods_id());
                     imageResourceDto.setImageCategory(ImageCategory.MasterImage);
@@ -283,6 +289,53 @@ public class GoodsService {
                 goods1.setShowOut(ShowOut.Show);
             }
             goodsRepository.save(goods1);
+            responseMessage.makeSuccess(success);
+            return responseMessage;
+        }
+        catch (Exception e){
+            responseMessage.makeError(fail,e.getMessage());
+            return responseMessage;
+        }
+    }
+
+
+    public ResponseMessage editsku(SKUDto skuDto){
+        success = "SKU修改成功！";
+        fail = "SKU修改失败！";
+        ResponseMessage responseMessage = new ResponseMessage<Goods>();
+        try{
+            if(skuDto.getSKU_id() == null || skuDto.getSKU_id() == ""){
+                SKU sku = new SKU();
+                sku.setSKU_id(UUID.randomUUID().toString());
+                sku.setSku(skuDto.getSKU());
+                sku.setPrice(skuDto.getPrice());
+                sku.setStock(skuDto.getStock());
+                sku.setGoods_id(skuDto.getGoods_id());
+                sku.setCreatTime(new Date());
+                skuRepository.save(sku);
+            }
+            else {
+                SKU sku = skuRepository.findById(skuDto.getSKU_id()).get();
+                sku.setSku(skuDto.getSKU());
+                sku.setPrice(skuDto.getPrice());
+                sku.setStock(skuDto.getStock());
+                skuRepository.save(sku);
+            }
+            responseMessage.makeSuccess(success);
+            return responseMessage;
+        }
+        catch (Exception e){
+            responseMessage.makeError(fail,e.getMessage());
+            return responseMessage;
+        }
+    }
+
+    public ResponseMessage delsku(SKUDto skuDto){
+        success = "SKU修改成功！";
+        fail = "SKU修改失败！";
+        ResponseMessage responseMessage = new ResponseMessage<Goods>();
+        try{
+            skuRepository.deleteById(skuDto.getSKU_id());
             responseMessage.makeSuccess(success);
             return responseMessage;
         }

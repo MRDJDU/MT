@@ -1,0 +1,10 @@
+
+2019-05-07 21:23:05.619 [http-nio-8080-exec-5] ERROR
+[message：]新增商品失败 >>>>> [Error creating bean with name 'redisConnectionFactory': Singleton bean creation not allowed while singletons of this factory are in destruction (Do not request a bean from a BeanFactory in a destroy method implementation!)]
+
+================================================================================================================
+
+2019-05-07 21:32:44.130 [http-nio-8080-exec-6] ERROR
+[message：]新增商品失败 >>>>> [Target object must not be null; nested exception is java.lang.IllegalArgumentException: Target object must not be null]
+
+================================================================================================================

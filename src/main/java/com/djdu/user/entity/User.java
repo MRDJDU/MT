@@ -27,22 +27,13 @@ import java.util.List;
 public class User extends BaseEmtity2 {
     @Id
     @Column(name = "user_id")
-    private String user_id;//用户id
+    private String id;//用户id
 
-    private String nickname;//用户昵称
+    private String nickName;//用户昵称
 
-    private String headimgurl;//用户头像url
+    private String headUrl;//用户头像url
 
-    @OneToMany(cascade = CascadeType.ALL,mappedBy="user",fetch=FetchType.LAZY)
-    private List<Address> address = new ArrayList<Address>();//子，用户填写的收货地址
+    private String gender;
 
-    @OneToMany(cascade = CascadeType.ALL,mappedBy="user",fetch=FetchType.LAZY)
-    private List<ShoppingCart> shoppingCart = new ArrayList<ShoppingCart>();//子，购物车内的商品
-
-    @OneToMany(cascade = CascadeType.ALL,mappedBy="user",fetch=FetchType.LAZY)
-    private List<Orders> orders = new ArrayList<Orders>();//子，订单
-
-    @OneToMany(cascade = CascadeType.ALL,mappedBy="user",fetch=FetchType.LAZY)
-    private List<Evaluation> evaluations = new ArrayList<Evaluation>();//子，评论表
 
 }

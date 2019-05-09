@@ -31,4 +31,6 @@ public class AddgoodsDto {
     public List<String> othercropImgs;
     public List<NormsDto> normsDtos;
     public List<SKUDto> skuDtos;
+    private int type;
+    private String goods_id;
 }

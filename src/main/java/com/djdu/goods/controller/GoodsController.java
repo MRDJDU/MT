@@ -2,15 +2,16 @@ package com.djdu.goods.controller;
 
 import com.djdu.Manage.dto.ManageDto;
 import com.djdu.Manage.entity.Manage;
+import com.djdu.brand.dto.BrandDto;
 import com.djdu.common.Message.MyPagaRequest;
 import com.djdu.common.Message.ResponseMessage;
 import com.djdu.common.Tool.JsonXMLUtils;
 import com.djdu.goods.dto.AddgoodsDto;
 import com.djdu.goods.dto.GoodsDto;
 import com.djdu.goods.dto.NormsDto;
-import com.djdu.goods.dto.SKUDto;
 import com.djdu.goods.entity.Goods;
 import com.djdu.goods.service.GoodsService;
+import com.djdu.sku.dto.SKUDto;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -72,6 +73,8 @@ public class GoodsController {
             if(addgoodsDto.getSelectedaddOptions()!=null && addgoodsDto.getSelectedaddOptions().size()>0){
                 goodsDto.setCategory_id(addgoodsDto.getSelectedaddOptions().get(0) +"/"+addgoodsDto.getSelectedaddOptions().get(1)+"/"+addgoodsDto.getSelectedaddOptions().get(2));
             }
+            goodsDto.setType(addgoodsDto.getType());
+            goodsDto.setGoods_id(addgoodsDto.getGoods_id());
             return goodsService.getPage(GoodsDto.getWhereClause(goodsDto),myPagaRequest.getPageable());
         }
         catch (Exception e){
@@ -92,6 +95,31 @@ public class GoodsController {
     public ResponseMessage ShowGoods(@RequestBody Goods goods){
         return goodsService.ShowGoods(goods);
     }
+
+    /**
+     * @Author DJDU
+     * @Description TODO 修改sku
+     * @Date 2019/5/8 1:23
+     * @Param [brandDto]
+     * @return com.djdu.common.Message.ResponseMessage
+     **/
+    @PostMapping(value="/editsku",consumes= MediaType.APPLICATION_JSON_VALUE)
+    public ResponseMessage editsku(@RequestBody SKUDto skuDto){
+        return goodsService.editsku(skuDto);
+    }
+
+    /**
+     * @Author DJDU
+     * @Description TODO 删除sku
+     * @Date 2019/5/8 1:24
+     * @Param [brandDto]
+     * @return com.djdu.common.Message.ResponseMessage
+     **/
+    @PostMapping(value="/delsku",consumes= MediaType.APPLICATION_JSON_VALUE)
+    public ResponseMessage delsku(@RequestBody SKUDto skuDto){
+        return goodsService.delsku(skuDto);
+    }
+
 
 
 }

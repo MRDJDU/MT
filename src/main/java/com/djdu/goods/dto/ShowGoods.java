@@ -2,6 +2,7 @@ package com.djdu.goods.dto;
 
 import com.djdu.common.base.BaseEmtity;
 import com.djdu.norms.entity.Norms;
+import com.djdu.sku.entity.SKU;
 import lombok.Data;
 
 import java.util.List;
@@ -28,6 +29,8 @@ public class ShowGoods extends BaseEmtity {
     private String brand;//品牌名
 
     private List<Norms> norms; //基础属性
+
+    private List<SKU> skus;
 
     private String masterImage;//商品主图
 

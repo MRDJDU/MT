@@ -1,0 +1,45 @@
+
+2019-05-09 02:08:01.087 [http-nio-8080-exec-10] ERROR
+[message：]分页查找商品列表失败！ >>>>> [null]
+
+================================================================================================================
+
+2019-05-09 02:08:31.249 [http-nio-8080-exec-2] ERROR
+[message：]分页查找商品列表失败！ >>>>> [null]
+
+================================================================================================================
+
+2019-05-09 02:09:09.437 [http-nio-8080-exec-4] ERROR
+[message：]分页查找商品列表失败！ >>>>> [null]
+
+================================================================================================================
+
+2019-05-09 02:09:21.576 [http-nio-8080-exec-6] ERROR
+[message：]分页查找商品列表失败！ >>>>> [null]
+
+================================================================================================================
+
+2019-05-09 02:09:52.749 [http-nio-8080-exec-8] ERROR
+[message：]分页查找商品列表失败！ >>>>> [null]
+
+================================================================================================================
+
+2019-05-09 02:14:42.228 [http-nio-8080-exec-1] ERROR
+[message：]分页查找商品列表失败！ >>>>> [null]
+
+================================================================================================================
+
+2019-05-09 02:14:42.351 [http-nio-8080-exec-2] ERROR
+[message：]新增用户失败 >>>>> [Error creating bean with name 'redisConnectionFactory': Singleton bean creation not allowed while singletons of this factory are in destruction (Do not request a bean from a BeanFactory in a destroy method implementation!)]
+
+================================================================================================================
+
+2019-05-09 03:06:01.050 [http-nio-8080-exec-1] ERROR
+[message：]分页查找商品列表失败！ >>>>> [Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: Bean instantiation via factory method failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean]: Factory method 'entityManagerFactory' threw exception; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'org.springframework.boot.autoconfigure.AutoConfigurationPackages': Initialization of bean failed; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration': Initialization of bean failed; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No bean named 'org.springframework.context.annotation.ConfigurationClassPostProcessor.importRegistry' available]
+
+================================================================================================================
+
+2019-05-09 03:06:01.102 [http-nio-8080-exec-1] ERROR
+[message：]分页查找商品列表失败！ >>>>> [Session/EntityManager is closed]
+
+================================================================================================================

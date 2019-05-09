@@ -34,5 +34,7 @@ public class Goods extends BaseEmtity {
 
     private String category_id;//父，三级分类b
 
+    private int type;
+
     private String brand_id;//父，品牌
 }

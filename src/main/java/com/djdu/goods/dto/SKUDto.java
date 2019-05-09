@@ -11,6 +11,9 @@ import lombok.Data;
  **/
 @Data
 public class SKUDto {
-    private String name;//基础属性名
-    private String value;//基础属性值
+    private String value;//库存进出计量单位
+
+    private int price;//价格
+
+    private int stock;//库存
 }

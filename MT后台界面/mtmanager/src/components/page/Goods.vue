@@ -28,6 +28,32 @@
                                 </template>
                             </el-form-item>
                             </div>
+                            <div>
+                                 <el-table :data="props.row.skus" class="tb-edit" style="width:100%" highlight-current-row>
+                                    <el-table-column  label="SKU">
+                                        <template slot-scope="scope">
+                                            <el-input size="small" v-model="scope.row.sku" placeholder="请输入内容"></el-input> <span>{{scope.row.sku}}</span>
+                                        </template>
+                                    </el-table-column>
+                                    <el-table-column  label="价格">
+                                        <template slot-scope="scope">
+                                            <el-input size="small" v-model="scope.row.price" placeholder="请输入内容"></el-input> <span>{{scope.row.price}}</span>
+                                        </template>
+                                    </el-table-column>
+                                    <el-table-column  label="库存">
+                                        <template slot-scope="scope">
+                                            <el-input size="small" v-model="scope.row.stock" placeholder="请输入内容"></el-input> <span>{{scope.row.stock}}</span>
+                                        </template>
+                                    </el-table-column>
+                                     <el-table-column label="操作" width="200" align="center">
+                                        <template slot-scope="scope">
+                                            <el-button type="danger" @click="delShowSKU(scope.row)">删除</el-button>
+                                            <el-button type="success" @click="saveShowSKU(scope.row)">保存</el-button>
+                                        </template>
+                                    </el-table-column>
+                                </el-table>
+                                <el-button type="success" @click="addShowSKU(props.row.skus)">添加SKU</el-button> -->
+                            </div>
                         </el-form>
                     </template>
                 </el-table-column>
@@ -36,24 +62,12 @@
                 <el-table-column label="商品名称" prop="goodsName" width="180"></el-table-column>
                 <el-table-column label="商品分类" prop="category" ></el-table-column>
                 <el-table-column label="品牌" prop="brand" width="180" sortable></el-table-column>
-                <el-table-column label="操作" width="325" align="center">
+                <el-table-column label="操作" width="200" align="center">
                     <template slot-scope="scope">
-                        <el-button type="success" @click="">编辑</el-button>
                         <el-button type="success" @click="upOrdown(scope.row)">{{scope.row.show}}</el-button>
-                        <el-button type="success" @click="showSKUs">库存计量单位</el-button>
                     </template>
                 </el-table-column>
             </el-table>
-
-
-
-
-
-
-
-
-
-
 
             <div class="pagination">
                 <el-pagination background @current-change="" layout="prev, pager, next" :total="total" :page-size="limit" center>
@@ -70,8 +84,8 @@
                 <el-step title="所属品牌"></el-step>
                 <el-step title="商品展示图"></el-step>
                 <el-step title="商品详情图"></el-step>
+                <el-step title="库存计量属性"></el-step>
                 <el-step title="设置基础属性"></el-step>
-                <!-- <el-step title="库存计量属性"></el-step> -->
             </el-steps>
             </div>
             <el-form ref="addform" :model="addform" label-width="70px">
@@ -124,8 +138,26 @@
                     </div>
                 </div>
 
-
                 <div style="margin-top: 30px;" id="s5" hidden>
+                     <div>
+                        <el-button @click="MakeSKU($event)" type="text">录入SKU</el-button>
+                    </div>
+                   <el-table :data="goodsSKU" class="tb-edit" style="width:100%" highlight-current-row>
+                        <el-table-column prop="value" label="SKU"></el-table-column>
+                        <el-table-column  label="价格">
+                            <template slot-scope="scope">
+                                <el-input size="small" v-model="scope.row.price" placeholder="请输入内容"></el-input> <span>{{scope.row.price}}</span>
+                            </template>
+                        </el-table-column>
+                        <el-table-column  label="库存">
+                            <template slot-scope="scope">
+                                <el-input size="small" v-model="scope.row.stock" placeholder="请输入内容"></el-input> <span>{{scope.row.stock}}</span>
+                            </template>
+                        </el-table-column>
+                    </el-table>
+                </div>  
+
+                <div style="margin-top: 30px;" id="s6" hidden>
                     <el-table :data="norms" class="tb-edit" style="width:100%" highlight-current-row>
                         <el-table-column prop="name" label="属性名"></el-table-column>
                         <el-table-column  label="属性值">
@@ -134,9 +166,7 @@
                             </template>
                         </el-table-column>
                     </el-table>
-                </div>    
-
-
+                </div>  
 
                 <div style="color: green;font-size: 30px;margin-left: 39%;margin-top: 25px;" id="ok" hidden>
                     <span>信息填写完毕</span>
@@ -150,6 +180,21 @@
                 <el-button @click="cancalAdd">取 消</el-button>
                 <el-button type="primary" @click="saveAdd">确 定</el-button>
             </span>
+        </el-dialog>
+
+         <el-dialog title="录入SKU" :visible.sync="makeSKUWin" width="25%"  center>
+               <el-table :data="SKU" class="tb-edit" style="width:100%" highlight-current-row>
+                    <el-table-column prop="name" label="属性名"></el-table-column>
+                    <el-table-column  label="属性值">
+                        <template slot-scope="scope">
+                            <el-input size="small" v-model="scope.row.value" placeholder="请输入内容"></el-input> <span>{{scope.row.value}}</span>
+                        </template>
+                    </el-table-column>
+                </el-table>
+            <div slot="footer" class="dialog-footer">
+                <el-button @click="makeSKUWin = false">取 消</el-button>
+                <el-button type="primary" @click="makedddd">确 定</el-button>
+            </div>
         </el-dialog>
 
         <el-dialog title="裁剪图片" :show-close="false" :close-on-click-modal="false" :close-on-press-escape="false" :visible.sync="showdialogVisible" width="30%">
@@ -169,23 +214,6 @@
             </span>
         </el-dialog>
 
-        <!-- 查看库存计量单位 -->
-        <el-dialog title="单位库存" :visible.sync="skusdialogTableVisible">
-            <el-table :data="tableData">
-
-                <template>
-                    <!-- <el-table-column :property="dataItem" :label="dataName" width="150"></el-table-column> -->
-                </template>
-
-                <el-table-column label="操作" width="325" align="center">
-                    <template slot-scope="scope">
-                        <el-button type="success" @click="">编辑</el-button>
-                        <el-button type="success" @click="">编辑</el-button>
-                    </template>
-                </el-table-column>
-            </el-table>
-        </el-dialog>
-
     </div>
 </template>
 <script>
@@ -200,7 +228,6 @@
                 total:1,
                 names:'',
                 tableData: [],
-                skusdialogTableVisible: false,
                 multipleSelection: [],
                 del_list: [],
                 delVisible: false,
@@ -230,7 +257,25 @@
                 otherImgSrc:'',
                 otherdialogVisible:false,
                 norms: [],
-                deleteId:[]
+                SKU:[],
+                deleteId:[],
+                makeSKUWin:false,
+                goodsSKU:[],
+                showSKU:[
+                    {
+                        SKU:'36G/白色',
+                        price:'3500',
+                        stock:'500'
+                    },{
+                        SKU:'36G/白色',
+                        price:'3500',
+                        stock:'500'
+                    },{
+                        SKU:'36G/白色',
+                        price:'3500',
+                        stock:'500'
+                    },
+                ]
             }
         },
         mounted(){
@@ -241,6 +286,102 @@
          VueCropper
         },
         methods: {
+            delShowSKU(e){
+                 console.log(e);
+                // 保留this
+                let _this=this;
+                this.axios.post('mt/goods/delsku',{
+                    "sku_id":e.sku_id
+                })
+                .then(response => {
+                    this.getgoods();
+                    if(response.data.statuCode){
+                        this.$notify({
+                            title: response.data.message,
+                            type: 'success',
+                            offset: 100,
+                            showClose: false
+                        });
+                    }
+                    else{
+                        this.$notify.error({
+                            title: response.data.message,
+                            offset: 100,
+                            showClose: false
+                        });
+                    }
+                });
+            },
+            saveShowSKU(e){
+                 // 保留this
+                let _this=this;
+                this.axios.post('mt/goods/editsku',{
+                    "sku_id":e.sku_id,
+                    "price":e.price,
+                    "stock":e.stock,
+                    "sku":e.sku,
+                    "goods_id":e.goods_id
+                })
+                .then(response => {
+                    this.getgoods();
+                    if(response.data.statuCode){
+                        this.$notify({
+                            title: response.data.message,
+                            type: 'success',
+                            offset: 100,
+                            showClose: false
+                        });
+                    }
+                    else{
+                        this.$notify.error({
+                            title: response.data.message,
+                            offset: 100,
+                            showClose: false
+                        });
+                    }
+                });
+
+            },
+            addShowSKU(e){
+                 var a = {
+                    SKU:'',
+                    price:'',
+                    stock:'',
+                    goods_id:e[0].goods_id
+                };
+                for(var i=0;i<e.length;i++){
+                    if(e[i].sku===''||e[i].price===''||e[i].stock===''){
+                        this.$notify.error({
+                            title: '请先填写空白行',
+                            offset: 100,
+                            showClose: false
+                        });
+                        return false;
+                    }
+                }
+                e.push(a);
+            },
+            MakeSKU(e){
+                this.makeSKUWin = true;
+            },
+            makedddd(){
+                var a = {
+                    value:'',
+                    price:'',
+                    stock:''
+                };
+                for(var i = 0;i < this.SKU.length;i++){
+                    a.value = a.value+ '/' + this.SKU[i].value;
+                    if(i == 0 ){
+                        a.value = this.SKU[i].value;
+                    }
+                }
+                for(var i = 0;i < this.SKU.length;i++){
+                    this.SKU[i].value = '';
+                }
+                this.goodsSKU.push(a);
+                this.makeSKUWin = false;
+            },
             searchGoods(){
                 this.getgoods();
             },
@@ -250,7 +391,8 @@
                 this.axios.post('mt/goods/findAllGoods',{
                     "addgoodsDto":{
                         "goodsname":this.names,
-                        "selectedaddOptions":this.selectedOptions
+                        "selectedaddOptions":this.selectedOptions,
+                        "type":1
                     },
                     "myPagaRequest":{
                         "page":1,
@@ -261,11 +403,8 @@
                 })
                 .then(response => {
                     if(response.data.statuCode){
-                        console.log(response.data.data.content);
                         this.tableData=response.data.data.content;
                         for(var i=0;i<this.tableData.length;i++){
-                            
-                             console.log('../../../static/ImageResource/'+this.tableData[i].masterImage+'.png');
                             this.tableData[i].masterImage= require('../../../static/ImageResource/'+this.tableData[i].masterImage+'.png');
                             
                             
@@ -361,7 +500,7 @@
                 this.active++;
                 if(this.active == 0){
                     document.getElementById('s0').removeAttribute('hidden');
-                    document.getElementById('s5').setAttribute('hidden','true');
+                    document.getElementById('s6').setAttribute('hidden','true');
                 }
                 if(this.active == 1){
                     document.getElementById('s1').removeAttribute('hidden');
@@ -434,6 +573,12 @@
                     }
                 }
                 if(this.active == 6){
+                    document.getElementById('s6').removeAttribute('hidden');
+                    document.getElementById('s5').setAttribute('hidden','true');
+
+                }
+
+                if(this.active == 7){
                     var k = true;
                     for(var i=0;i<this.norms.length;i++){
                         if(this.norms[i].value=='' || this.norms[i].value==null){
@@ -441,7 +586,7 @@
                         }
                    }
                    if(k){
-                        document.getElementById('s5').setAttribute('hidden','true');
+                        document.getElementById('s6').setAttribute('hidden','true');
                         document.getElementById('goodsAdd').removeAttribute('hidden');
                         document.getElementById('ok').removeAttribute('hidden');
                         document.getElementById('next').setAttribute('hidden','true');
@@ -455,9 +600,6 @@
                             });
                    }
                 }
-            },
-            showSKUs(){
-                this.skusdialogTableVisible = true;
             },
             cancalAdd(){
                 this.active=0;
@@ -485,6 +627,38 @@
                     this.brandoptions=[];
                     return false;
                 }
+
+
+                //获取SKU基础列表
+                this.axios.post('http://localhost:8080/mt/BaseSKU/getBaseSKUPage',{
+                    "baseSKUDto":{
+                        "categoryThird_id":this.selectedaddOptions[2]
+                    },
+                    "myPagaRequest":{
+                        "page":1,
+                        "limit":200,
+                        "sort":this.sort,
+                        "dir":this.dir
+                    }
+                })
+                .then(response => {
+                    if(response.data.statuCode){
+                        this.SKU=response.data.data.content;
+                        for(var i=0;i<this.SKU.length;i++){
+                            this.SKU.value=''
+                        }
+                    }
+                    else{
+                            this.$notify.error({
+                            title: response.data.message,
+                            offset: 100,
+                            showClose: false
+                        });
+                    }
+                });
+
+
+
                 //获取基础属性列表
                  this.axios.post('mt/BaseNorms/getBaseNormsPage',{
                 "baseNormsDto":{
@@ -766,7 +940,9 @@
                     "selectedaddBrandOptions":_this.selectedaddBrandOptions,
                     "showcropImgs":_this.showcropImgs,
                     "othercropImgs":_this.othercropImgs,
-                    "normsDtos":normsDto
+                    "normsDtos":normsDto,
+                    "skuDtos":this.goodsSKU,
+                    "type":1
             })
             .then(response => {
                 _this.getgoods();

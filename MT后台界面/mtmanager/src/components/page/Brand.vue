@@ -181,7 +181,7 @@
                 this.multipleSelection = val;
             },
             handleEdit(row){
-                console.log(row);
+                // console.log(row);
                 var arr=row.Category_id.split("/");
                 this.form.name = row.name;
                 this.form.category_id=arr;

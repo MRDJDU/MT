@@ -22,7 +22,11 @@ public class SKU extends BaseEmtity {
     @Column(name = "SKU_id")
     private String SKU_id;//库存进出计量单位id
 
-    private String name;//库存进出计量单位id
+    private String sku;//库存进出计量单位值
+
+    private int price;//价格
+
+    private int stock;//库存
 
     private String goods_id;//父，商品
 }

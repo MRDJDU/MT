@@ -30,6 +30,8 @@ public class GoodsDto {
 
     private String brand_id;//父，品牌
 
+    private int type;
+
 
     @SuppressWarnings({"serial"})
     public static Specification<Goods> getWhereClause(final GoodsDto goodsDto){
@@ -45,11 +47,24 @@ public class GoodsDto {
                     ));
                 }
 
+                if(StringUtils.isNotBlank(goodsDto.getGoods_id())){
+                    predicate.add(criteriaBuilder.like(root.get("goods_id").as(String.class),
+                            "%"+goodsDto.getGoods_id()+"%"
+                    ));
+                }
+
                 if(StringUtils.isNotBlank(goodsDto.getCategory_id())){
                     predicate.add(criteriaBuilder.like(root.get("category_id").as(String.class),
                             "%"+goodsDto.getCategory_id()+"%"
                     ));
                 }
+
+                if(goodsDto.getType()!=0){
+                    predicate.add(criteriaBuilder.equal(root.get("type").as(int.class),
+                            goodsDto.getType()
+                    ));
+                }
+
 
                 //默认已删除的不能查询
                 predicate.add(criteriaBuilder.equal(root.get("usable").as(Usable.class),

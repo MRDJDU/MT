@@ -1,0 +1,23 @@
+<!--pages/authorize/authorize.wxml-->
+
+<view class='authorize'>
+    <!-- top -->
+    <view class='authorize-top'>
+        <view><image class='authorize-img' src='../../images/authorize.png'></image></view>
+        <view class='authorize-text'><text >该页面由小程序开发，向其提供以下权限即可继续操作</text></view>
+    </view>
+
+    <!-- center -->
+
+    <view class='authorize-center'>
+        <view class="icon iconfont icon-gouxuan"></view>
+        <text>获得您的公开信息（昵称、头像等）</text>
+    </view>
+
+
+    <view class='authorize-btm'>
+        <button type="primary" open-type="getUserInfo" bindgetuserinfo="onGetUserInfo">授权登录</button>
+    </view>
+
+
+</view>
