@@ -28,6 +28,7 @@ Page({
      attrValueList: [],
      userInfo:{},
      norms:[],
+     skuid:'',
     gg_id:'',
      gg_txt:'',
     guigeList: [{ guige: '100', price: '133' }, { guige: '200', price: '345' }, { guige: '300', price: 'fsf' }]
@@ -38,12 +39,14 @@ Page({
     var self = this, 
     id = e.currentTarget.dataset.id, 
     txt = e.currentTarget.dataset.txt, 
-    prices = e.currentTarget.dataset.price
+    prices = e.currentTarget.dataset.price,
+    skuids = e.currentTarget.dataset.skuid
     self.setData({
       gg_id: id,
       gg_txt: txt,
       gg_price: prices,
-      price: prices
+      price: prices,
+      skuid:skuids
     });
   },
 
@@ -168,7 +171,9 @@ Page({
             price: res.data.data.content[0].skus[0].price,
             guigeList: res.data.data.content[0].skus,
             gg_id: res.data.data.content[0].skus[0].sku,
-            gg_txt: res.data.data.content[0].skus[0].sku
+            gg_txt: res.data.data.content[0].skus[0].sku,
+            skuid: res.data.data.content[0].skus[0].sku_id
+
             // commodityAttr:res.data.commodityAttr,
             // attrValueList:res.data.attrValueList,
           });
@@ -473,19 +478,36 @@ Page({
       return;
     };
     wx.request({
-      url: app.d.ceshiUrl + '/Api/Shopping/add',
+      // url: app.d.ceshiUrl + '/Api/Shopping/add',
+      url: app.d.myurl + '/car/addcar',
       method:'post',
       data: {
-        uid: app.d.userId,
-        pid: that.data.productId,
-        num: that.data.buynum,
+        // uid: app.d.userId,
+        // pid: that.data.productId,
+        // num: that.data.buynum,
+        shoppingCart_id: that.data.productId,
+        user_id: app.d.userId,
+        goods_id: that.data.productId,
+        sku_id: that.data.skuid,
+        goodsName: that.data.itemData.name,
+        goodsCount: that.data.buynum,
+        price: that.data.price,
+        sku: that.data.gg_txt,
+        state:1
       },
       header: {
-        'Content-Type':  'application/x-www-form-urlencoded'
+        // 'Content-Type':  'application/x-www-form-urlencoded'
+        'Content-Type': 'application/json;charset=UTF-8'
       },
       success: function (res) {
         // //--init data        
         var data = res.data;
+        console.log(222222);
+        that.setData(
+          {
+            showModalStatus: false
+          }
+        );
         if(data.status == 1){
           var ptype = e.currentTarget.dataset.type;
           if(ptype == 'buynow'){

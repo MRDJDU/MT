@@ -40,7 +40,7 @@
         <view class='guige'>
             <text class="gg-title">规格</text>
             <view class='gg'>
-              <text  wx:for="{{guigeList}}" wx:key="gg" wx:for-item="item" class="{{gg_id==item.sku?'active':''}}" data-id="{{item.sku}}"  data-txt="{{item.sku}}" data-price='{{item.price}}' bindtap="filter">{{item.sku}}</text>
+              <text  wx:for="{{guigeList}}" wx:key="gg" wx:for-item="item" class="{{gg_id==item.sku?'active':''}}" data-id="{{item.sku}}"  data-txt="{{item.sku}}" data-price='{{item.price}}' data-skuid="{{item.sku_id}}" bindtap="filter">{{item.sku}}</text>
             </view>
         </view>
     <text class="line"></text>

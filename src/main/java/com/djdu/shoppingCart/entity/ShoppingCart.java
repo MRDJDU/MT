@@ -41,6 +41,6 @@ public class ShoppingCart extends BaseEmtity2 {
 
     private String sku; // SKU
 
-    private boolean state;//状态，是否已付款 1未付款 2已付款
+    private int state;//状态，是否已付款 1未付款 2已付款
 
 }
