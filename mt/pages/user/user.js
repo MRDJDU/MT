@@ -62,19 +62,20 @@ Page( {
       userInfo: app.globalData.userInfo
       });
     wx.request({
-      url: app.d.ceshiUrl + '/Api/User/getorder',
+      // url: app.d.ceshiUrl + '/Api/User/getorder',
+      url: app.d.myurl + '/order/findnum',
       method:'post',
       data: {
-        userId:app.d.userId,
+        user_id:app.d.userId,
       },
       header: {
-        'Content-Type':  'application/x-www-form-urlencoded'
+        // 'Content-Type':  'application/x-www-form-urlencoded'
+        'Content-Type': 'application/json;charset=UTF-8'
       },
-      success: function (res) {
-        //--init data        
-        var status = res.data.status;
-        if(status==1){
-          var orderInfo = res.data.orderInfo;
+      success: function (res) {   
+        console.log(res);
+        if(1){
+          var orderInfo = res.data.data;
           that.setData({
             orderInfo: orderInfo
           });

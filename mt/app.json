@@ -14,7 +14,8 @@
     "pages/address/user-address/user-address",
     "pages/category/index",
     "pages/shop_store/shop_store",
-    "pages/authorize/authorize"
+    "pages/authorize/authorize",
+    "pages/view/pwdInput"
   ],
   "window": {
     "backgroundTextStyle": "dark",

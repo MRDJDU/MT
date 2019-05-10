@@ -9,6 +9,7 @@
 <view class="c_t60"></view>
 <swiper current="{{currentTab}}" class="swiper-box" duration="300" style="height:{{winHeight - 31}}px" bindchange="bindChange">
 
+
   <!-- 待付款 -->
   <swiper-item> 
     <view class="search_no" wx:if="{{!orderList0.length}}">
@@ -20,21 +21,31 @@
         <image class="sh_slt" src="{{item.photo_x}}"></image>
         <view class="df_1">            
             <view class="sp_text">
-                <navigator url="../index/detail?productId={{item.pid}}" hover-class="changestyle">
                 <view class="sp_tit ovh1">{{item.name}}</view>
-                </navigator>
                 <view class="sp_neb">单价：¥ {{item.price_yh}} 数量：×{{item.product_num}} 产品：×{{item.pro_count}}</view>
                 <view class="sp_jg">¥：{{item.price}}</view>
-                <view class="font_12 red fl_r" bindtap="payOrderByWechat" data-orderId="{{item.id}}" data-ordersn="{{item.order_sn}}" wx:if="{{item.type=='weixin'}}">微信支付</view>
-                <!--<navigator class="font_12 red fl_r" url="../order/downline?orderId={{item.id}}" wx:if="{{item.PayType=='cash'}}">线下支付</navigator>-->
-
-                <view class="font_12 red fl_r mr_5" bindtap="removeOrder" data-order-id="{{item.id}}">取消订单</view>
+                <view class="font_12 red fl_r" bindtap="payOrderByWechat" data-oid="{{item.id}}" data-price="{{item.price}}" >支付</view>
+                <view class="font_12 red fl_r mr_5" bindtap="removeOrder" data-ordid="{{item.id}}">取消订单</view>
                 <navigator url="../order/detail?orderId={{item.id}}" class="font_12 red fl_r mr_5">订单详情</navigator>
 
             </view>
         </view>
     </view>
   </swiper-item>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   <!-- 待发货 -->
   <swiper-item>
@@ -51,12 +62,23 @@
                 </navigator>
                 <view class="sp_neb">单价：¥ {{item.price_yh}} 数量：×{{item.product_num}} 产品：×{{item.pro_count}}</view>
                 <view class="sp_jg">¥：{{item.price}}</view>
-                <navigator class="font_12 red fl_r" url="tuihuo?orderId={{item.id}}">申请退款</navigator>
                 <navigator url="../order/detail?orderId={{item.id}}" class="font_12 red fl_r mr_5">订单详情</navigator>
             </view>
         </view>
     </view>
   </swiper-item>
+
+
+
+
+
+
+
+
+
+
+
+
 
   <!-- 待收货 -->
   <swiper-item>
@@ -73,13 +95,24 @@
                 </navigator>
                 <view class="sp_neb">单价：¥ {{item.price_yh}} 数量：×{{item.product_num}} 产品：×{{item.pro_count}}</view>
                 <view class="sp_jg">¥：{{item.price}}</view>
-                <navigator class="font_12 red fl_r" url="tuihuo?orderId={{item.id}}">申请退款</navigator>
                 <view class="font_12 red fl_r mr_5" bindtap="recOrder" data-order-id="{{item.id}}">确认收货</view>
                 <navigator url="../order/detail?orderId={{item.id}}" class="font_12 red fl_r mr_5">订单详情</navigator>
             </view>
         </view>
     </view>
   </swiper-item>
+
+
+
+
+
+
+
+
+
+
+
+
 
   <!-- 已完成-->
   <swiper-item>

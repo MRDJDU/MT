@@ -6,15 +6,29 @@
         </view>
     </scroll-view>
 
-    <!-- 右侧数据 -->
-    <scroll-view scroll-y="true" class="right">
+
+    <!-- 右侧二级数据 -->
+    <scroll-view scroll-y="true" class="right" wx:if="{{showModalStatus}}">
+        <view>二级分类</view>
         <view class="typeTree">
-            <view  class="brand" wx:for="{{typeTree}}" wx:for-item="data">
-                <navigator url="../listdetail/listdetail?cat_id={{data.id}}&title={{data.name}}" wx:key="typeId" class="item">
+            <view  class="brand" wx:for="{{typeTree}}" wx:for-item="data" bindtap="three" data-type-id="{{data.id}}">
+                <!-- <navigator url="../listdetail/listdetail?cat_id={{data.id}}&title={{data.name}}" wx:key="typeId" class="item"> -->
+                
                     <image src="{{data.bz_1}}"></image>
                     <text>{{data.name}}</text>
-                </navigator>
-                    
+                <!-- </navigator> -->   
+            </view>
+        </view>
+    </scroll-view>
+     <!-- 右侧三级数据 -->
+     <scroll-view scroll-y="true" class="right" wx:if="{{showModalStatusThree}}">
+        <view>三级分类</view>
+        <view class="typeTree">
+            <view  class="brand" wx:for="{{typeThree}}" wx:for-item="data">
+                <navigator url="../listdetail/listdetail?cat_id={{data.id}}&title={{data.name}}" wx:key="typeId" class="item">
+                <image src="{{data.bz_1}}"></image>
+                    <text>{{data.name}}</text>
+                </navigator>   
             </view>
         </view>
     </scroll-view>

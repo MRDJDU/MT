@@ -31,17 +31,16 @@ public class Orders extends BaseEmtity2 {
 
     private int itemCount;//商品项数量，不是商品个数，比如手机*2，鼠标*1，这里应该是2
 
-    private BigDecimal priceCount;//商品总额
+    private double priceCount;//商品总额
 
-    private boolean state;//是否已完成
+    private int state;//是否已完成 1未付款 2等待出货 4待收货 3 确认收货
 
-    @ManyToOne(cascade= CascadeType.ALL,fetch= FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    private User user;//用户，父
+    private String user_id;//用户id
 
-    @OneToMany(cascade = CascadeType.ALL,mappedBy="orders",fetch= FetchType.LAZY)
-    private List<OrderDetails> orderDetails = new ArrayList<OrderDetails>();//子，订单详情
+    private String address_xq;
 
-    @OneToOne(cascade= CascadeType.ALL,fetch= FetchType.LAZY,mappedBy="orders")
-    private Logistics logistics;//子，物流表
+    private String tel;
+
+    private String name;
+
 }

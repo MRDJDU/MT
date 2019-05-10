@@ -29,21 +29,15 @@ public class OrderDetails extends BaseEmtity2 {
 
     private String name;//商品名称
 
-    private int items;//数量
+    private int num;//数量
 
-    private BigDecimal price;//价格，单价
+    private double price;//价格，单价
 
-    @OneToOne(cascade= CascadeType.ALL,fetch= FetchType.LAZY)
-    private Goods goods;//商品
+    private double zprice;//单件商品总价
 
-    @OneToOne(cascade= CascadeType.ALL,fetch= FetchType.LAZY)
-    private SKU sku;//商品库存进存单位
+    private String photo_x;
 
-    @ManyToOne(cascade= CascadeType.ALL,fetch= FetchType.LAZY)
-    @JoinColumn(name = "orders_id")
-    private Orders orders;//父，订单
+    private String orders_id;
 
-    @OneToOne(cascade= CascadeType.ALL,mappedBy="orderDetails",fetch= FetchType.LAZY)
-    private Evaluation evaluation;//子,评论表
-
+    private String id;
 }

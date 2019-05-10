@@ -71,8 +71,17 @@ public class GoodsController {
                 goodsDto.setName(addgoodsDto.getGoodsname());
             }
             if(addgoodsDto.getSelectedaddOptions()!=null && addgoodsDto.getSelectedaddOptions().size()>0){
-                goodsDto.setCategory_id(addgoodsDto.getSelectedaddOptions().get(0) +"/"+addgoodsDto.getSelectedaddOptions().get(1)+"/"+addgoodsDto.getSelectedaddOptions().get(2));
+                if(addgoodsDto.getSelectedaddOptions().size()==1){
+                    goodsDto.setCategory_id(addgoodsDto.getSelectedaddOptions().get(0));
+                }
+                else{
+                    goodsDto.setCategory_id(addgoodsDto.getSelectedaddOptions().get(0) +"/"+addgoodsDto.getSelectedaddOptions().get(1)+"/"+addgoodsDto.getSelectedaddOptions().get(2));
+                }
+
             }
+            //if(addgoodsDto.getSelectedaddOptions().size()==1){
+            //    goodsDto.setCategory_id(addgoodsDto.getSelectedaddOptions().get(0));
+            //}
             goodsDto.setType(addgoodsDto.getType());
             goodsDto.setGoods_id(addgoodsDto.getGoods_id());
             return goodsService.getPage(GoodsDto.getWhereClause(goodsDto),myPagaRequest.getPageable());

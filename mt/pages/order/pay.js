@@ -19,6 +19,7 @@ Page({
   },
   onLoad:function(options){
     var uid = app.d.userId;
+    console.log(options.cartId);
     this.setData({
       cartId: options.cartId,
       userId: uid
@@ -28,32 +29,99 @@ Page({
   loadProductDetail:function(){
     var that = this;
     wx.request({
-      url: app.d.ceshiUrl + '/Api/Payment/buy_cart',
+      // url: app.d.ceshiUrl + '/Api/Payment/buy_cart',
+      url: app.d.myurl + '/car/buy_cart',
       method:'post',
       data: {
-        cart_id: that.data.cartId,
-        uid: that.data.userId,
+        shoppingCart_id: that.data.cartId,
+        user_id: that.data.userId,
       },
       header: {
-        'Content-Type':  'application/x-www-form-urlencoded'
+        // 'Content-Type':  'application/x-www-form-urlencoded'
+        'Content-Type': 'application/json;charset=UTF-8'
       },
       success: function (res) {
         //that.initProductData(res.data);
-        var adds = res.data.adds;
-        if (adds){
-          var addrId = adds.id;
-          that.setData({
-            address: adds,
-            addrId: addrId
-          });
+        console.log(res);
+        var totals = 0;
+        var pros=[];
+        var a={};
+        for(var i=0;i<res.data.data.length;i++){
+          a.id = res.data.data[i].shoppingCart_id;
+          a.name = res.data.data[i].goodsName + '(' + res.data.data[i].sku+')';
+          a.photo_x = res.data.data[i].img;
+          a.price = res.data.data[i].price;
+          a.num = res.data.data[i].goodsCount;
+          pros.push(a);
+          totals = totals + res.data.data[i].zprice;
+          a={};
         }
+
+
         that.setData({
-          addemt: res.data.addemt,
-          productData:res.data.pro,
-          total: res.data.price,
-          vprice: res.data.price,
-          vou: res.data.vou,
+          addemt: 0,
+          productData: pros,
+          total: totals,//共支付金额
         });
+
+
+
+
+
+        wx.request({
+          url: app.d.ceshiUrl + '/Api/Address/index',
+          data: {
+            user_id: app.d.userId,
+          },
+          method: 'POST', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
+          header: {// 设置请求的 header
+            'Content-Type': 'application/x-www-form-urlencoded'
+          },
+
+          success: function (res) {
+            console.log(111111111111122222);
+            console.log(res);
+            var adds ={};
+            for(var i = 0;i<res.data.adds.length;i++){
+              if (res.data.adds[i].is_default==1){
+                adds = res.data.adds[i];
+              }
+            }
+            // var adds = res.data.adds;
+            if (adds) {
+              var addrId = adds.id;
+              that.setData({
+                address: adds,
+                addrId: addrId
+              });
+            }
+
+
+
+
+            // // success
+            // console.log(res);
+            // var address = res.data.adds;
+            // console.log(address);
+            // if (address == '') {
+            //   var address = []
+            // }
+
+            // that.setData({
+            //   address: address,
+            //   cartId: cartId,
+            // })
+          },
+          fail: function () {
+            // fail
+            wx.showToast({
+              title: '网络异常！',
+              duration: 2000
+            });
+          }
+        })
+       
+        
         //endInitData
       },
     });
@@ -86,19 +154,6 @@ Page({
     this.createProductOrder();
   },
 
-  //线下支付
-  createProductOrderByXX:function(e){
-    this.setData({
-      paytype: 'cash',
-    });
-    wx.showToast({
-      title: "线下支付开通中，敬请期待!",
-      duration: 3000
-    });
-    return false;
-    this.createProductOrder();
-  },
-
   //确认订单
   createProductOrder:function(){
     this.setData({
@@ -114,37 +169,33 @@ Page({
       });
       return false;
     }
+    var adds = {};
+    adds.address_xq = that.data.address.address_xq;
+    adds.tel = that.data.address.tel;
+    adds.name = that.data.address.name;
+    //创建订单
     wx.request({
-      url: app.d.ceshiUrl + '/Api/Payment/payment',
+      // url: app.d.ceshiUrl + '/Api/Payment/payment',
+      url: app.d.myurl + '/order/addorder',
       method:'post',
       data: {
-        uid: that.data.userId,
-        cart_id: that.data.cartId,
-        type:that.data.paytype,
-        aid: that.data.addrId,//地址的id
-        remark: that.data.remark,//用户备注
-        price: that.data.total,//总价
-        vid: that.data.vid,//优惠券ID
+        orderDetails: that.data.productData,
+        add: adds,
+        total: that.data.total,
+        user_id: app.d.userId
       },
       header: {
-        'Content-Type':  'application/x-www-form-urlencoded'
+        // 'Content-Type':  'application/x-www-form-urlencoded'
+        'Content-Type': 'application/json;charset=UTF-8'
       },
       success: function (res) {
         //--init data        
-        var data = res.data;
-        if(data.status == 1){
-          //创建订单成功
-          if(data.arr.pay_type == 'cash'){
-              wx.showToast({
-                 title:"请自行联系商家进行发货!",
-                 duration:3000
-              });
-              return false;
-          }
-          if(data.arr.pay_type == 'weixin'){
-            //微信支付
-            that.wxpay(data.arr);
-          }
+        var orders_id = res.data.data.orders_id;
+        console.log(res);
+        if(1){
+          wx.navigateTo({
+            url: "../view/pwdInput?orders_id=" + orders_id + '&price=' + that.data.total
+          })
         }else{
           wx.showToast({
             title:"下单失败!",

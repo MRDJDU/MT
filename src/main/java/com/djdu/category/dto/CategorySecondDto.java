@@ -46,14 +46,15 @@ public class CategorySecondDto {
                     ));
                 }
 
+                if(StringUtils.isNotBlank(categorySecondDto.getCategoryFirst_id())){
+                    predicate.add(criteriaBuilder.like(root.get("categoryFirst_id").as(String.class),
+                            "%"+categorySecondDto.getCategoryFirst_id()+"%"
+                    ));
+                }
 
-                predicate.add(criteriaBuilder.like(root.get("categoryFirst_id").as(String.class),
-                        "%"+categorySecondDto.getCategoryFirst_id()+"%"
-                ));
-
-                predicate.add(criteriaBuilder.equal(root.get("categoryFirst_id").as(String.class),
-                        categorySecondDto.getCategoryFirst_id()
-                ));
+                //predicate.add(criteriaBuilder.equal(root.get("categoryFirst_id").as(String.class),
+                //        categorySecondDto.getCategoryFirst_id()
+                //));
 
                 //默认已删除的不能查询
                 predicate.add(criteriaBuilder.equal(root.get("usable").as(Usable.class),

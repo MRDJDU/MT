@@ -19,7 +19,7 @@ public class outImg extends WebMvcConfigurerAdapter {
         //addResourceHandler是指你想在url请求的路径
         //addResourceLocations是图片存放的真实路径
 
-        registry.addResourceHandler("/image/**").addResourceLocations("file:E://workspace//IdeaProjects//MT//MT后台界面//mtmanager//static//ImageResource/");
+        registry.addResourceHandler("/image/**").addResourceLocations("file:E://workspace//IdeaProjects//MT//MT后台界面//mtmanager//static/");
         super.addResourceHandlers(registry);
     }
 }

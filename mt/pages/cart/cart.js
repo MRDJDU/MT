@@ -19,19 +19,21 @@ bindMinus: function(e) {
     console.log(num);
     var cart_id = e.currentTarget.dataset.cartid;
     wx.request({
-      url: app.d.ceshiUrl + '/Api/Shopping/up_cart',
+      // url: app.d.ceshiUrl + '/Api/Shopping/up_cart',
+      url: app.d.myurl + '/car/changcar',
       method:'post',
       data: {
         user_id: app.d.userId,
-        num:num,
-        cart_id:cart_id
+        goodsCount: num,
+        shoppingCart_id: cart_id
       },
       header: {
-        'Content-Type':  'application/x-www-form-urlencoded'
+        // 'Content-Type':  'application/x-www-form-urlencoded'
+        'Content-Type': 'application/json;charset=UTF-8'
       },
       success: function (res) {
         var status = res.data.status;
-        if(status==1){
+        if(1){
           // 只有大于一件的时候，才能normal状态，否则disable状态
           var minusStatus = num <= 1 ? 'disabled' : 'normal';
           // 购物车数据
@@ -70,20 +72,23 @@ bindPlus: function(e) {
     num ++;
     console.log(num);
     var cart_id = e.currentTarget.dataset.cartid;
+  console.log(cart_id);
     wx.request({
-      url: app.d.ceshiUrl + '/Api/Shopping/up_cart',
+      // url: app.d.ceshiUrl + '/Api/Shopping/up_cart',
+      url: app.d.myurl + '/car/changcar',
       method:'post',
       data: {
         user_id: app.d.userId,
-        num:num,
-        cart_id:cart_id
+        goodsCount:num,
+        shoppingCart_id:cart_id
       },
       header: {
-        'Content-Type':  'application/x-www-form-urlencoded'
+        // 'Content-Type':  'application/x-www-form-urlencoded'
+        'Content-Type': 'application/json;charset=UTF-8'
       },
       success: function (res) {
         var status = res.data.status;
-        if(status==1){
+        if(1){
           // 只有大于一件的时候，才能normal状态，否则disable状态
           var minusStatus = num <= 1 ? 'disabled' : 'normal';
           // 购物车数据
@@ -166,6 +171,7 @@ bindCheckout: function() {
      return false;
    }
    //存回data
+  console.log(toastStr);
    wx.navigateTo({
      url: '../order/pay?cartId=' + toastStr,
    })
@@ -210,18 +216,21 @@ removeShopCard:function(e){
       content: '你确认移除吗',
       success: function(res) {
         res.confirm && wx.request({
-          url: app.d.ceshiUrl + '/Api/Shopping/delete',
+          // url: app.d.ceshiUrl + '/Api/Shopping/delete',
+          url: app.d.myurl + '/car/delete',
           method:'post',
           data: {
+            user_id: app.d.userId,
             cart_id: cardId,
           },
           header: {
-            'Content-Type':  'application/x-www-form-urlencoded'
+            // 'Content-Type':  'application/x-www-form-urlencoded'
+            'Content-Type': 'application/json;charset=UTF-8'
           },
           success: function (res) {
             //--init data
             var data = res.data;
-            if(data.status == 1){
+            if( 1){
               //that.data.productData.length =0;
               that.loadProductData();
             }else{
@@ -243,21 +252,34 @@ removeShopCard:function(e){
     });
   },
 
-// 数据案例
+// 获取购物车内商品
   loadProductData:function(){
     var that = this;
     wx.request({
-      url: app.d.ceshiUrl + '/Api/Shopping/index',
+      // url: app.d.ceshiUrl + '/Api/Shopping/index',
+      url: app.d.myurl + '/car/findcar',
       method:'post',
       data: {
         user_id: app.d.userId
       },
       header: {
-        'Content-Type':  'application/x-www-form-urlencoded'
+        // 'Content-Type':  'application/x-www-form-urlencoded'
+        'Content-Type': 'application/json;charset=UTF-8'
       },
       success: function (res) {
         //--init data
-        var cart = res.data.cart;
+        var cart = [];
+        var a = {};
+        for (var i = 0; i < res.data.data.length;i++){
+          a.pro_name = res.data.data[i].goodsName + '(' + res.data.data[i].sku+')';
+          a.id = res.data.data[i].shoppingCart_id;
+          a.uid = res.data.data[i].user_id;
+          a.price = res.data.data[i].price;
+          a.photo_x = res.data.data[i].img;
+          a.num = res.data.data[i].goodsCount;
+          cart.push(a);
+          a={};
+        }
         that.setData({
           carts:cart,
         });

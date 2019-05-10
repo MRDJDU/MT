@@ -24,7 +24,9 @@ import java.math.BigDecimal;
 @JsonIgnoreProperties({ "handler","hibernateLazyInitializer" })
 public class ShoppingCart extends BaseEmtity2 {
     @Id
-    @Column(name = "shoppingCart_id")
+    @Column(name = "id")
+    private String id;
+
     private String shoppingCart_id;//购物车内商品id
 
     private String goods_id;
@@ -37,10 +39,14 @@ public class ShoppingCart extends BaseEmtity2 {
 
     private int goodsCount;//商品数量
 
-    private BigDecimal price;//价格
+    private double price;//价格
 
     private String sku; // SKU
 
     private int state;//状态，是否已付款 1未付款 2已付款
+
+    private String img;
+
+    private double zprice;
 
 }

@@ -47,9 +47,9 @@
 
 
 </view>
-		<view class="p_all bg_white mt10 font_14">
+		<!-- <view class="p_all bg_white mt10 font_14">
 			<textarea class="min_60" auto-height name="remark" placeholder="备注" bindinput="remarkInput" value="{{remark}}"/> 
-		</view>	
+		</view>	 -->
 
 	<view class="zhifu mt10 tc">应共支付：<span class="font_20 red">¥ {{total}}</span></view>
 	<!-- <navigator url="##" hover-class="none" class="zhifu mt10">支付宝<image class="x_right" src="/images/x_right.png"></image></navigator> -->
@@ -64,7 +64,7 @@
 				<button class="wx_pay_submit" type="primary" id="wxPay" formType="submit" >微信支付</button>
 				<button class="xx_pay_submit" type="default" id="xxPay" formType="submit" >线下支付</button>
 			</navigator> -->
-			<button class="wx_pay_submit" type="primary" id="wxPay" disabled="{{btnDisabled}}" formType="submit" bindtap="createProductOrderByWX">微信支付</button>
+			<button class="wx_pay_submit" type="primary" id="wxPay" disabled="{{btnDisabled}}" formType="submit" bindtap="createProductOrderByWX">支付宝支付</button>
 			<!-- <button class="xx_pay_submit" type="default" id="xxPay" disabled="{{btnDisabled}}" formType="submit" bindtap="createProductOrderByXX">线下支付</button> -->
 			
 		</view>

@@ -133,7 +133,7 @@ getMore:function(e){
             a.id = res.data.data.content[i].goods_id;
             a.name = res.data.data.content[i].goodsName;
             a.price_yh = res.data.data.content[i].skus[0].price;
-            a.photo_x = app.d.img + res.data.data.content[i].masterImage + '.png';
+            a.photo_x = app.d.img + '/ImageResource/' + res.data.data.content[i].masterImage + '.png';
             prolists.push(a);
             a = {};
           }

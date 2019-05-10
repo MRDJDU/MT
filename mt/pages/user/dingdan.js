@@ -38,25 +38,25 @@ Page({
 //取消订单
 removeOrder:function(e){
     var that = this;
-    var orderId = e.currentTarget.dataset.orderId;
+    var orderId = e.currentTarget.dataset.ordid;
     wx.showModal({
       title: '提示',
       content: '你确定要取消订单吗？',
       success: function(res) {
         res.confirm && wx.request({
-          url: app.d.ceshiUrl + '/Api/Order/orders_edit',
+          // url: app.d.ceshiUrl + '/Api/Order/orders_edit',
+          url: app.d.myurl + '/order/delete',
           method:'post',
           data: {
-            id: orderId,
-            type:'cancel',
+            orders_id: orderId
           },
           header: {
-            'Content-Type':  'application/x-www-form-urlencoded'
+            // 'Content-Type':  'application/x-www-form-urlencoded'
+            'Content-Type': 'application/json;charset=UTF-8'
           },
           success: function (res) {
             //--init data
-            var status = res.data.status;
-            if(status == 1){
+            if(1){
               wx.showToast({
                 title: '操作成功！',
                 duration: 2000
@@ -91,29 +91,27 @@ recOrder:function(e){
       content: '你确定已收到宝贝吗？',
       success: function(res) {
         res.confirm && wx.request({
-          url: app.d.ceshiUrl + '/Api/Order/orders_edit',
+          // url: app.d.ceshiUrl + '/Api/Order/orders_edit',
+          url: app.d.myurl + '/order/changeorder',
           method:'post',
           data: {
-            id: orderId,
-            type:'receive',
+            orders_id: orderId,
+            state: 4
           },
           header: {
-            'Content-Type':  'application/x-www-form-urlencoded'
+            // 'Content-Type':  'application/x-www-form-urlencoded'
+            'Content-Type': 'application/json;charset=UTF-8'
+
           },
           success: function (res) {
             //--init data
             var status = res.data.status;
-            if(status == 1){
+            if(1){
               wx.showToast({
                 title: '操作成功！',
                 duration: 2000
               });
               that.loadOrderList();
-            }else{
-              wx.showToast({
-                title: res.data.err,
-                duration: 2000
-              });
             }
           },
           fail: function () {
@@ -132,20 +130,22 @@ recOrder:function(e){
   loadOrderList: function(){
     var that = this;
     wx.request({
-      url: app.d.ceshiUrl + '/Api/Order/index',
+      // url: app.d.ceshiUrl + '/Api/Order/index',
+      url: app.d.myurl + '/order/findOders',
       method:'post',
       data: {
-        uid:app.d.userId,
-        order_type:that.data.isStatus,
-        page:that.data.page,
+        user_id:app.d.userId,
+        order_type:that.data.isStatus
       },
       header: {
-        'Content-Type':  'application/x-www-form-urlencoded'
+        // 'Content-Type':  'application/x-www-form-urlencoded'
+        'Content-Type': 'application/json;charset=UTF-8'
       },
       success: function (res) {
-        //--init data        
-        var status = res.data.status;
-        var list = res.data.ord;
+        //--init data  
+
+        var list = res.data.data;
+        console.log(list);
         switch(that.data.currentTab){
           case 0:
             that.setData({
@@ -284,67 +284,11 @@ loadReturnOrderList:function(){
   // },
 
   payOrderByWechat: function (e) {
-    var order_id = e.currentTarget.dataset.orderId;
-    var order_sn = e.currentTarget.dataset.ordersn;
-    if(!order_sn){
-      wx.showToast({
-        title: "订单异常!",
-        duration: 2000,
-      });
-      return false;
-    }
-    wx.request({
-      url: app.d.ceshiUrl + '/Api/Wxpay/wxpay',
-      data: {
-        order_id: order_id,
-        order_sn: order_sn,
-        uid: app.d.userId,
-      },
-      method: 'POST', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
-      header: {
-        'Content-Type': 'application/x-www-form-urlencoded'
-      }, // 设置请求的 header
-      success: function (res) {
-        if (res.data.status == 1) {
-          var order = res.data.arr;
-          wx.requestPayment({
-            timeStamp: order.timeStamp,
-            nonceStr: order.nonceStr,
-            package: order.package,
-            signType: 'MD5',
-            paySign: order.paySign,
-            success: function (res) {
-              wx.showToast({
-                title: "支付成功!",
-                duration: 2000,
-              });
-              setTimeout(function () {
-                wx.navigateTo({
-                  url: '../user/dingdan?currentTab=1&otype=deliver',
-                });
-              }, 3000);
-            },
-            fail: function (res) {
-              wx.showToast({
-                title: res,
-                duration: 3000
-              })
-            }
-          })
-        } else {
-          wx.showToast({
-            title: res.data.err,
-            duration: 2000
-          });
-        }
-      },
-      fail: function (e) {
-        // fail
-        wx.showToast({
-          title: '网络异常！',
-          duration: 2000
-        });
-      }
+    var orders_id = e.currentTarget.dataset.oid;
+    var price = e.currentTarget.dataset.price;
+    console.log(orders_id);
+    wx.navigateTo({
+      url: "../view/pwdInput?orders_id=" + orders_id + '&price=' + price
     })
   },
 

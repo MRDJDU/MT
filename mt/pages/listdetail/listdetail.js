@@ -3,11 +3,13 @@ Page({
   data: {
     current: 0,
     shopList: [],
+    options:[],
     ptype:'',
     title:'宠物美容学校',
     page:2,
     catId:0,
-    brandId: 0
+    brandId: 0,
+    limit:8
   },
 showModal: function () {
     // 显示遮罩层
@@ -52,46 +54,53 @@ hideModal: function () {
 
 //点击加载更多
 getMore:function(e){
-  var that = this;
-  var page = that.data.page;
-  wx.request({
-      url: app.d.ceshiUrl + '/Api/Product/get_more',
-      method:'post',
-      data: {
-        page:page,
-        ptype:that.data.ptype,
-        cat_id:that.data.catId,
-        brand_id: that.data.brandId
-      },
-      header: {
-        'Content-Type':  'application/x-www-form-urlencoded'
-      },
-      success: function (res) {  
-        var prolist = res.data.pro;
-        if(prolist==''){
-          wx.showToast({
-            title: '没有更多数据！',
-            duration: 2000
-          });
-          return false;
-        }
-        //that.initProductData(data);
-        that.setData({
-          page: page+1,
-          shopList:that.data.shopList.concat(prolist)
-        });
-        //endInitData
-      },
-      fail:function(e){
-        wx.showToast({
-          title: '网络异常！',
-          duration: 2000
-        });
-      }
-    })
+  // var that = this;
+  // var page = that.data.page;
+  // wx.request({
+  //     url: app.d.ceshiUrl + '/Api/Product/get_more',
+  //     method:'post',
+  //     data: {
+  //       page:page,
+  //       ptype:that.data.ptype,
+  //       cat_id:that.data.catId,
+  //       brand_id: that.data.brandId
+  //     },
+  //     header: {
+  //       'Content-Type':  'application/x-www-form-urlencoded'
+  //     },
+  //     success: function (res) {  
+  //       var prolist = res.data.pro;
+  //       if(prolist==''){
+  //         wx.showToast({
+  //           title: '没有更多数据！',
+  //           duration: 2000
+  //         });
+  //         return false;
+  //       }
+  //       //that.initProductData(data);
+  //       that.setData({
+  //         page: page+1,
+  //         shopList:that.data.shopList.concat(prolist)
+  //       });
+  //       //endInitData
+  //     },
+  //     fail:function(e){
+  //       wx.showToast({
+  //         title: '网络异常！',
+  //         duration: 2000
+  //       });
+  //     }
+  //   })
+  this.data.limit = this.data.limit + this.data.limit;
+  this.on(this.data.options);
 },
 
 onLoad: function (options) {
+  this.data.options = options;
+  this.on(this.options);
+},
+
+on: function (options) {
   var objectId = options.title;
   //更改头部标题
   wx.setNavigationBarTitle({
@@ -101,29 +110,46 @@ onLoad: function (options) {
     });
 
     //页面初始化 options为页面跳转所带来的参数
-    var cat_id = options.cat_id;
-    var ptype = options.ptype;
-    var brandId = options.brandId;
+    var cat_id = options.cat_id;//分类id
     var that = this;
     that.setData({
-      ptype: ptype,
-      catId: cat_id,
-      brandId: brandId
-    })
+      catId: cat_id
+    });
     //ajax请求数据
     wx.request({
-      url: app.d.ceshiUrl + '/Api/Product/lists',
+      // url: app.d.ceshiUrl + '/Api/Product/lists',
+      url: app.d.myurl + '/goods/findAllGoods',
       method:'post',
       data: {
-        cat_id:cat_id,
-        ptype:ptype,
-        brand_id: brandId
+        "addgoodsDto": {
+          "selectedaddOptions": cat_id
+        },
+        "myPagaRequest": {
+          "page": 1,
+          "limit": that.data.limit,
+          "sort": "creatTime",
+          "dir": "DESC"
+        }
+        // ptype:ptype,
+        // brand_id: brandId
       },
       header: {
-        'content-type': 'application/x-www-form-urlencoded'
+        // 'content-type': 'application/x-www-form-urlencoded'
+        'Content-Type': 'application/json;charset=UTF-8'
       },
       success: function (res) {
-        var shoplist = res.data.pro;
+        var a = {};
+        var shoplist = [];
+        for (var i = 0; i < res.data.data.content.length; i++) {
+          if (res.data.data.content[i].showOut == 'Show') {
+            a.id = res.data.data.content[i].goods_id;
+            a.name = res.data.data.content[i].goodsName;
+            a.price_yh = res.data.data.content[i].skus[0].price;
+            a.photo_x = app.d.img + '/ImageResource/' + res.data.data.content[i].masterImage + '.png';
+            shoplist.push(a);
+            a = {};
+          }
+        }
         that.setData({
           shopList: shoplist
         })

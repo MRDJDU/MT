@@ -36,10 +36,6 @@
 			</view>         
 		    </view>
 
-           <view class="p_all bg_white mt10 font_14">
-			<textarea class="min_60" auto-height name="remark" disabled="{{true}}" placeholder="订单备注" value="{{orderData.remark?orderData.remark:'未备注'}}"/> 
-		</view>	
-
 	<view class="zhifu mt10 tc">金额：<span class="font_20 red">¥ {{orderData.price}}</span></view>
         
 

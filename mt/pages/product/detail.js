@@ -157,9 +157,9 @@ Page({
           pro.num = res.data.data.content[0].skus[0].stock;
           pro.brand = res.data.data.content[0].brand;
           pro.id = res.data.data.content[0].goods_id;
-          pro.photo_x =app.d.img + res.data.data.content[0].detailsImage[0].img + '.png';
+          pro.photo_x = app.d.img + '/ImageResource/' +  res.data.data.content[0].detailsImage[0].img + '.png';
           for (var i = 0; i < res.data.data.content[0].detailsImage.length;i++){
-            res.data.data.content[0].detailsImage[i] = app.d.img + res.data.data.content[0].detailsImage[i].img + '.png';
+            res.data.data.content[0].detailsImage[i] = app.d.img +'/ImageResource/'+ res.data.data.content[0].detailsImage[i].img + '.png';
           }
           // var content=pro.content;
           //that.initProductData(data);
@@ -490,6 +490,7 @@ Page({
         goods_id: that.data.productId,
         sku_id: that.data.skuid,
         goodsName: that.data.itemData.name,
+        img: that.data.itemData.photo_x,
         goodsCount: that.data.buynum,
         price: that.data.price,
         sku: that.data.gg_txt,
@@ -502,17 +503,17 @@ Page({
       success: function (res) {
         // //--init data        
         var data = res.data;
-        console.log(222222);
         that.setData(
           {
             showModalStatus: false
           }
         );
-        if(data.status == 1){
+        if(1){
           var ptype = e.currentTarget.dataset.type;
-          if(ptype == 'buynow'){
+          console.log(ptype);
+          if (ptype == 'buynow'){
             wx.redirectTo({
-              url: '../order/pay?cartId='+data.cart_id
+              url: '../order/pay?cartId=' + that.data.productId
             });
             return;
           }else{
